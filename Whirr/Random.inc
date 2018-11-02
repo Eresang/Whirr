@@ -9,9 +9,18 @@
 ; --- Random helper macros ---
 
     ; Randomize random seed by using system counter
-    _RandomRandomize MACRO
-        lea rcx, FXP_RandomSeed
-        call QueryPerformanceCounter
+    _Randomize MACRO seed
+        IFB <seed>
+            lea rcx, RANDOM_SEED
+            call QueryPerformanceCounter
+        ELSE
+            IFE OPATTR(seed) EQ 30
+                mov rcx, QWORD PTR seed
+                mov RANDOM_SEED, rcx
+            ELSE
+                mov RANDOM_SEED, seed
+            ENDIF
+        ENDIF
     ENDM
 
     ; Return 64 quasi-random bits
@@ -19,9 +28,9 @@
         mov rax, RANDOM_MULTIPLY
 
         IFB <seed>
-            mul RANDOM_SEED
+            mul QWORD PTR RANDOM_SEED
         ELSE
-            mul seed
+            mul QWORD PTR seed
         ENDIF
 
         add rax, rdx
@@ -38,7 +47,9 @@
     ENDM
 
     ; _Random as procedure
+    ; RCX: seed pointer
     Random PROC
+        ; Determine if custom seed is used
         or rcx, rcx
         jnz @Random_SeedSelected
             mov rcx, RANDOM_SEED
@@ -54,6 +65,12 @@
             ECHO Error: "_RandomRange: register rcx is not valid for passing upper limit"
         ENDIF
 
+        IFNB <seed>
+            IFE _ArgIndexOf(seed), rcx, rdx, r8 EQ -1
+                ECHO Error: "_RandomRange: registers rcx, rdx and r8 are not valid for passing seed pointer"
+            ENDIF
+        ENDIF
+
         _ArgMove rcx, lower
         _ArgMove r8, upper
         _ArgMove rdx, upper
@@ -62,9 +79,9 @@
         sub r8, rcx
 
         IFB <seed>
-            mul RANDOM_SEED
+            mul QWORD PTR RANDOM_SEED
         ELSE
-            mul seed
+            mul QWORD PTR seed
         ENDIF
 
         add rax, rdx
@@ -86,7 +103,19 @@
     ENDM
 
     ; _RandomRange as procedure
+    ; RCX: lower limit
+    ; RDX: upper limit
+    ; R8 : seed pointer
     RandomRange PROC
-        _RandomRange rax, rcx, rdx
+        ; Determine if custom seed is used
+        or r8, r8
+        jnz @RandomRange_SeedSelected
+            mov r8, RANDOM_SEED
+        @RandomRange_SeedSelected:
+
+        ; _RandomRange already uses r8
+        mov r9, r8
+
+        _RandomRange rax, rcx, r9
         ret
     RandomRange ENDP

@@ -15,6 +15,9 @@ include Random.inc
         call GetProcessHeap
         mov WhirrHeapHandle, rax
 
+        lea rcx, WhirrHeapHandle
+        _Randomize rcx
+
         _HeapAlloc HeapData, WhirrHeapHandle, 10000h
 
         ret
