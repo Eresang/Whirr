@@ -1,8 +1,8 @@
 .DATA
 
-    RANDOM_SEED                                 DQ                  1234567899876543210
-    RANDOM_ADD                                  EQU                 9182736455463728197
-    RANDOM_MULTIPLY                             EQU                 13579086420135790861
+    RANDOM_SEED                                 DQ 1234567899876543210
+    RANDOM_ADD                                  EQU 9182736455463728197
+    RANDOM_MULTIPLY                             EQU 13579086420135790861
 
 .CODE
 

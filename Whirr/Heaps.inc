@@ -11,9 +11,9 @@
     HEAP_GENERATE_EXCEPTIONS                    EQU 00000004h
     HEAP_ZERO_MEMORY                            EQU 00000008h
 
-    ; Wrappers only check if arguments match their target register
-    ; "Callers" should ensure:
-    ;  - Registers values don't get overwritten
+    ; Wrappers only check if arguments match their target registers
+    ; Invokers should ensure:
+    ;  - Register values don't get overwritten
     ;  - Stack is 16-bit aligned
 
 ; --- Heap helper macros ---

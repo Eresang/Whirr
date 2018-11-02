@@ -4,10 +4,10 @@ include Heaps.inc
 include Random.inc
 
 .DATA
-    WhirrHeapHandle                             DQ                  0
+    WhirrHeapHandle                             DQ 0
 
 ; TEST
-    HeapData                                    DQ                  ?
+    HeapData                                    DQ ?
 
 .CODE
 
