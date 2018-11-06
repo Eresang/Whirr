@@ -14,7 +14,8 @@
             lea rcx, RANDOM_SEED
             call QueryPerformanceCounter
         ELSE
-            IFE OPATTR(seed) EQ 30
+            ; If seed not a fully defined direct register
+            IFE OPATTR(seed) EQ 48
                 mov rcx, QWORD PTR seed
                 mov RANDOM_SEED, rcx
             ELSE
@@ -30,7 +31,11 @@
         IFB <seed>
             mul QWORD PTR RANDOM_SEED
         ELSE
-            mul QWORD PTR seed
+            IFE OPATTR(seed) EQ 48
+                mul QWORD PTR seed
+            ELSE
+                mul seed
+            ENDIF
         ENDIF
 
         add rax, rdx
@@ -40,7 +45,11 @@
         IFB <seed>
             mov RANDOM_SEED, rax
         ELSE
-            mov seed, rax
+            IFE OPATTR(seed) EQ 48
+                mov QWORD PTR seed, rax
+            ELSE
+                mov seed, rax
+            ENDIF
         ENDIF
 
         _ArgMove destination, rax
@@ -61,16 +70,6 @@
 
     ; Return a quasi-random 64 bit value between or equal to lower and upper limits
     _RandomRange MACRO destination:REQ, lower:REQ, upper:REQ, seed
-        IFIDNI <upper>, <rcx>
-            ECHO Error: "_RandomRange: register rcx is not valid for passing upper limit"
-        ENDIF
-
-        IFNB <seed>
-            IFE _ArgIndexOf(seed), rcx, rdx, r8 EQ -1
-                ECHO Error: "_RandomRange: registers rcx, rdx and r8 are not valid for passing seed pointer"
-            ENDIF
-        ENDIF
-
         _ArgMove rcx, lower
         _ArgMove r8, upper
         _ArgMove rdx, upper
@@ -81,7 +80,11 @@
         IFB <seed>
             mul QWORD PTR RANDOM_SEED
         ELSE
-            mul QWORD PTR seed
+            IFE OPATTR(seed) EQ 48
+                mul QWORD PTR seed
+            ELSE
+                mul seed
+            ENDIF
         ENDIF
 
         add rax, rdx
@@ -92,7 +95,11 @@
         IFB <seed>
             mov RANDOM_SEED, rax
         ELSE
-            mov seed, rax
+            IFE OPATTR(seed) EQ 48
+                mov QWORD PTR seed, rax
+            ELSE
+                mov seed, rax
+            ENDIF
         ENDIF
 
         mul r8
