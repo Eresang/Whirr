@@ -6,6 +6,11 @@
 
 .CODE
 
+    ; Wrappers only check if arguments match their target registers
+    ; Invokers should ensure:
+    ;  - Register values don't get overwritten
+    ;  - Stack is 16-bit aligned
+
 ; --- Random helper macros ---
 
     ; Randomize random seed by using system counter
