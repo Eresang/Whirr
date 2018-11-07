@@ -17,8 +17,9 @@ include Random.inc
 
         mov rax, OPATTR(rcx)
 
-        lea rcx, WhirrHeapHandle
-        _Randomize rcx
+        lea rcx, HeapData
+
+        _Random rax, QWORD PTR [rcx]
 
         _HeapAlloc HeapData, WhirrHeapHandle, 10000h
 

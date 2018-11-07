@@ -19,13 +19,7 @@
             lea rcx, RANDOM_SEED
             call QueryPerformanceCounter
         ELSE
-            ; If seed not a fully defined direct register
-            IFE OPATTR(seed) EQ 48
-                mov rcx, QWORD PTR seed
-                mov RANDOM_SEED, rcx
-            ELSE
-                mov RANDOM_SEED, seed
-            ENDIF
+            mov RANDOM_SEED, seed
         ENDIF
     ENDM
 
@@ -34,13 +28,9 @@
         mov rax, RANDOM_MULTIPLY
 
         IFB <seed>
-            mul QWORD PTR RANDOM_SEED
+            mul RANDOM_SEED
         ELSE
-            IFE OPATTR(seed) EQ 48
-                mul QWORD PTR seed
-            ELSE
-                mul seed
-            ENDIF
+            mul seed
         ENDIF
 
         add rax, rdx
@@ -50,28 +40,11 @@
         IFB <seed>
             mov RANDOM_SEED, rax
         ELSE
-            IFE OPATTR(seed) EQ 48
-                mov QWORD PTR seed, rax
-            ELSE
-                mov seed, rax
-            ENDIF
+            mov seed, rax
         ENDIF
 
         _ArgMove destination, rax
     ENDM
-
-    ; _Random as procedure
-    ; RCX: seed pointer
-    Random PROC
-        ; Determine if custom seed is used
-        or rcx, rcx
-        jnz @Random_SeedSelected
-            mov rcx, RANDOM_SEED
-        @Random_SeedSelected:
-
-        _Random rax, rcx
-        ret
-    Random ENDP
 
     ; Return a quasi-random 64 bit value between or equal to lower and upper limits
     _RandomRange MACRO destination:REQ, lower:REQ, upper:REQ, seed
@@ -83,13 +56,9 @@
         sub r8, rcx
 
         IFB <seed>
-            mul QWORD PTR RANDOM_SEED
+            mul RANDOM_SEED
         ELSE
-            IFE OPATTR(seed) EQ 48
-                mul QWORD PTR seed
-            ELSE
-                mul seed
-            ENDIF
+            mul seed
         ENDIF
 
         add rax, rdx
@@ -100,11 +69,7 @@
         IFB <seed>
             mov RANDOM_SEED, rax
         ELSE
-            IFE OPATTR(seed) EQ 48
-                mov QWORD PTR seed, rax
-            ELSE
-                mov seed, rax
-            ENDIF
+            mov seed, rax
         ENDIF
 
         mul r8
@@ -114,6 +79,21 @@
         _ArgMove destination, rax
     ENDM
 
+; --- Random procedures ---
+
+    ; _Random as procedure
+    ; RCX: seed pointer
+    Random PROC
+        ; Determine if custom seed is used
+        or rcx, rcx
+        jnz @Random_SeedSelected
+            lea rcx, RANDOM_SEED
+        @Random_SeedSelected:
+
+        _Random rax, QWORD PTR [rcx]
+        ret
+    Random ENDP
+
     ; _RandomRange as procedure
     ; RCX: lower limit
     ; RDX: upper limit
@@ -122,12 +102,12 @@
         ; Determine if custom seed is used
         or r8, r8
         jnz @RandomRange_SeedSelected
-            mov r8, RANDOM_SEED
+            lea r8, RANDOM_SEED
         @RandomRange_SeedSelected:
 
-        ; _RandomRange already uses r8
+        ; _RandomRange uses r8
         mov r9, r8
 
-        _RandomRange rax, rcx, r9
+        _RandomRange rax, rcx, QWORD PTR [r9]
         ret
     RandomRange ENDP

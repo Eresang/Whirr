@@ -1,6 +1,6 @@
 ; --- VARARG helper macros ---
 
-    ; Retrieves argument from list
+    ; Retrieves argument at index from list
     _ArgAtIndex MACRO index:REQ, arguments:VARARG
     LOCAL cnt, itr
         cnt = _ArgCount(arguments)
@@ -17,7 +17,7 @@
         EXITM <>
     ENDM
 
-    ; Retrieves index from list
+    ; Retrieves index of match from list
     _ArgIndexOf MACRO match:REQ, arguments:VARARG
     LOCAL itr
         itr = -1
@@ -54,13 +54,14 @@
         ENDIF
     ENDM
 
-    ; Move odd index arguments to [their index-1], if they don't match
+    ; Move odd index arguments to [their index-1] if they don't match
     _ArgMove MACRO arguments:VARARG
     LOCAL itr, previous
         itr = 0
         previous TEXTEQU <>
 
         FOR item, <arguments>
+            ; Ignore every item in arguments at an even index
             IF itr EQ 1
                 IFDIFI previous, <item>
                     mov previous, item
