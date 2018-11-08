@@ -14,6 +14,7 @@
 ; --- Random helper macros ---
 
     ; Randomize random seed by using system counter
+    ; Expects custom seed to be in a register
     _Randomize MACRO seed
         IFB <seed>
             lea rcx, RANDOM_SEED
@@ -24,6 +25,7 @@
     ENDM
 
     ; Return 64 quasi-random bits
+    ; Expects custom seed to be a memory location or an otherwise unused register
     _Random MACRO destination:REQ, seed
         mov rax, RANDOM_MULTIPLY
 
@@ -47,6 +49,7 @@
     ENDM
 
     ; Return a quasi-random 64 bit value between or equal to lower and upper limits
+    ; Expects custom seed to be a memory location or an otherwise unused register
     _RandomRange MACRO destination:REQ, lower:REQ, upper:REQ, seed
         _ArgMove rcx, lower
         _ArgMove r8, upper
