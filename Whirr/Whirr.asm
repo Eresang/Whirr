@@ -5,11 +5,9 @@ include Strings.inc
 include Random.inc
 
 .DATA
-    WHIRR_HEAPHANDLE                            DQ 0
+    WHIRR_HEAPHANDLE                            DQ ?
 
-    _String WHIRR_TEXT,\
-                  """A quoted string!!""\n",\
-                  "Followed by an unquoted string\n"
+    _String WHIRR_TITLE, "Whirr"
 
 ; TEST
     HeapData                                    DQ ?
@@ -20,10 +18,13 @@ include Random.inc
         call GetProcessHeap
         mov WHIRR_HEAPHANDLE, rax
 
-        lea rcx, WHIRR_TEXT
+        lea rcx, WHIRR_TITLE
         or rax, rax
 
-        _HeapAlloc HeapData, WHIRR_HEAPHANDLE, 10000h
+        _HeapAlloc\
+            HeapData,\
+            WHIRR_HEAPHANDLE,\
+            10000h
 
         ret
     WhirrProc ENDP

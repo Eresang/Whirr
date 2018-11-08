@@ -34,13 +34,14 @@
                 ECHO Error:_String &label&: invalid string format
             ENDIF
 
-            cnt = cnt + __StringActualLength(item)
+            cnt = cnt + __StringRealLength(item)
         ENDM
 
-        ; Place length field and label
+        ; Place length field
         ALIGN 8
         label DQ cnt
 
+        ; Write actual text
         FOR item, <text>
             __StringToWords item
         ENDM
@@ -69,7 +70,7 @@
     ; _String helper
     ; Count number of characters that string should contain after __StringToWords
     ; Presumes valid format and ignores opening/closing double quotes
-    __StringActualLength MACRO text:REQ
+    __StringRealLength MACRO text:REQ
     LOCAL lgt, ctr, flg
         lgt SIZESTR <text>
 
@@ -115,13 +116,16 @@
 
             let SUBSTR <text>, ctr, 2
             IFIDN let, <"">
+                ; Double quote
                 tmp CATSTR tmp, <"""",>
                 ctr = ctr + 1
             ELSE
                 IFIDNI let, <\n>
+                    ; Newline
                     tmp CATSTR tmp, <13,10,>
                     ctr = ctr + 1
                 ELSE
+                    ; Any other character
                     let SUBSTR <text>, ctr, 1
                     tmp CATSTR tmp, <">, let, <",>
                 ENDIF

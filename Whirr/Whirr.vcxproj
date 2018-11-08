@@ -29,6 +29,12 @@
     <None Include="Random.inc" />
     <None Include="Strings.inc" />
   </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Whir.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Whir.ico" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{5525028E-E708-4933-B398-9D342D4FEC16}</ProjectGuid>
