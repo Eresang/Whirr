@@ -16,7 +16,7 @@
 
     ; Construct a simple WideChar string started with a length field and terminated by a zero
     ; Allows creation of very long strings by entering a string in several partitions
-    ; Some characters need to be repeated be entered into the text data (e.g. !, ")
+    ; Some characters need to be repeated to be entered into the text data (e.g. !, ")
     ; Ex. IN:
     ;           _String textName, "hello"
     ; Ex. OUT:
@@ -96,7 +96,7 @@
     ; _String helper
     ; Turn string into a field of DW data
     ; Presumes valid format and ignores opening/closing double quotes
-    ; Will replace \n with CR + LF
+    ; Will replace \n with CR + LF and pairs of double quotes with a single double quote
     __StringToWords MACRO text:REQ
     LOCAL lgt, ctr, let, tmp, chr
         lgt SIZESTR <text>
@@ -127,6 +127,7 @@
                 ENDIF
             ENDIF
 
+            ; Limit line length
             chr SIZESTR tmp
             IF chr GE 60
                 DW tmp
