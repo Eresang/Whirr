@@ -1,10 +1,15 @@
 include Macros.inc
 include Heaps.inc
+include Strings.inc
 
 include Random.inc
 
 .DATA
-    WhirrHeapHandle                             DQ 0
+    WHIRR_HEAPHANDLE                            DQ 0
+
+    _String WHIRR_TEXT,\
+                  """A quoted string!!""\n",\
+                  "Followed by an unquoted string\n"
 
 ; TEST
     HeapData                                    DQ ?
@@ -13,15 +18,12 @@ include Random.inc
 
     WhirrProc PROC
         call GetProcessHeap
-        mov WhirrHeapHandle, rax
+        mov WHIRR_HEAPHANDLE, rax
 
-        mov rax, OPATTR(rcx)
+        lea rcx, WHIRR_TEXT
+        or rax, rax
 
-        lea rcx, HeapData
-
-        _Random rax, QWORD PTR [rcx]
-
-        _HeapAlloc HeapData, WhirrHeapHandle, 10000h
+        _HeapAlloc HeapData, WHIRR_HEAPHANDLE, 10000h
 
         ret
     WhirrProc ENDP
