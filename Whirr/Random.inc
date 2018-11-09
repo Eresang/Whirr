@@ -1,11 +1,3 @@
-.DATA
-
-    RANDOM_SEED                                 DQ 1234567899876543210
-    RANDOM_ADD                                  EQU 9182736455463728197
-    RANDOM_MULTIPLY                             EQU 13579086420135790861
-
-.CODE
-
     ; Wrappers only check if arguments match their target registers
     ; Invokers should ensure:
     ;  - Register values don't get overwritten
@@ -51,9 +43,7 @@
     ; Return a quasi-random 64 bit value between or equal to lower and upper limits
     ; Expects custom seed to be a memory location or an otherwise unused register
     _RandomRange MACRO destination:REQ, lower:REQ, upper:REQ, seed
-        _ArgMove rcx, lower
-        _ArgMove r8, upper
-        _ArgMove rdx, upper
+        _ArgMove rcx, lower, r8, upper, rdx, upper
         
         mov rax, RANDOM_MULTIPLY
         sub r8, rcx
@@ -82,10 +72,17 @@
         _ArgMove destination, rax
     ENDM
 
-; --- Random procedures ---
+.DATA
+
+    RANDOM_SEED                                 DQ 1234567899876543210
+    RANDOM_ADD                                  EQU 9182736455463728197
+    RANDOM_MULTIPLY                             EQU 13579086420135790861
+
+.CODE
 
     ; _Random as procedure
     ; RCX: seed pointer
+    ;      if NULL use RANDOM_SEED
     Random PROC
         ; Determine if custom seed is used
         or rcx, rcx
@@ -101,6 +98,7 @@
     ; RCX: lower limit
     ; RDX: upper limit
     ; R8 : seed pointer
+    ;      if NULL use RANDOM_SEED
     RandomRange PROC
         ; Determine if custom seed is used
         or r8, r8
@@ -110,7 +108,6 @@
 
         ; _RandomRange uses r8
         mov r9, r8
-
-        _RandomRange rax, rcx, QWORD PTR [r9]
+        _RandomRange rax, rcx, rdx, QWORD PTR [r9]
         ret
     RandomRange ENDP

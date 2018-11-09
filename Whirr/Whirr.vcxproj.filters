@@ -35,6 +35,12 @@
     <None Include="Strings.inc">
       <Filter>Source Files\Included</Filter>
     </None>
+    <None Include="Externals.inc">
+      <Filter>Source Files\Included</Filter>
+    </None>
+    <None Include="Defines.inc">
+      <Filter>Source Files\Included</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Whir.rc">

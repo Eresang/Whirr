@@ -1,12 +1,3 @@
-.DATA
-    ALIGN 8
-    STRINGS_NEWLINE                             DQ 2
-                                                DQ 0A000Dh
-    STRINGS_SPACE                               DQ 1
-                                                DQ 20h
-
-.CODE
-
     ; Wrappers only check if arguments match their target registers
     ; Invokers should ensure:
     ;  - Register texts don't get overwritten
@@ -139,3 +130,15 @@
             ENDIF
         GOTO nxt
     ENDM
+
+.DATA
+    ALIGN 8
+    STRINGS_NEWLINE                             DQ 2
+                                                DQ 0A000Dh
+
+    STRINGS_SPACE                               DQ 1
+                                                DQ 20h
+
+    _String STRINGS_NUMBERS, "0123456789ABCDEF"
+
+.CODE

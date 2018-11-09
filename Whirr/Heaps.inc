@@ -1,16 +1,3 @@
-    GetProcessHeap                              PROTO STDCALL
-
-    HeapAlloc                                   PROTO STDCALL
-    HeapCreate                                  PROTO STDCALL
-    HeapDestroy                                 PROTO STDCALL
-    HeapFree                                    PROTO STDCALL
-    HeapReAlloc                                 PROTO STDCALL
-
-    ; Heap_ flags
-    HEAP_NO_SERIALIZE                           EQU 00000001h
-    HEAP_GENERATE_EXCEPTIONS                    EQU 00000004h
-    HEAP_ZERO_MEMORY                            EQU 00000008h
-
     ; Wrappers only check if arguments match their target registers
     ; Invokers should ensure:
     ;  - Register values don't get overwritten
@@ -68,3 +55,7 @@
 
         call HeapDestroy
     ENDM
+
+.DATA
+
+.CODE

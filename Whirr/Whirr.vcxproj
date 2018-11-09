@@ -24,6 +24,8 @@
     </MASM>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Defines.inc" />
+    <None Include="Externals.inc" />
     <None Include="Macros.inc" />
     <None Include="Heaps.inc" />
     <None Include="Random.inc" />

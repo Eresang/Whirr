@@ -1,3 +1,4 @@
+include Externals.inc
 include Macros.inc
 include Heaps.inc
 include Strings.inc
@@ -5,26 +6,30 @@ include Strings.inc
 include Random.inc
 
 .DATA
+    WHIRR_MODULE                                DQ ?
     WHIRR_HEAPHANDLE                            DQ ?
 
-    _String WHIRR_TITLE, "Whirr"
+    _String\
+        WHIRR_WINDOWCLASS,\
+        "WhirrWindowClass"
 
-; TEST
-    HeapData                                    DQ ?
+    _String\
+        WHIRR_TITLE,\
+        "Whirr"
 
 .CODE
 
     WhirrProc PROC
+        xor rcx, rcx
+        call GetModuleHandle
+        mov WHIRR_MODULE, rax
+
         call GetProcessHeap
         mov WHIRR_HEAPHANDLE, rax
 
-        lea rcx, WHIRR_TITLE
-        or rax, rax
-
-        _HeapAlloc\
-            HeapData,\
-            WHIRR_HEAPHANDLE,\
-            10000h
+        IFDEF DEFINES_RANDOMIZEATSTART
+            _Randomize
+        ENDIF
 
         ret
     WhirrProc ENDP

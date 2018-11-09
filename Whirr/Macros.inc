@@ -72,3 +72,7 @@
             itr = (itr + 1) MOD 2
         ENDM
     ENDM
+
+.DATA
+
+.CODE
