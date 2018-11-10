@@ -66,17 +66,16 @@
         ENDIF
 
         mul r8
-        mov rax, rdx
-        add rax, rcx
+        add rdx, rcx
 
-        _ArgMove destination, rax
+        _ArgMove destination, rdx
     ENDM
 
 .DATA
 
-    RANDOM_SEED                                 DQ 1234567899876543210
-    RANDOM_ADD                                  EQU 9182736455463728197
-    RANDOM_MULTIPLY                             EQU 13579086420135790861
+    RANDOM_SEED                                 DQ 13043817825332783101
+    RANDOM_ADD                                  EQU 9223372036854775783
+    RANDOM_MULTIPLY                             EQU 18446744073709551557
 
 .CODE
 
