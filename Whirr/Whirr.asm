@@ -1,5 +1,8 @@
-include Externals.inc
 include Macros.inc
+
+include Defines.inc
+include Externals.inc
+
 include Heaps.inc
 include Strings.inc
 
@@ -31,6 +34,15 @@ include Random.inc
             _Randomize
         ENDIF
 
+        mov rcx, 1000000000
+
+        @Loop:
+            _Random rax
+            or ax, ax
+            jz @Exit
+        loop @Loop
+
+        @Exit:
         ret
     WhirrProc ENDP
 
