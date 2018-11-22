@@ -26,6 +26,7 @@
   <ItemGroup>
     <None Include="Defines.inc" />
     <None Include="Externals.inc" />
+    <None Include="Guid.inc" />
     <None Include="Macros.inc" />
     <None Include="Heaps.inc" />
     <None Include="Random.inc" />

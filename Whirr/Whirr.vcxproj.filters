@@ -41,6 +41,9 @@
     <None Include="Defines.inc">
       <Filter>Source Files\Included</Filter>
     </None>
+    <None Include="Guid.inc">
+      <Filter>Source Files\Included</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Whir.rc">
