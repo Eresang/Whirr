@@ -30,19 +30,17 @@ include Random.inc
         call GetProcessHeap
         mov WHIRR_HEAPHANDLE, rax
 
-        IFDEF DEFINES_RANDOMIZEATSTART
-            _Randomize
-        ENDIF
-
-        mov rcx, 1000000000
+        mov rcx, 10000000000000
 
         @Loop:
-            _Random rax
-            or ax, ax
+            _Random rdx
+            or edx, edx
             jz @Exit
         loop @Loop
 
         @Exit:
+        xor rcx, rcx
+        call ExitProcess
         ret
     WhirrProc ENDP
 

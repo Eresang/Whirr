@@ -27,8 +27,8 @@
     ENDM
 
     ; Ex. Usage:
-    ; _CallCOM instance, IUnknown, QueryInterface
-    ; In which instance is a previously obtained ^^vTable
+    ; _CallCOM "instance", IUnknown, QueryInterface
+    ; In which instance is a previously obtained [vTable]
     _CallCOM MACRO ifp:REQ, interface:REQ, method:REQ
         _ArgMove rcx, ifp
 
