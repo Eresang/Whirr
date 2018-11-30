@@ -12,10 +12,11 @@
     ;           _String textName, "hello"
     ; Ex. OUT:
     ;           ALIGN 8
-    ;           textName DQ 5
+    ;           DQ 5
+    ;           textName label DW
     ;           DW "h","e","l","l","o",
     ;           DW 0
-    _String MACRO label:REQ, text:VARARG
+    _String MACRO name:REQ, text:VARARG
     LOCAL cnt
         cnt = 0
 
@@ -30,7 +31,8 @@
 
         ; Place length field
         ALIGN 8
-        label DQ cnt
+        DQ cnt
+        name label DW
 
         ; Write actual text
         FOR item, <text>

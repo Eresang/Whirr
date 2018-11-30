@@ -24,9 +24,12 @@
     </MASM>
   </ItemGroup>
   <ItemGroup>
+    <None Include="COM.inc" />
     <None Include="Defines.inc" />
+    <None Include="DXGI.inc" />
     <None Include="Externals.inc" />
-    <None Include="Guid.inc" />
+    <None Include="GUID.inc" />
+    <None Include="IID.inc" />
     <None Include="Macros.inc" />
     <None Include="Heaps.inc" />
     <None Include="Random.inc" />
