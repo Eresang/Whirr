@@ -16,6 +16,9 @@
     <Filter Include="Source Files\Included">
       <UniqueIdentifier>{971eb1f6-2b11-4de3-a316-db0288805400}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Included\COM">
+      <UniqueIdentifier>{f571c225-fcfa-470e-9ee1-0a6b5b4c3bf6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <MASM Include="Whirr.asm">
@@ -41,8 +44,17 @@
     <None Include="Defines.inc">
       <Filter>Source Files\Included</Filter>
     </None>
-    <None Include="Guid.inc">
-      <Filter>Source Files\Included</Filter>
+    <None Include="COM.inc">
+      <Filter>Source Files\Included\COM</Filter>
+    </None>
+    <None Include="GUID.inc">
+      <Filter>Source Files\Included\COM</Filter>
+    </None>
+    <None Include="IID.inc">
+      <Filter>Source Files\Included\COM</Filter>
+    </None>
+    <None Include="DXGI.inc">
+      <Filter>Source Files\Included\COM</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

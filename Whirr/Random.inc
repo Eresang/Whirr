@@ -73,6 +73,7 @@
 
 .DATA
 
+    ALIGN 8
     RANDOM_SEED                                 DQ 13043817825332783101
     RANDOM_ADD                                  EQU 9223372036854775783
     RANDOM_MULTIPLY                             EQU 18446744073709551557

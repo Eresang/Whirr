@@ -12,10 +12,11 @@
     ;           _String textName, "hello"
     ; Ex. OUT:
     ;           ALIGN 8
-    ;           textName DQ 5
+    ;           DQ 5
+    ;           textName label DW
     ;           DW "h","e","l","l","o",
     ;           DW 0
-    _String MACRO label:REQ, text:VARARG
+    _String MACRO name:REQ, text:VARARG
     LOCAL cnt
         cnt = 0
 
@@ -28,9 +29,10 @@
             cnt = cnt + __StringRealLength(item)
         ENDM
 
-        ; Place length field
+        ; Place length field and reference label
         ALIGN 8
-        label DQ cnt
+        DQ cnt
+        name label DW
 
         ; Write actual text
         FOR item, <text>
@@ -124,7 +126,7 @@
 
             ; Limit line length
             chr SIZESTR tmp
-            IF chr GE 60
+            IF chr GE 72
                 DW tmp
                 tmp EQU <>
             ENDIF
@@ -133,11 +135,11 @@
 
 .DATA
     ALIGN 8
-    STRINGS_NEWLINE                             DQ 2
-                                                DQ 0A000Dh
+                                                DQ 2
+    STRINGS_NEWLINE                             DQ 0A000Dh
 
-    STRINGS_SPACE                               DQ 1
-                                                DQ 20h
+                                                DQ 1
+    STRINGS_SPACE                               DQ 20h
 
     _String STRINGS_NUMBERS, "0123456789ABCDEF"
 

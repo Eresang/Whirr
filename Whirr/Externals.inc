@@ -528,15 +528,15 @@
 ; --- Structs ---
 
     POINT STRUCT
-        x                                       DD ?
-        y                                       DD ?
+        x                                       DD 0
+        y                                       DD 0
     POINT ENDS
 
     RECT STRUCT
-        left                                    DD ?
-        top                                     DD ?
-        right                                   DD ?
-        bottom                                  DD ?
+        left                                    DD 0
+        top                                     DD 0
+        right                                   DD 0
+        bottom                                  DD 0
     RECT ENDS
 
     WNDCLASSEX STRUCT
@@ -578,14 +578,14 @@
         wParam                                  DQ ?
         lParam                                  DQ ?
         time                                    DD ?
-        pt                                      POINT {?,?}
+        pt                                      POINT {}
                                                 DD ?
     MESSAGE ENDS
 
     MONITORINFO STRUCT
         cbSize                                  DD ?
-        rcMonitor                               RECT {?,?}
-        rcWork                                  RECT {?,?}
+        rcMonitor                               RECT {}
+        rcWork                                  RECT {}
         DWFlags                                 DD ?
     MONITORINFO ENDS
 
