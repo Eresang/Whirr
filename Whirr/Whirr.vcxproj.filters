@@ -47,9 +47,6 @@
     <None Include="COM.inc">
       <Filter>Source Files\Included\COM</Filter>
     </None>
-    <None Include="GUID.inc">
-      <Filter>Source Files\Included\COM</Filter>
-    </None>
     <None Include="IID.inc">
       <Filter>Source Files\Included\COM</Filter>
     </None>

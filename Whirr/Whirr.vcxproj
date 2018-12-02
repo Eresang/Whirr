@@ -28,7 +28,6 @@
     <None Include="Defines.inc" />
     <None Include="DXGI.inc" />
     <None Include="Externals.inc" />
-    <None Include="GUID.inc" />
     <None Include="IID.inc" />
     <None Include="Macros.inc" />
     <None Include="Heaps.inc" />
