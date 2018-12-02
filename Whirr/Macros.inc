@@ -21,6 +21,7 @@
             cnt = 4
         ENDIF
         cnt = extra / 8 + cnt
+
         IF (cnt MOD 2) EQ 1
             cnt = cnt + 1
         ENDIF
