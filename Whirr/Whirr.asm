@@ -52,7 +52,7 @@ include Random.inc
     WhirrProc PROC
     ; Initialize()
     ; {
-        _Enter _ToBytes(8, 8), rax
+        _Enter _ToBytes(8, 8)
 
         xor rcx, rcx
         call GetModuleHandle

@@ -37,11 +37,8 @@
 
         ; Push actual values
         itr = 0
-        REPT cnt
-            IF itr LT mxc
-                ind EQU _ArgAtIndex(itr, arguments)
-                mov [rsp + itr * 8], ind
-            ENDIF
+        FOR item, <arguments>
+            mov [rsp + itr * 8], item
             itr = itr + 1
         ENDM
     ENDM
