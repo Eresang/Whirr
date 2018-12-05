@@ -53,6 +53,12 @@
     <None Include="DXGI.inc">
       <Filter>Source Files\Included\COM</Filter>
     </None>
+    <None Include="D3D12.inc">
+      <Filter>Source Files\Included\COM</Filter>
+    </None>
+    <None Include="D3D.inc">
+      <Filter>Source Files\Included\COM</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Whir.rc">

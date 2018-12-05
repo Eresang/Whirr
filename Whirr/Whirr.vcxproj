@@ -25,6 +25,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="COM.inc" />
+    <None Include="D3D.inc" />
+    <None Include="D3D12.inc" />
     <None Include="Defines.inc" />
     <None Include="DXGI.inc" />
     <None Include="Externals.inc" />

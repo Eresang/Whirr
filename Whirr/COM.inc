@@ -67,3 +67,5 @@ include IID.inc
 ; --- Interface Specifications ---
 
 include DXGI.inc
+include D3D.inc
+include D3D12.inc

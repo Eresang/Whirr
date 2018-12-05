@@ -567,7 +567,7 @@
                                                 DD ?
         lpszName                                DQ ?
         lpszClass                               DQ ?
-        DWExStyle                               DD ?
+        dwExStyle                               DD ?
                                                 DD ?
     CREATESTRUCT ENDS
 
@@ -586,19 +586,19 @@
         cbSize                                  DD ?
         rcMonitor                               RECT {}
         rcWork                                  RECT {}
-        DWFlags                                 DD ?
+        dwFlags                                 DD ?
     MONITORINFO ENDS
 
     SYSTEM_INFO STRUCT
-        DWProcessorArchitecture                 DW ?
-        DWReserved                              DW ?
-        DWPageSize                              DD ?
+        dwProcessorArchitecture                 DW ?
+        dwReserved                              DW ?
+        dwPageSize                              DD ?
         lpMinimumApplicationAddress             DQ ?
         lpMaximumApplicationAddress             DQ ?
-        DWActiveProcessorMask                   DQ ?
-        DWNumberOfProcessors                    DD ?
-        DWProcessorType                         DD ?
-        DWAllocationGranularity                 DD ?
+        dwActiveProcessorMask                   DQ ?
+        dwNumberOfProcessors                    DD ?
+        dwProcessorType                         DD ?
+        dwAllocationGranularity                 DD ?
         wProcessorLevel                         DW ?
         wProcessorRevision                      DW ?
     SYSTEM_INFO ENDS

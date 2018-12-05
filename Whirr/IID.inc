@@ -48,3 +48,44 @@
     _DefineGuid IDXGISwapChain4,            03D585D5Ah, 0BD4Ah, 0489Eh, 0B1h, 0F4h, 03Dh, 0BCh, 0B6h, 045h, 02Fh, 0FBh
     _DefineGuid IDXGIDevice4,               095B4F95Fh, 0D8DAh, 04CA4h, 09Eh, 0E6h, 03Bh, 076h, 0D5h, 096h, 08Ah, 010h
     _DefineGuid IDXGIFactory5,              07632e1f5h, 0ee65h, 04dcah, 087h, 0fdh, 084h, 0cdh, 075h, 0f8h, 083h, 08dh
+
+    ; DXGI 6
+    _DefineGuid IDXGIAdapter4,              03c8d99d1h, 04fbfh, 04181h, 0a8h, 02ch, 0afh, 066h, 0bfh, 07bh, 0d2h, 04eh
+    _DefineGuid IDXGIOutput6,               0068346e8h, 0aaech, 04b84h, 0adh, 0d7h, 013h, 07fh, 051h, 03fh, 077h, 0a1h
+    _DefineGuid IDXGIFactory6,              0c1b6694fh, 0ff09h, 044a9h, 0b0h, 03ch, 077h, 090h, 00ah, 00ah, 01dh, 017h
+    _DefineGuid IDXGIFactory7,              0a4966eedh, 076dbh, 044dah, 084h, 0c1h, 0eeh, 09ah, 07ah, 0fbh, 020h, 0a8h
+
+    ; D3D12
+    _DefineGuid ID3D12Object,               0c4fec28fh, 07966h, 04e95h, 09fh, 094h, 0f4h, 031h, 0cbh, 056h, 0c3h, 0b8h
+    _DefineGuid ID3D12DeviceChild,          0905db94bh, 0a00ch, 04140h, 09dh, 0f5h, 02bh, 064h, 0cah, 09eh, 0a3h, 057h
+    _DefineGuid ID3D12RootSignature,        0c54a6b66h, 072dfh, 04ee8h, 08bh, 0e5h, 0a9h, 046h, 0a1h, 042h, 092h, 014h
+    _DefineGuid ID3D12RootSignatureDeserializer,                034AB647Bh, 03CC8h, 046ACh, 084h, 01Bh, 0C0h, 096h, 056h, 045h, 0C0h, 046h
+    _DefineGuid ID3D12VersionedRootSignatureDeserializer,       07F91CE67h, 0090Ch, 04BB7h, 0B7h, 08Eh, 0EDh, 08Fh, 0F2h, 0E3h, 01Dh, 0A0h
+    _DefineGuid ID3D12Pageable,             063ee58fbh, 01268h, 04835h, 086h, 0dah, 0f0h, 008h, 0ceh, 062h, 0f0h, 0d6h
+    _DefineGuid ID3D12Heap,                 06b3b2502h, 06e51h, 045b3h, 090h, 0eeh, 098h, 084h, 026h, 05eh, 08dh, 0f3h
+    _DefineGuid ID3D12Resource,             0696442beh, 0a72eh, 04059h, 0bch, 079h, 05bh, 05ch, 098h, 004h, 00fh, 0adh
+    _DefineGuid ID3D12CommandAllocator,     06102dee4h, 0af59h, 04b09h, 0b9h, 099h, 0b4h, 04dh, 073h, 0f0h, 09bh, 024h
+    _DefineGuid ID3D12Fence,                00a753dcfh, 0c4d8h, 04b91h, 0adh, 0f6h, 0beh, 05ah, 060h, 0d9h, 05ah, 076h
+    _DefineGuid ID3D12Fence1,               0433685feh, 0e22bh, 04ca0h, 0a8h, 0dbh, 0b5h, 0b4h, 0f4h, 0ddh, 00eh, 04ah
+    _DefineGuid ID3D12PipelineState,        0765a30f3h, 0f624h, 04c6fh, 0a8h, 028h, 0ach, 0e9h, 048h, 062h, 024h, 045h
+    _DefineGuid ID3D12DescriptorHeap,       08efb471dh, 0616ch, 04f49h, 090h, 0f7h, 012h, 07bh, 0b7h, 063h, 0fah, 051h
+    _DefineGuid ID3D12QueryHeap,            00d9658aeh, 0ed45h, 0469eh, 0a6h, 01dh, 097h, 00eh, 0c5h, 083h, 0cah, 0b4h
+    _DefineGuid ID3D12CommandSignature,     0c36a797ch, 0ec80h, 04f0ah, 089h, 085h, 0a7h, 0b2h, 047h, 050h, 082h, 0d1h
+    _DefineGuid ID3D12CommandList,          07116d91ch, 0e7e4h, 047ceh, 0b8h, 0c6h, 0ech, 081h, 068h, 0f4h, 037h, 0e5h
+    _DefineGuid ID3D12GraphicsCommandList,  05b160d0fh, 0ac1bh, 04185h, 08bh, 0a8h, 0b3h, 0aeh, 042h, 0a5h, 0a4h, 055h
+    _DefineGuid ID3D12GraphicsCommandList1, 0553103fbh, 01fe7h, 04557h, 0bbh, 038h, 094h, 06dh, 07dh, 00eh, 07ch, 0a7h
+    _DefineGuid ID3D12GraphicsCommandList2, 038C3E585h, 0FF17h, 0412Ch, 091h, 050h, 04Fh, 0C6h, 0F9h, 0D7h, 02Ah, 028h
+    _DefineGuid ID3D12CommandQueue,         00ec870a6h, 05d7eh, 04c22h, 08ch, 0fch, 05bh, 0aah, 0e0h, 076h, 016h, 0edh
+    _DefineGuid ID3D12Device,               0189819f1h, 01db6h, 04b57h, 0beh, 054h, 018h, 021h, 033h, 09bh, 085h, 0f7h
+    _DefineGuid ID3D12PipelineLibrary,      0c64226a8h, 09201h, 046afh, 0b4h, 0cch, 053h, 0fbh, 09fh, 0f7h, 041h, 04fh
+    _DefineGuid ID3D12PipelineLibrary1,     080eabf42h, 02568h, 04e5eh, 0bdh, 082h, 0c3h, 07fh, 086h, 096h, 01dh, 0c3h
+    _DefineGuid ID3D12Device1,              077acce80h, 0638eh, 04e65h, 088h, 095h, 0c1h, 0f2h, 033h, 086h, 086h, 03eh
+    _DefineGuid ID3D12Device2,              030baa41eh, 0b15bh, 0475ch, 0a0h, 0bbh, 01ah, 0f5h, 0c5h, 0b6h, 043h, 028h
+    _DefineGuid ID3D12Device3,              081dadc15h, 02badh, 04392h, 093h, 0c5h, 010h, 013h, 045h, 0c4h, 0aah, 098h
+    _DefineGuid ID3D12ProtectedSession,     0A1533D18h, 00AC1h, 04084h, 085h, 0B9h, 089h, 0A9h, 061h, 016h, 080h, 06Bh
+    _DefineGuid ID3D12ProtectedResourceSession,                 06CD696F4h, 0F289h, 040CCh, 080h, 091h, 05Ah, 06Ch, 00Ah, 009h, 09Ch, 03Dh
+    _DefineGuid ID3D12Device4,              0e865df17h, 0a9eeh, 046f9h, 0a4h, 063h, 030h, 098h, 031h, 05ah, 0a2h, 0e5h
+    _DefineGuid ID3D12Resource1,            09D5E227Ah, 04430h, 04161h, 088h, 0B3h, 03Eh, 0CAh, 06Bh, 0B1h, 06Eh, 019h
+    _DefineGuid ID3D12Heap1,                0572F7389h, 02168h, 049E3h, 096h, 093h, 0D6h, 0DFh, 058h, 071h, 0BFh, 06Dh
+    _DefineGuid ID3D12GraphicsCommandList3, 06FDA83A7h, 0B84Ch, 04E38h, 09Ah, 0C8h, 0C7h, 0BDh, 022h, 001h, 06Bh, 03Dh
+    _DefineGuid ID3D12Tools,                07071e1f0h, 0e84bh, 04b33h, 097h, 04fh, 012h, 0fah, 049h, 0deh, 065h, 0c5h

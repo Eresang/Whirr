@@ -63,8 +63,6 @@ include Random.inc
     ; }
 
     ; ---
-
-
         mov rcx, WHIRR_MODULE
         lea rdx, WHIRR_WINDOWCLASSNAME
 
@@ -101,8 +99,7 @@ include Random.inc
         mov rcx, WHIRR_HWND
         call UpdateWindow
 
-
-        MessageLoop:
+        WHIRR_MESSAGELOOP:
 
             lea rcx, [rsp + 20h]
             xor rdx, rdx
@@ -110,7 +107,7 @@ include Random.inc
             xor r9, r9
             call GetMessage
             or rax, rax
-            jz ExitMessageLoop
+            jz WHIRR_EXITMESSAGELOOP
 
             lea rcx, [rsp + 20h]
             call TranslateMessage
@@ -118,10 +115,8 @@ include Random.inc
             lea rcx, [rsp + 20h]
             call DispatchMessage
 
-        jmp MessageLoop
-        ExitMessageLoop:
-
-
+        jmp WHIRR_MESSAGELOOP
+        WHIRR_EXITMESSAGELOOP:
     ; ---
 
     ; Finalize()
