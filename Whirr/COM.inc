@@ -57,9 +57,9 @@ include IID.inc
 ; --- IUnknown ---
 
     _IUnknown MACRO
-        QueryInterface          DQ ?
-        AddRef                  DQ ?
-        Release                 DQ ?
+        rQueryInterface         DQ ?
+        rAddRef                 DQ ?
+        rRelease                DQ ?
     ENDM
 
     _ComTable IUnkown, _IUnknown

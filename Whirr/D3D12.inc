@@ -1,3 +1,5 @@
+; Bulk unit containing D3D12 structs, flags and COM tables
+
     D3D12CreateDevice               PROTO STDCALL
 
 ; --- Structs and values ---
@@ -425,10 +427,10 @@
     D3D12_COMMAND_QUEUE_PRIORITY_GLOBAL_REALTIME        EQU 10000
 
     D3D12_COMMAND_QUEUE_DESC STRUCT
-        dType                                           DD ?
-        dPriority                                       DD ?
-        dFlags                                          DD ?
-        dNodeMask                                       DD ?
+        rType                                           DD ?
+        rPriority                                       DD ?
+        rFlags                                          DD ?
+        rNodeMask                                       DD ?
     D3D12_COMMAND_QUEUE_DESC ENDS
 
     D3D12_PRIMITIVE_TOPOLOGY_TYPE_UNDEFINED             EQU 0
@@ -441,13 +443,13 @@
     D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA        EQU 1
 
     D3D12_INPUT_ELEMENT_DESC STRUCT
-        dSemanticName                                   DQ ?
-        dSemanticIndex                                  DD ?
-        dFormat                                         DD ?
-        dInputSlot                                      DD ?
-        dAlignedByteOffset                              DD ?
-        dInputSlotClass                                 DD ?
-        dInstanceDataStepRate                           DD ?
+        rSemanticName                                   DQ ?
+        rSemanticIndex                                  DD ?
+        rFormat                                         DD ?
+        rInputSlot                                      DD ?
+        rAlignedByteOffset                              DD ?
+        rInputSlotClass                                 DD ?
+        rInstanceDataStepRate                           DD ?
     D3D12_INPUT_ELEMENT_DESC ENDS
 
     D3D12_FILL_MODE_WIREFRAME                           EQU 2
@@ -461,33 +463,33 @@
     D3D12_CULL_MODE_BACK                                EQU 3
 
     D3D12_SO_DECLARATION_ENTRY STRUCT
-        dStream                                         DD ?,?
-        dSemanticName                                   DQ ?
-        dSemanticIndex                                  DD ?,?
-        dStartComponent                                 DB ?
-        dComponentCount                                 DB ?
-        dOutputSlot                                     DB ?,?
+        rStream                                         DD ?,?
+        rSemanticName                                   DQ ?
+        rSemanticIndex                                  DD ?,?
+        rStartComponent                                 DB ?
+        rComponentCount                                 DB ?
+        rOutputSlot                                     DB ?,?
                                                         DD ?
     D3D12_SO_DECLARATION_ENTRY ENDS
 
     D3D12_RECT                                          EQU RECT
 
     D3D12_VIEWPORT STRUCT
-        dTopLeftX                                       REAL4 ?
-        dTopLeftY                                       REAL4 ?
-        dWidth                                          REAL4 ?
-        dHeight                                         REAL4 ?
-        dMinDepth                                       REAL4 ?
-        dMaxDepth                                       REAL4 ?
+        rTopLeftX                                       REAL4 ?
+        rTopLeftY                                       REAL4 ?
+        rWidth                                          REAL4 ?
+        rHeight                                         REAL4 ?
+        rMinDepth                                       REAL4 ?
+        rMaxDepth                                       REAL4 ?
     D3D12_VIEWPORT ENDS
 
     D3D12_BOX STRUCT
-        dleft                                            DD ?
-        dtop                                             DD ?
-        dfront                                           DD ?
-        dright                                           DD ?
-        dbottom                                          DD ?
-        dback                                            DD ?
+        rleft                                            DD ?
+        rtop                                             DD ?
+        rfront                                           DD ?
+        rright                                           DD ?
+        rbottom                                          DD ?
+        rback                                            DD ?
     D3D12_BOX ENDS
 
     D3D12_COMPARISON_FUNC_NEVER                         EQU 1
@@ -512,34 +514,34 @@
     D3D12_STENCIL_OP_DECR                               EQU 8
 
     D3D12_DEPTH_STENCILOP_DESC STRUCT
-        dStencilFailOp                                  DD ?
-        dStencilDepthFailOp                             DD ?
-        dStencilPassOp                                  DD ?
-        dStencilFunc                                    DQ ?
+        rStencilFailOp                                  DD ?
+        rStencilDepthFailOp                             DD ?
+        rStencilPassOp                                  DD ?
+        rStencilFunc                                    DQ ?
                                                         DD ?
     D3D12_DEPTH_STENCILOP_DESC ENDS
 
     D3D12_DEPTH_STENCIL_DESC STRUCT
-        dDepthEnable                                    DB ?,?,?,?
-        dDepthWriteMask                                 DD ?
-        dDepthFunc                                      DD ?
-        dStencilEnable                                  DB ?
-        dStencilReadMask                                DB ?
-        dStencilWriteMask                               DB ?,?
-        dFrontFace                                      DD ?
-        dBackFace                                       DD ?
+        rDepthEnable                                    DB ?,?,?,?
+        rDepthWriteMask                                 DD ?
+        rDepthFunc                                      DD ?
+        rStencilEnable                                  DB ?
+        rStencilReadMask                                DB ?
+        rStencilWriteMask                               DB ?,?
+        rFrontFace                                      DD ?
+        rBackFace                                       DD ?
     D3D12_DEPTH_STENCIL_DESC ENDS
 
     D3D12_DEPTH_STENCIL_DESC1 STRUCT
-        dDepthEnable                                    DB ?,?,?,?
-        dDepthWriteMask                                 DD ?
-        dDepthFunc                                      DD ?
-        dStencilEnable                                  DB ?
-        dStencilReadMask                                DB ?
-        dStencilWriteMask                               DB ?,?
-        dFrontFace                                      DD ?
-        dBackFace                                       DD ?
-        dDepthBoundsTestEnable                          DB ?,?,?,?,?,?,?,?
+        rDepthEnable                                    DB ?,?,?,?
+        rDepthWriteMask                                 DD ?
+        rDepthFunc                                      DD ?
+        rStencilEnable                                  DB ?
+        rStencilReadMask                                DB ?
+        rStencilWriteMask                               DB ?,?
+        rFrontFace                                      DD ?
+        rBackFace                                       DD ?
+        rDepthBoundsTestEnable                          DB ?,?,?,?,?,?,?,?
     D3D12_DEPTH_STENCIL_DESC1 ENDS
 
     D3D12_BLEND_ZERO                                    EQU 1
@@ -590,57 +592,57 @@
     D3D12_LOGIC_OP_OR_INVERTED                          EQU D3D12_LOGIC_OP_OR_REVERSE + 1
 
     D3D12_RENDER_TARGET_BLEND_DESC STRUCT
-        dBlendEnable                                    DB ?
-        dLogicOpEnable                                  DB ?,?,?
-        dSrcBlend                                       DD ?
-        dDestBlend                                      DD ?
-        dBlendOp                                        DD ?
-        dSrcBlendAlpha                                  DD ?
-        dDestBlendAlpha                                 DD ?
-        dBlendOpAlpha                                   DD ?
-        dLogicOp                                        DD ?
-        dRenderTargetWriteMask                          DB ?,?,?,?
+        rBlendEnable                                    DB ?
+        rLogicOpEnable                                  DB ?,?,?
+        rSrcBlend                                       DD ?
+        rDestBlend                                      DD ?
+        rBlendOp                                        DD ?
+        rSrcBlendAlpha                                  DD ?
+        rDestBlendAlpha                                 DD ?
+        rBlendOpAlpha                                   DD ?
+        rLogicOp                                        DD ?
+        rRenderTargetWriteMask                          DB ?,?,?,?
     D3D12_RENDER_TARGET_BLEND_DESC ENDS
 
     D3D12_BLEND_DESC STRUCT
-        dAlphaToCoverageEnable                          DB ?
-        dIndependentBlendEnable                         DB ?,?,?
-        dRenderTarget                                   D3D12_RENDER_TARGET_BLEND_DESC D3D12_SIMULTANEOUS_RENDERTARGET_COUNT DUP (?)
+        rAlphaToCoverageEnable                          DB ?
+        rIndependentBlendEnable                         DB ?,?,?
+        rRenderTarget                                   D3D12_RENDER_TARGET_BLEND_DESC D3D12_SIMULTANEOUS_RENDERTARGET_COUNT DUP ({})
     D3D12_BLEND_DESC ENDS
 
     D3D12_CONSERVATIVE_RASTERIZATION_MODE_OFF           EQU 0
     D3D12_CONSERVATIVE_RASTERIZATION_MODE_ON            EQU 1
 
     D3D12_RASTERIZER_DESC STRUCT
-        dFillMode                                       DD ?
-        dCullMode                                       DD ?
-        dFrontCounterClockwise                          DB ?,?,?,?
-        dDepthBias                                      DD ?
-        dDepthBiasClamp                                 REAL4 ?
-        dSlopeScaledDepthBias                           REAL4 ?
-        dDepthClipEnable                                DB ?
-        dMultisampleEnable                              DB ?
-        dAntialiasedLineEnable                          DB ?,?
-        dForcedSampleCount                              DD ?
-        dConservativeRaster                             DD ?
+        rFillMode                                       DD ?
+        rCullMode                                       DD ?
+        rFrontCounterClockwise                          DB ?,?,?,?
+        rDepthBias                                      DD ?
+        rDepthBiasClamp                                 REAL4 ?
+        rSlopeScaledDepthBias                           REAL4 ?
+        rDepthClipEnable                                DB ?
+        rMultisampleEnable                              DB ?
+        rAntialiasedLineEnable                          DB ?,?
+        rForcedSampleCount                              DD ?
+        rConservativeRaster                             DD ?
     D3D12_RASTERIZER_DESC ENDS
 
     D3D12_SHADER_BYTECODE STRUCT
         pShaderBytecode                                 DQ ?
-        BytecodeLength                                  DD ?,?
+        rBytecodeLength                                 DD ?,?
     D3D12_SHADER_BYTECODE ENDS
 
     D3D12_STREAM_OUTPUT_DESC STRUCT
         pSODeclaration                                  DQ ?
-        NumEntries                                      DD ?,?
+        rNumEntries                                     DD ?,?
         pBufferStrides                                  DQ ?
-        NumStrides                                      DD ?
-        RasterizedStream                                DD ?
+        rNumStrides                                     DD ?
+        rRasterizedStream                               DD ?
     D3D12_STREAM_OUTPUT_DESC ENDS
 
     D3D12_INPUT_LAYOUT_DESC STRUCT
         pInputElementDescs                              DQ ?
-        NumElements                                     DD ?,?
+        rNumElements                                    DD ?,?
     D3D12_INPUT_LAYOUT_DESC ENDS
 
     D3D12_INDEX_BUFFER_STRIP_CUT_VALUE_DISABLED         EQU 0
@@ -649,7 +651,7 @@
 
     D3D12_CACHED_PIPELINE_STATE STRUCT
         pCachedBlob                                     DQ ?
-        CachedBlobSizeInBytes                           DD ?,?
+        rCachedBlobSizeInBytes                          DD ?,?
     D3D12_CACHED_PIPELINE_STATE ENDS
 
     D3D12_PIPELINE_STATE_FLAG_NONE                      EQU 0
@@ -657,44 +659,44 @@
 
     D3D12_GRAPHICS_PIPELINE_STATE_DESC STRUCT
         pRootSignature                                  DQ ?
-        VS                                              D3D12_SHADER_BYTECODE {}
-        PS                                              D3D12_SHADER_BYTECODE {}
-        dDS                                             D3D12_SHADER_BYTECODE {}
-        HS                                              D3D12_SHADER_BYTECODE {}
-        dGS                                             D3D12_SHADER_BYTECODE {}
-        StreamOutput                                    D3D12_STREAM_OUTPUT_DESC {}
-        BlendState                                      D3D12_BLEND_DESC {}
-        SampleMask                                      DD ?,?
-        RasterizerState                                 D3D12_RASTERIZER_DESC {}
-        DepthStencilState                               D3D12_DEPTH_STENCIL_DESC {}
-        InputLayout                                     D3D12_INPUT_LAYOUT_DESC {}
-        IBStripCutValue                                 DD ?
-        PrimitiveTopologyType                           DD ?
-        NumRenderTargets                                DD ?
-        RTVFormats                                      DD 8 DUP (?)
-        DSVFormat                                       DD ?
-        SampleDesc                                      DXGI_SAMPLE_DESC {}
-        NodeMask                                        DD ?,?
-        CachedPSO                                       D3D12_CACHED_PIPELINE_STATE {}
-        Flags                                           DD ?,?
+        rVS                                             D3D12_SHADER_BYTECODE {}
+        rPS                                             D3D12_SHADER_BYTECODE {}
+        rDS                                             D3D12_SHADER_BYTECODE {}
+        rHS                                             D3D12_SHADER_BYTECODE {}
+        rGS                                             D3D12_SHADER_BYTECODE {}
+        rStreamOutput                                   D3D12_STREAM_OUTPUT_DESC {}
+        rBlendState                                     D3D12_BLEND_DESC {}
+        rSampleMask                                     DD ?,?
+        rRasterizerState                                D3D12_RASTERIZER_DESC {}
+        rDepthStencilState                              D3D12_DEPTH_STENCIL_DESC {}
+        rInputLayout                                    D3D12_INPUT_LAYOUT_DESC {}
+        rIBStripCutValue                                DD ?
+        rPrimitiveTopologyType                          DD ?
+        rNumRenderTargets                               DD ?
+        rRTVFormats                                     DD 8 DUP (?)
+        rDSVFormat                                      DD ?
+        rSampleDesc                                     DXGI_SAMPLE_DESC {}
+        rNodeMask                                       DD ?,?
+        rCachedPSO                                      D3D12_CACHED_PIPELINE_STATE {}
+        rFlags                                          DD ?,?
     D3D12_GRAPHICS_PIPELINE_STATE_DESC ENDS
 
     D3D12_COMPUTE_PIPELINE_STATE_DESC STRUCT
         pRootSignature                                  DQ ?
-        dCS                                             D3D12_SHADER_BYTECODE {}
-        NodeMask                                        DD ?,?
-        CachedPSO                                       D3D12_CACHED_PIPELINE_STATE {}
-        Flags                                           DD ?,?
+        rCS                                             D3D12_SHADER_BYTECODE {}
+        rNodeMask                                       DD ?,?
+        rCachedPSO                                      D3D12_CACHED_PIPELINE_STATE {}
+        rFlags                                          DD ?,?
     D3D12_COMPUTE_PIPELINE_STATE_DESC ENDS
 
     D3D12_RT_FORMAT_ARRAY STRUCT
-        RTFormats                                       DD 8 DUP (?)
-        NumRenderTargets                                DD ?,?
+        rRTFormats                                      DD 8 DUP (?)
+        rNumRenderTargets                               DD ?,?
     D3D12_RT_FORMAT_ARRAY ENDS
 
     D3D12_PIPELINE_STATE_STREAM_DESC STRUCT
-        SizeInBytes                                     DD ?,?
-        pPipelineStateSubobjectStream                   DQ ?
+        rSizeInBytes                                    DD ?,?
+        rpPipelineStateSubobjectStream                  DQ ?
     D3D12_PIPELINE_STATE_STREAM_DESC ENDS
 
     D3D12_PIPELINE_STATE_SUBOBJECT_TYPE_ROOT_SIGNATURE  EQU 0
@@ -806,876 +808,619 @@
     D3D12_FORMAT_SUPPORT2_TILED                         EQU 0200h
     D3D12_FORMAT_SUPPORT2_MULTIPLANE_OVERLAY            EQU 04000h
 
-; ___ TODO START ___
-COMMENT |
-DEFINE_ENUM_FLAG_OPERATORSD3D12_FORMAT_SUPPORT2;
-typedef 
-enum D3D12_MULTISAMPLE_QUALITY_LEVEL_FLAGS
-    {
-        D3D12_MULTISAMPLE_QUALITY_LEVELS_FLAG_NONE EQU 0,
-        D3D12_MULTISAMPLE_QUALITY_LEVELS_FLAG_TILED_RESOURCE EQU 0x1
-    } 	D3D12_MULTISAMPLE_QUALITY_LEVEL_FLAGS;
-
-DEFINE_ENUM_FLAG_OPERATORSD3D12_MULTISAMPLE_QUALITY_LEVEL_FLAGS;
-typedef 
-enum D3D12_CROSS_NODE_SHARING_TIER
-    {
-        D3D12_CROSS_NODE_SHARING_TIER_NOT_SUPPORTED EQU 0,
-        D3D12_CROSS_NODE_SHARING_TIER_1_EMULATED EQU 1,
-        D3D12_CROSS_NODE_SHARING_TIER_1 EQU 2,
-        D3D12_CROSS_NODE_SHARING_TIER_2 EQU 3,
-        D3D12_CROSS_NODE_SHARING_TIER_3 EQU 4
-    } 	D3D12_CROSS_NODE_SHARING_TIER;
-
-typedef 
-enum D3D12_RESOURCE_HEAP_TIER
-    {
-        D3D12_RESOURCE_HEAP_TIER_1 EQU 1,
-        D3D12_RESOURCE_HEAP_TIER_2 EQU 2
-    } 	D3D12_RESOURCE_HEAP_TIER;
-
-typedef 
-enum D3D12_PROGRAMMABLE_SAMPLE_POSITIONS_TIER
-    {
-        D3D12_PROGRAMMABLE_SAMPLE_POSITIONS_TIER_NOT_SUPPORTED EQU 0,
-        D3D12_PROGRAMMABLE_SAMPLE_POSITIONS_TIER_1 EQU 1,
-        D3D12_PROGRAMMABLE_SAMPLE_POSITIONS_TIER_2 EQU 2
-    } 	D3D12_PROGRAMMABLE_SAMPLE_POSITIONS_TIER;
-
-typedef 
-enum D3D12_VIEW_INSTANCING_TIER
-    {
-        D3D12_VIEW_INSTANCING_TIER_NOT_SUPPORTED EQU 0,
-        D3D12_VIEW_INSTANCING_TIER_1 EQU 1,
-        D3D12_VIEW_INSTANCING_TIER_2 EQU 2,
-        D3D12_VIEW_INSTANCING_TIER_3 EQU 3
-    } 	D3D12_VIEW_INSTANCING_TIER;
-
-typedef struct D3D12_FEATURE_DATA_D3D12_OPTIONS
-    {
-    _Out_  BOOL DoublePrecisionFloatShaderOps;
-    _Out_  BOOL OutputMergerLogicOp;
-    _Out_  D3D12_SHADER_MIN_PRECISION_SUPPORT MinPrecisionSupport;
-    _Out_  D3D12_TILED_RESOURCES_TIER TiledResourcesTier;
-    _Out_  D3D12_RESOURCE_BINDING_TIER ResourceBindingTier;
-    _Out_  BOOL PSSpecifiedStencilRefSupported;
-    _Out_  BOOL TypedUAVLoadAdditionalFormats;
-    _Out_  BOOL ROVsSupported;
-    _Out_  D3D12_CONSERVATIVE_RASTERIZATION_TIER ConservativeRasterizationTier;
-    _Out_  UINT MaxGPUVirtualAddressBitsPerResource;
-    _Out_  BOOL StandardSwizzle64KBSupported;
-    _Out_  D3D12_CROSS_NODE_SHARING_TIER CrossNodeSharingTier;
-    _Out_  BOOL CrossAdapterRowMajorTextureSupported;
-    _Out_  BOOL VPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation;
-    _Out_  D3D12_RESOURCE_HEAP_TIER ResourceHeapTier;
-    } 	D3D12_FEATURE_DATA_D3D12_OPTIONS;
-
-typedef struct D3D12_FEATURE_DATA_D3D12_OPTIONS1
-    {
-    _Out_  BOOL WaveOps;
-    _Out_  UINT WaveLaneCountMin;
-    _Out_  UINT WaveLaneCountMax;
-    _Out_  UINT TotalLaneCount;
-    _Out_  BOOL ExpandedComputeResourceStates;
-    _Out_  BOOL Int64ShaderOps;
-    } 	D3D12_FEATURE_DATA_D3D12_OPTIONS1;
-
-typedef struct D3D12_FEATURE_DATA_D3D12_OPTIONS2
-    {
-    _Out_  BOOL DepthBoundsTestSupported;
-    _Out_  D3D12_PROGRAMMABLE_SAMPLE_POSITIONS_TIER ProgrammableSamplePositionsTier;
-    } 	D3D12_FEATURE_DATA_D3D12_OPTIONS2;
-
-typedef 
-enum D3D_ROOT_SIGNATURE_VERSION
-    {
-        D3D_ROOT_SIGNATURE_VERSION_1 EQU 0x1,
-        D3D_ROOT_SIGNATURE_VERSION_1_0 EQU 0x1,
-        D3D_ROOT_SIGNATURE_VERSION_1_1 EQU 0x2
-    } 	D3D_ROOT_SIGNATURE_VERSION;
-
-typedef struct D3D12_FEATURE_DATA_ROOT_SIGNATURE
-    {
-    _Inout_  D3D_ROOT_SIGNATURE_VERSION HighestVersion;
-    } 	D3D12_FEATURE_DATA_ROOT_SIGNATURE;
-
-typedef struct D3D12_FEATURE_DATA_ARCHITECTURE
-    {
-    _In_  UINT NodeIndex;
-    _Out_  BOOL TileBasedRenderer;
-    _Out_  BOOL UMA;
-    _Out_  BOOL CacheCoherentUMA;
-    } 	D3D12_FEATURE_DATA_ARCHITECTURE;
-
-typedef struct D3D12_FEATURE_DATA_ARCHITECTURE1
-    {
-    _In_  UINT NodeIndex;
-    _Out_  BOOL TileBasedRenderer;
-    _Out_  BOOL UMA;
-    _Out_  BOOL CacheCoherentUMA;
-    _Out_  BOOL IsolatedMMU;
-    } 	D3D12_FEATURE_DATA_ARCHITECTURE1;
-
-typedef struct D3D12_FEATURE_DATA_FEATURE_LEVELS
-    {
-    _In_  UINT NumFeatureLevels;
-    _In_reads_(NumFeatureLevels)  const D3D_FEATURE_LEVEL *pFeatureLevelsRequested;
-    _Out_  D3D_FEATURE_LEVEL MaxSupportedFeatureLevel;
-    } 	D3D12_FEATURE_DATA_FEATURE_LEVELS;
-
-typedef 
-enum D3D_SHADER_MODEL
-    {
-        D3D_SHADER_MODEL_5_1 EQU 0x51,
-        D3D_SHADER_MODEL_6_0 EQU 0x60,
-        D3D_SHADER_MODEL_6_1 EQU 0x61,
-        D3D_SHADER_MODEL_6_2 EQU 0x62
-    } 	D3D_SHADER_MODEL;
-
-typedef struct D3D12_FEATURE_DATA_SHADER_MODEL
-    {
-    _Inout_  D3D_SHADER_MODEL HighestShaderModel;
-    } 	D3D12_FEATURE_DATA_SHADER_MODEL;
-
-typedef struct D3D12_FEATURE_DATA_FORMAT_SUPPORT
-    {
-    _In_  DXGI_FORMAT Format;
-    _Out_  D3D12_FORMAT_SUPPORT1 Support1;
-    _Out_  D3D12_FORMAT_SUPPORT2 Support2;
-    } 	D3D12_FEATURE_DATA_FORMAT_SUPPORT;
-
-typedef struct D3D12_FEATURE_DATA_MULTISAMPLE_QUALITY_LEVELS
-    {
-    _In_  DXGI_FORMAT Format;
-    _In_  UINT SampleCount;
-    _In_  D3D12_MULTISAMPLE_QUALITY_LEVEL_FLAGS Flags;
-    _Out_  UINT NumQualityLevels;
-    } 	D3D12_FEATURE_DATA_MULTISAMPLE_QUALITY_LEVELS;
-
-typedef struct D3D12_FEATURE_DATA_FORMAT_INFO
-    {
-    DXGI_FORMAT Format;
-    UINT8 PlaneCount;
-    } 	D3D12_FEATURE_DATA_FORMAT_INFO;
-
-typedef struct D3D12_FEATURE_DATA_GPU_VIRTUAL_ADDRESS_SUPPORT
-    {
-    UINT MaxGPUVirtualAddressBitsPerResource;
-    UINT MaxGPUVirtualAddressBitsPerProcess;
-    } 	D3D12_FEATURE_DATA_GPU_VIRTUAL_ADDRESS_SUPPORT;
-
-typedef 
-enum D3D12_SHADER_CACHE_SUPPORT_FLAGS
-    {
-        D3D12_SHADER_CACHE_SUPPORT_NONE EQU 0,
-        D3D12_SHADER_CACHE_SUPPORT_SINGLE_PSO EQU 0x1,
-        D3D12_SHADER_CACHE_SUPPORT_LIBRARY EQU 0x2,
-        D3D12_SHADER_CACHE_SUPPORT_AUTOMATIC_INPROC_CACHE EQU 0x4,
-        D3D12_SHADER_CACHE_SUPPORT_AUTOMATIC_DISK_CACHE EQU 0x8
-    } 	D3D12_SHADER_CACHE_SUPPORT_FLAGS;
-
-DEFINE_ENUM_FLAG_OPERATORSD3D12_SHADER_CACHE_SUPPORT_FLAGS;
-typedef struct D3D12_FEATURE_DATA_SHADER_CACHE
-    {
-    _Out_  D3D12_SHADER_CACHE_SUPPORT_FLAGS SupportFlags;
-    } 	D3D12_FEATURE_DATA_SHADER_CACHE;
-
-typedef struct D3D12_FEATURE_DATA_COMMAND_QUEUE_PRIORITY
-    {
-    _In_  D3D12_COMMAND_LIST_TYPE CommandListType;
-    _In_  UINT Priority;
-    _Out_  BOOL PriorityForTypeIsSupported;
-    } 	D3D12_FEATURE_DATA_COMMAND_QUEUE_PRIORITY;
-
-typedef 
-enum D3D12_COMMAND_LIST_SUPPORT_FLAGS
-    {
-        D3D12_COMMAND_LIST_SUPPORT_FLAG_NONE EQU 0,
-        D3D12_COMMAND_LIST_SUPPORT_FLAG_DIRECT EQU 1 << D3D12_COMMAND_LIST_TYPE_DIRECT ,
-        D3D12_COMMAND_LIST_SUPPORT_FLAG_BUNDLE EQU 1 << D3D12_COMMAND_LIST_TYPE_BUNDLE ,
-        D3D12_COMMAND_LIST_SUPPORT_FLAG_COMPUTE EQU 1 << D3D12_COMMAND_LIST_TYPE_COMPUTE ,
-        D3D12_COMMAND_LIST_SUPPORT_FLAG_COPY EQU 1 << D3D12_COMMAND_LIST_TYPE_COPY ,
-        D3D12_COMMAND_LIST_SUPPORT_FLAG_VIDEO_DECODE EQU 1 << D3D12_COMMAND_LIST_TYPE_VIDEO_DECODE ,
-        D3D12_COMMAND_LIST_SUPPORT_FLAG_VIDEO_PROCESS EQU 1 << D3D12_COMMAND_LIST_TYPE_VIDEO_PROCESS 
-    } 	D3D12_COMMAND_LIST_SUPPORT_FLAGS;
-
-DEFINE_ENUM_FLAG_OPERATORSD3D12_COMMAND_LIST_SUPPORT_FLAGS;
-typedef struct D3D12_FEATURE_DATA_D3D12_OPTIONS3
-    {
-    _Out_  BOOL CopyQueueTimestampQueriesSupported;
-    _Out_  BOOL CastingFullyTypedFormatSupported;
-    _Out_  D3D12_COMMAND_LIST_SUPPORT_FLAGS WriteBufferImmediateSupportFlags;
-    _Out_  D3D12_VIEW_INSTANCING_TIER ViewInstancingTier;
-    _Out_  BOOL BarycentricsSupported;
-    } 	D3D12_FEATURE_DATA_D3D12_OPTIONS3;
-
-typedef struct D3D12_FEATURE_DATA_EXISTING_HEAPS
-    {
-    _Out_  BOOL Supported;
-    } 	D3D12_FEATURE_DATA_EXISTING_HEAPS;
-
-typedef 
-enum D3D12_SHARED_RESOURCE_COMPATIBILITY_TIER
-    {
-        D3D12_SHARED_RESOURCE_COMPATIBILITY_TIER_0 EQU 0,
-        D3D12_SHARED_RESOURCE_COMPATIBILITY_TIER_1 EQU D3D12_SHARED_RESOURCE_COMPATIBILITY_TIER_0 + 1 
-    } 	D3D12_SHARED_RESOURCE_COMPATIBILITY_TIER;
-
-typedef struct D3D12_FEATURE_DATA_D3D12_OPTIONS4
-    {
-    _Out_  BOOL MSAA64KBAlignedTextureSupported;
-    _Out_  D3D12_SHARED_RESOURCE_COMPATIBILITY_TIER SharedResourceCompatibilityTier;
-    _Out_  BOOL Native16BitShaderOpsSupported;
-    } 	D3D12_FEATURE_DATA_D3D12_OPTIONS4;
-
-typedef 
-enum D3D12_HEAP_SERIALIZATION_TIER
-    {
-        D3D12_HEAP_SERIALIZATION_TIER_0 EQU 0,
-        D3D12_HEAP_SERIALIZATION_TIER_10 EQU 10
-    } 	D3D12_HEAP_SERIALIZATION_TIER;
-
-typedef struct D3D12_FEATURE_DATA_SERIALIZATION
-    {
-    _In_  UINT NodeIndex;
-    _Out_  D3D12_HEAP_SERIALIZATION_TIER HeapSerializationTier;
-    } 	D3D12_FEATURE_DATA_SERIALIZATION;
-
-typedef struct D3D12_FEATURE_DATA_CROSS_NODE
-    {
-    D3D12_CROSS_NODE_SHARING_TIER SharingTier;
-    BOOL AtomicShaderInstructions;
-    } 	D3D12_FEATURE_DATA_CROSS_NODE;
-
-typedef struct D3D12_RESOURCE_ALLOCATION_INFO
-    {
-    UINT64 SizeInBytes;
-    UINT64 Alignment;
-    } 	D3D12_RESOURCE_ALLOCATION_INFO;
-
-typedef struct D3D12_RESOURCE_ALLOCATION_INFO1
-    {
-    UINT64 Offset;
-    UINT64 Alignment;
-    UINT64 SizeInBytes;
-    } 	D3D12_RESOURCE_ALLOCATION_INFO1;
-
-typedef 
-enum D3D12_HEAP_TYPE
-    {
-        D3D12_HEAP_TYPE_DEFAULT EQU 1,
-        D3D12_HEAP_TYPE_UPLOAD EQU 2,
-        D3D12_HEAP_TYPE_READBACK EQU 3,
-        D3D12_HEAP_TYPE_CUSTOM EQU 4
-    } 	D3D12_HEAP_TYPE;
-
-typedef 
-enum D3D12_CPU_PAGE_PROPERTY
-    {
-        D3D12_CPU_PAGE_PROPERTY_UNKNOWN EQU 0,
-        D3D12_CPU_PAGE_PROPERTY_NOT_AVAILABLE EQU 1,
-        D3D12_CPU_PAGE_PROPERTY_WRITE_COMBINE EQU 2,
-        D3D12_CPU_PAGE_PROPERTY_WRITE_BACK EQU 3
-    } 	D3D12_CPU_PAGE_PROPERTY;
-
-typedef 
-enum D3D12_MEMORY_POOL
-    {
-        D3D12_MEMORY_POOL_UNKNOWN EQU 0,
-        D3D12_MEMORY_POOL_L0 EQU 1,
-        D3D12_MEMORY_POOL_L1 EQU 2
-    } 	D3D12_MEMORY_POOL;
-
-typedef struct D3D12_HEAP_PROPERTIES
-    {
-    D3D12_HEAP_TYPE Type;
-    D3D12_CPU_PAGE_PROPERTY CPUPageProperty;
-    D3D12_MEMORY_POOL MemoryPoolPreference;
-    UINT CreationNodeMask;
-    UINT VisibleNodeMask;
-    } 	D3D12_HEAP_PROPERTIES;
-
-typedef 
-enum D3D12_HEAP_FLAGS
-    {
-        D3D12_HEAP_FLAG_NONE EQU 0,
-        D3D12_HEAP_FLAG_SHARED EQU 0x1,
-        D3D12_HEAP_FLAG_DENY_BUFFERS EQU 0x4,
-        D3D12_HEAP_FLAG_ALLOW_DISPLAY EQU 0x8,
-        D3D12_HEAP_FLAG_SHARED_CROSS_ADAPTER EQU 0x20,
-        D3D12_HEAP_FLAG_DENY_RT_DS_TEXTURES EQU 0x40,
-        D3D12_HEAP_FLAG_DENY_NON_RT_DS_TEXTURES EQU 0x80,
-        D3D12_HEAP_FLAG_HARDWARE_PROTECTED EQU 0x100,
-        D3D12_HEAP_FLAG_ALLOW_WRITE_WATCH EQU 0x200,
-        D3D12_HEAP_FLAG_ALLOW_SHADER_ATOMICS EQU 0x400,
-        D3D12_HEAP_FLAG_ALLOW_ALL_BUFFERS_AND_TEXTURES EQU 0,
-        D3D12_HEAP_FLAG_ALLOW_ONLY_BUFFERS EQU 0xc0,
-        D3D12_HEAP_FLAG_ALLOW_ONLY_NON_RT_DS_TEXTURES EQU 0x44,
-        D3D12_HEAP_FLAG_ALLOW_ONLY_RT_DS_TEXTURES EQU 0x84
-    } 	D3D12_HEAP_FLAGS;
-
-DEFINE_ENUM_FLAG_OPERATORSD3D12_HEAP_FLAGS;
-typedef struct D3D12_HEAP_DESC
-    {
-    UINT64 SizeInBytes;
-    D3D12_HEAP_PROPERTIES Properties;
-    UINT64 Alignment;
-    D3D12_HEAP_FLAGS Flags;
-    } 	D3D12_HEAP_DESC;
-
-typedef 
-enum D3D12_RESOURCE_DIMENSION
-    {
-        D3D12_RESOURCE_DIMENSION_UNKNOWN EQU 0,
-        D3D12_RESOURCE_DIMENSION_BUFFER EQU 1,
-        D3D12_RESOURCE_DIMENSION_TEXTURE1D EQU 2,
-        D3D12_RESOURCE_DIMENSION_TEXTURE2D EQU 3,
-        D3D12_RESOURCE_DIMENSION_TEXTURE3D EQU 4
-    } 	D3D12_RESOURCE_DIMENSION;
-
-typedef 
-enum D3D12_TEXTURE_LAYOUT
-    {
-        D3D12_TEXTURE_LAYOUT_UNKNOWN EQU 0,
-        D3D12_TEXTURE_LAYOUT_ROW_MAJOR EQU 1,
-        D3D12_TEXTURE_LAYOUT_64KB_UNDEFINED_SWIZZLE EQU 2,
-        D3D12_TEXTURE_LAYOUT_64KB_STANDARD_SWIZZLE EQU 3
-    } 	D3D12_TEXTURE_LAYOUT;
-
-typedef 
-enum D3D12_RESOURCE_FLAGS
-    {
-        D3D12_RESOURCE_FLAG_NONE EQU 0,
-        D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET EQU 0x1,
-        D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL EQU 0x2,
-        D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS EQU 0x4,
-        D3D12_RESOURCE_FLAG_DENY_SHADER_RESOURCE EQU 0x8,
-        D3D12_RESOURCE_FLAG_ALLOW_CROSS_ADAPTER EQU 0x10,
-        D3D12_RESOURCE_FLAG_ALLOW_SIMULTANEOUS_ACCESS EQU 0x20,
-        D3D12_RESOURCE_FLAG_VIDEO_DECODE_REFERENCE_ONLY EQU 0x40
-    } 	D3D12_RESOURCE_FLAGS;
-
-DEFINE_ENUM_FLAG_OPERATORSD3D12_RESOURCE_FLAGS;
-typedef struct D3D12_RESOURCE_DESC
-    {
-    D3D12_RESOURCE_DIMENSION Dimension;
-    UINT64 Alignment;
-    UINT64 Width;
-    UINT Height;
-    UINT16 DepthOrArraySize;
-    UINT16 MipLevels;
-    DXGI_FORMAT Format;
-    DXGI_SAMPLE_DESC SampleDesc;
-    D3D12_TEXTURE_LAYOUT Layout;
-    D3D12_RESOURCE_FLAGS Flags;
-    } 	D3D12_RESOURCE_DESC;
-
-typedef struct D3D12_DEPTH_STENCIL_VALUE
-    {
-    FLOAT Depth;
-    UINT8 Stencil;
-    } 	D3D12_DEPTH_STENCIL_VALUE;
-
-typedef struct D3D12_CLEAR_VALUE
-    {
-    DXGI_FORMAT Format;
-    union 
-        {
-        FLOAT Color[ 4 ];
-        D3D12_DEPTH_STENCIL_VALUE DepthStencil;
-        } 	;
-    } 	D3D12_CLEAR_VALUE;
-
-typedef struct D3D12_RANGE
-    {
-    SIZE_T Begin;
-    SIZE_T End;
-    } 	D3D12_RANGE;
-
-typedef struct D3D12_RANGE_UINT64
-    {
-    UINT64 Begin;
-    UINT64 End;
-    } 	D3D12_RANGE_UINT64;
-
-typedef struct D3D12_SUBRESOURCE_RANGE_UINT64
-    {
-    UINT Subresource;
-    D3D12_RANGE_UINT64 Range;
-    } 	D3D12_SUBRESOURCE_RANGE_UINT64;
-
-typedef struct D3D12_SUBRESOURCE_INFO
-    {
-    UINT64 Offset;
-    UINT RowPitch;
-    UINT DepthPitch;
-    } 	D3D12_SUBRESOURCE_INFO;
-
-typedef struct D3D12_TILED_RESOURCE_COORDINATE
-    {
-    UINT X;
-    UINT Y;
-    UINT Z;
-    UINT Subresource;
-    } 	D3D12_TILED_RESOURCE_COORDINATE;
-
-typedef struct D3D12_TILE_REGION_SIZE
-    {
-    UINT NumTiles;
-    BOOL UseBox;
-    UINT Width;
-    UINT16 Height;
-    UINT16 Depth;
-    } 	D3D12_TILE_REGION_SIZE;
-
-typedef 
-enum D3D12_TILE_RANGE_FLAGS
-    {
-        D3D12_TILE_RANGE_FLAG_NONE EQU 0,
-        D3D12_TILE_RANGE_FLAG_NULL EQU 1,
-        D3D12_TILE_RANGE_FLAG_SKIP EQU 2,
-        D3D12_TILE_RANGE_FLAG_REUSE_SINGLE_TILE EQU 4
-    } 	D3D12_TILE_RANGE_FLAGS;
-
-typedef struct D3D12_SUBRESOURCE_TILING
-    {
-    UINT WidthInTiles;
-    UINT16 HeightInTiles;
-    UINT16 DepthInTiles;
-    UINT StartTileIndexInOverallResource;
-    } 	D3D12_SUBRESOURCE_TILING;
-
-typedef struct D3D12_TILE_SHAPE
-    {
-    UINT WidthInTexels;
-    UINT HeightInTexels;
-    UINT DepthInTexels;
-    } 	D3D12_TILE_SHAPE;
-
-typedef struct D3D12_PACKED_MIP_INFO
-    {
-    UINT8 NumStandardMips;
-    UINT8 NumPackedMips;
-    UINT NumTilesForPackedMips;
-    UINT StartTileIndexInOverallResource;
-    } 	D3D12_PACKED_MIP_INFO;
-
-typedef 
-enum D3D12_TILE_MAPPING_FLAGS
-    {
-        D3D12_TILE_MAPPING_FLAG_NONE EQU 0,
-        D3D12_TILE_MAPPING_FLAG_NO_HAZARD EQU 0x1
-    } 	D3D12_TILE_MAPPING_FLAGS;
-
-DEFINE_ENUM_FLAG_OPERATORSD3D12_TILE_MAPPING_FLAGS;
-typedef 
-enum D3D12_TILE_COPY_FLAGS
-    {
-        D3D12_TILE_COPY_FLAG_NONE EQU 0,
-        D3D12_TILE_COPY_FLAG_NO_HAZARD EQU 0x1,
-        D3D12_TILE_COPY_FLAG_LINEAR_BUFFER_TO_SWIZZLED_TILED_RESOURCE EQU 0x2,
-        D3D12_TILE_COPY_FLAG_SWIZZLED_TILED_RESOURCE_TO_LINEAR_BUFFER EQU 0x4
-    } 	D3D12_TILE_COPY_FLAGS;
-
-DEFINE_ENUM_FLAG_OPERATORSD3D12_TILE_COPY_FLAGS;
-typedef 
-enum D3D12_RESOURCE_STATES
-    {
-        D3D12_RESOURCE_STATE_COMMON EQU 0,
-        D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER EQU 0x1,
-        D3D12_RESOURCE_STATE_INDEX_BUFFER EQU 0x2,
-        D3D12_RESOURCE_STATE_RENDER_TARGET EQU 0x4,
-        D3D12_RESOURCE_STATE_UNORDERED_ACCESS EQU 0x8,
-        D3D12_RESOURCE_STATE_DEPTH_WRITE EQU 0x10,
-        D3D12_RESOURCE_STATE_DEPTH_READ EQU 0x20,
-        D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE EQU 0x40,
-        D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE EQU 0x80,
-        D3D12_RESOURCE_STATE_STREAM_OUT EQU 0x100,
-        D3D12_RESOURCE_STATE_INDIRECT_ARGUMENT EQU 0x200,
-        D3D12_RESOURCE_STATE_COPY_DEST EQU 0x400,
-        D3D12_RESOURCE_STATE_COPY_SOURCE EQU 0x800,
-        D3D12_RESOURCE_STATE_RESOLVE_DEST EQU 0x1000,
-        D3D12_RESOURCE_STATE_RESOLVE_SOURCE EQU 0x2000,
-        D3D12_RESOURCE_STATE_GENERIC_READ EQU 0x1 | 0x2  | 0x40  | 0x80  | 0x200  | 0x800 ,
-        D3D12_RESOURCE_STATE_PRESENT EQU 0,
-        D3D12_RESOURCE_STATE_PREDICATION EQU 0x200,
-        D3D12_RESOURCE_STATE_VIDEO_DECODE_READ EQU 0x10000,
-        D3D12_RESOURCE_STATE_VIDEO_DECODE_WRITE EQU 0x20000,
-        D3D12_RESOURCE_STATE_VIDEO_PROCESS_READ EQU 0x40000,
-        D3D12_RESOURCE_STATE_VIDEO_PROCESS_WRITE EQU 0x80000
-    } 	D3D12_RESOURCE_STATES;
-
-DEFINE_ENUM_FLAG_OPERATORSD3D12_RESOURCE_STATES;
-typedef 
-enum D3D12_RESOURCE_BARRIER_TYPE
-    {
-        D3D12_RESOURCE_BARRIER_TYPE_TRANSITION EQU 0,
-        D3D12_RESOURCE_BARRIER_TYPE_ALIASING EQU D3D12_RESOURCE_BARRIER_TYPE_TRANSITION + 1 ,
-        D3D12_RESOURCE_BARRIER_TYPE_UAV EQU D3D12_RESOURCE_BARRIER_TYPE_ALIASING + 1 
-    } 	D3D12_RESOURCE_BARRIER_TYPE;
-
-
-typedef struct D3D12_RESOURCE_TRANSITION_BARRIER
-    {
-    ID3D12Resource *pResource;
-    UINT Subresource;
-    D3D12_RESOURCE_STATES StateBefore;
-    D3D12_RESOURCE_STATES StateAfter;
-    } 	D3D12_RESOURCE_TRANSITION_BARRIER;
-
-typedef struct D3D12_RESOURCE_ALIASING_BARRIER
-    {
-    ID3D12Resource *pResourceBefore;
-    ID3D12Resource *pResourceAfter;
-    } 	D3D12_RESOURCE_ALIASING_BARRIER;
-
-typedef struct D3D12_RESOURCE_UAV_BARRIER
-    {
-    ID3D12Resource *pResource;
-    } 	D3D12_RESOURCE_UAV_BARRIER;
-
-typedef 
-enum D3D12_RESOURCE_BARRIER_FLAGS
-    {
-        D3D12_RESOURCE_BARRIER_FLAG_NONE EQU 0,
-        D3D12_RESOURCE_BARRIER_FLAG_BEGIN_ONLY EQU 0x1,
-        D3D12_RESOURCE_BARRIER_FLAG_END_ONLY EQU 0x2
-    } 	D3D12_RESOURCE_BARRIER_FLAGS;
-
-DEFINE_ENUM_FLAG_OPERATORSD3D12_RESOURCE_BARRIER_FLAGS;
-typedef struct D3D12_RESOURCE_BARRIER
-    {
-    D3D12_RESOURCE_BARRIER_TYPE Type;
-    D3D12_RESOURCE_BARRIER_FLAGS Flags;
-    union 
-        {
-        D3D12_RESOURCE_TRANSITION_BARRIER Transition;
-        D3D12_RESOURCE_ALIASING_BARRIER Aliasing;
-        D3D12_RESOURCE_UAV_BARRIER UAV;
-        } 	;
-    } 	D3D12_RESOURCE_BARRIER;
-
-typedef struct D3D12_SUBRESOURCE_FOOTPRINT
-    {
-    DXGI_FORMAT Format;
-    UINT Width;
-    UINT Height;
-    UINT Depth;
-    UINT RowPitch;
-    } 	D3D12_SUBRESOURCE_FOOTPRINT;
-
-typedef struct D3D12_PLACED_SUBRESOURCE_FOOTPRINT
-    {
-    UINT64 Offset;
-    D3D12_SUBRESOURCE_FOOTPRINT Footprint;
-    } 	D3D12_PLACED_SUBRESOURCE_FOOTPRINT;
-
-typedef 
-enum D3D12_TEXTURE_COPY_TYPE
-    {
-        D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX EQU 0,
-        D3D12_TEXTURE_COPY_TYPE_PLACED_FOOTPRINT EQU 1
-    } 	D3D12_TEXTURE_COPY_TYPE;
-
-typedef struct D3D12_TEXTURE_COPY_LOCATION
-    {
-    ID3D12Resource *pResource;
-    D3D12_TEXTURE_COPY_TYPE Type;
-    union 
-        {
-        D3D12_PLACED_SUBRESOURCE_FOOTPRINT PlacedFootprint;
-        UINT SubresourceIndex;
-        } 	;
-    } 	D3D12_TEXTURE_COPY_LOCATION;
-
-typedef 
-enum D3D12_RESOLVE_MODE
-    {
-        D3D12_RESOLVE_MODE_DECOMPRESS EQU 0,
-        D3D12_RESOLVE_MODE_MIN EQU 1,
-        D3D12_RESOLVE_MODE_MAX EQU 2,
-        D3D12_RESOLVE_MODE_AVERAGE EQU 3
-    } 	D3D12_RESOLVE_MODE;
-
-typedef struct D3D12_SAMPLE_POSITION
-    {
-    INT8 X;
-    INT8 Y;
-    } 	D3D12_SAMPLE_POSITION;
-
-typedef struct D3D12_VIEW_INSTANCE_LOCATION
-    {
-    UINT ViewportArrayIndex;
-    UINT RenderTargetArrayIndex;
-    } 	D3D12_VIEW_INSTANCE_LOCATION;
-
-typedef 
-enum D3D12_VIEW_INSTANCING_FLAGS
-    {
-        D3D12_VIEW_INSTANCING_FLAG_NONE EQU 0,
-        D3D12_VIEW_INSTANCING_FLAG_ENABLE_VIEW_INSTANCE_MASKING EQU 0x1
-    } 	D3D12_VIEW_INSTANCING_FLAGS;
-
-DEFINE_ENUM_FLAG_OPERATORSD3D12_VIEW_INSTANCING_FLAGS;
-typedef struct D3D12_VIEW_INSTANCING_DESC
-    {
-    UINT ViewInstanceCount;
-    _Field_size_full_(ViewInstanceCount)  const D3D12_VIEW_INSTANCE_LOCATION *pViewInstanceLocations;
-    D3D12_VIEW_INSTANCING_FLAGS Flags;
-    } 	D3D12_VIEW_INSTANCING_DESC;
-
-typedef 
-enum D3D12_SHADER_COMPONENT_MAPPING
-    {
-        D3D12_SHADER_COMPONENT_MAPPING_FROM_MEMORY_COMPONENT_0 EQU 0,
-        D3D12_SHADER_COMPONENT_MAPPING_FROM_MEMORY_COMPONENT_1 EQU 1,
-        D3D12_SHADER_COMPONENT_MAPPING_FROM_MEMORY_COMPONENT_2 EQU 2,
-        D3D12_SHADER_COMPONENT_MAPPING_FROM_MEMORY_COMPONENT_3 EQU 3,
-        D3D12_SHADER_COMPONENT_MAPPING_FORCE_VALUE_0 EQU 4,
-        D3D12_SHADER_COMPONENT_MAPPING_FORCE_VALUE_1 EQU 5
-    } 	D3D12_SHADER_COMPONENT_MAPPING;
-
-#define D3D12_SHADER_COMPONENT_MAPPING_MASK 0x7 
-#define D3D12_SHADER_COMPONENT_MAPPING_SHIFT 3 
-#define D3D12_SHADER_COMPONENT_MAPPING_ALWAYS_SET_BIT_AVOIDING_ZEROMEM_MISTAKES (1<<(D3D12_SHADER_COMPONENT_MAPPING_SHIFT*4)) 
-#define D3D12_ENCODE_SHADER_4_COMPONENT_MAPPING(Src0,Src1,Src2,Src3) ((((Src0)&D3D12_SHADER_COMPONENT_MAPPING_MASK)| \
-                                                                (((Src1)&D3D12_SHADER_COMPONENT_MAPPING_MASK)<<D3D12_SHADER_COMPONENT_MAPPING_SHIFT)| \
-                                                                (((Src2)&D3D12_SHADER_COMPONENT_MAPPING_MASK)<<(D3D12_SHADER_COMPONENT_MAPPING_SHIFT*2))| \
-                                                                (((Src3)&D3D12_SHADER_COMPONENT_MAPPING_MASK)<<(D3D12_SHADER_COMPONENT_MAPPING_SHIFT*3))| \
-                                                                D3D12_SHADER_COMPONENT_MAPPING_ALWAYS_SET_BIT_AVOIDING_ZEROMEM_MISTAKES))
-#define D3D12_DECODE_SHADER_4_COMPONENT_MAPPING(ComponentToExtract,Mapping) ((D3D12_SHADER_COMPONENT_MAPPING)(Mapping >> (D3D12_SHADER_COMPONENT_MAPPING_SHIFT*ComponentToExtract) & D3D12_SHADER_COMPONENT_MAPPING_MASK))
-#define D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING D3D12_ENCODE_SHADER_4_COMPONENT_MAPPING(0,1,2,3) 
-typedef 
-enum D3D12_BUFFER_SRV_FLAGS
-    {
-        D3D12_BUFFER_SRV_FLAG_NONE EQU 0,
-        D3D12_BUFFER_SRV_FLAG_RAW EQU 0x1
-    } 	D3D12_BUFFER_SRV_FLAGS;
-
-DEFINE_ENUM_FLAG_OPERATORSD3D12_BUFFER_SRV_FLAGS;
-typedef struct D3D12_BUFFER_SRV
-    {
-    UINT64 FirstElement;
-    UINT NumElements;
-    UINT StructureByteStride;
-    D3D12_BUFFER_SRV_FLAGS Flags;
-    } 	D3D12_BUFFER_SRV;
-
-typedef struct D3D12_TEX1D_SRV
-    {
-    UINT MostDetailedMip;
-    UINT MipLevels;
-    FLOAT ResourceMinLODClamp;
-    } 	D3D12_TEX1D_SRV;
-
-typedef struct D3D12_TEX1D_ARRAY_SRV
-    {
-    UINT MostDetailedMip;
-    UINT MipLevels;
-    UINT FirstArraySlice;
-    UINT ArraySize;
-    FLOAT ResourceMinLODClamp;
-    } 	D3D12_TEX1D_ARRAY_SRV;
-
-typedef struct D3D12_TEX2D_SRV
-    {
-    UINT MostDetailedMip;
-    UINT MipLevels;
-    UINT PlaneSlice;
-    FLOAT ResourceMinLODClamp;
-    } 	D3D12_TEX2D_SRV;
-
-typedef struct D3D12_TEX2D_ARRAY_SRV
-    {
-    UINT MostDetailedMip;
-    UINT MipLevels;
-    UINT FirstArraySlice;
-    UINT ArraySize;
-    UINT PlaneSlice;
-    FLOAT ResourceMinLODClamp;
-    } 	D3D12_TEX2D_ARRAY_SRV;
-
-typedef struct D3D12_TEX3D_SRV
-    {
-    UINT MostDetailedMip;
-    UINT MipLevels;
-    FLOAT ResourceMinLODClamp;
-    } 	D3D12_TEX3D_SRV;
-
-typedef struct D3D12_TEXCUBE_SRV
-    {
-    UINT MostDetailedMip;
-    UINT MipLevels;
-    FLOAT ResourceMinLODClamp;
-    } 	D3D12_TEXCUBE_SRV;
-
-typedef struct D3D12_TEXCUBE_ARRAY_SRV
-    {
-    UINT MostDetailedMip;
-    UINT MipLevels;
-    UINT First2DArrayFace;
-    UINT NumCubes;
-    FLOAT ResourceMinLODClamp;
-    } 	D3D12_TEXCUBE_ARRAY_SRV;
-
-typedef struct D3D12_TEX2DMS_SRV
-    {
-    UINT UnusedField_NothingToDefine;
-    } 	D3D12_TEX2DMS_SRV;
-
-typedef struct D3D12_TEX2DMS_ARRAY_SRV
-    {
-    UINT FirstArraySlice;
-    UINT ArraySize;
-    } 	D3D12_TEX2DMS_ARRAY_SRV;
-
-typedef 
-enum D3D12_SRV_DIMENSION
-    {
-        D3D12_SRV_DIMENSION_UNKNOWN EQU 0,
-        D3D12_SRV_DIMENSION_BUFFER EQU 1,
-        D3D12_SRV_DIMENSION_TEXTURE1D EQU 2,
-        D3D12_SRV_DIMENSION_TEXTURE1DARRAY EQU 3,
-        D3D12_SRV_DIMENSION_TEXTURE2D EQU 4,
-        D3D12_SRV_DIMENSION_TEXTURE2DARRAY EQU 5,
-        D3D12_SRV_DIMENSION_TEXTURE2DMS EQU 6,
-        D3D12_SRV_DIMENSION_TEXTURE2DMSARRAY EQU 7,
-        D3D12_SRV_DIMENSION_TEXTURE3D EQU 8,
-        D3D12_SRV_DIMENSION_TEXTURECUBE EQU 9,
-        D3D12_SRV_DIMENSION_TEXTURECUBEARRAY EQU 10
-    } 	D3D12_SRV_DIMENSION;
-
-typedef struct D3D12_SHADER_RESOURCE_VIEW_DESC
-    {
-    DXGI_FORMAT Format;
-    D3D12_SRV_DIMENSION ViewDimension;
-    UINT Shader4ComponentMapping;
-    union 
-        {
-        D3D12_BUFFER_SRV Buffer;
-        D3D12_TEX1D_SRV Texture1D;
-        D3D12_TEX1D_ARRAY_SRV Texture1DArray;
-        D3D12_TEX2D_SRV Texture2D;
-        D3D12_TEX2D_ARRAY_SRV Texture2DArray;
-        D3D12_TEX2DMS_SRV Texture2DMS;
-        D3D12_TEX2DMS_ARRAY_SRV Texture2DMSArray;
-        D3D12_TEX3D_SRV Texture3D;
-        D3D12_TEXCUBE_SRV TextureCube;
-        D3D12_TEXCUBE_ARRAY_SRV TextureCubeArray;
-        } 	;
-    } 	D3D12_SHADER_RESOURCE_VIEW_DESC;
-
-typedef struct D3D12_CONSTANT_BUFFER_VIEW_DESC
-    {
-    D3D12_GPU_VIRTUAL_ADDRESS BufferLocation;
-    UINT SizeInBytes;
-    } 	D3D12_CONSTANT_BUFFER_VIEW_DESC;
-
-typedef 
-enum D3D12_FILTER
-    {
-        D3D12_FILTER_MIN_MAG_MIP_POINT EQU 0,
-        D3D12_FILTER_MIN_MAG_POINT_MIP_LINEAR EQU 0x1,
-        D3D12_FILTER_MIN_POINT_MAG_LINEAR_MIP_POINT EQU 0x4,
-        D3D12_FILTER_MIN_POINT_MAG_MIP_LINEAR EQU 0x5,
-        D3D12_FILTER_MIN_LINEAR_MAG_MIP_POINT EQU 0x10,
-        D3D12_FILTER_MIN_LINEAR_MAG_POINT_MIP_LINEAR EQU 0x11,
-        D3D12_FILTER_MIN_MAG_LINEAR_MIP_POINT EQU 0x14,
-        D3D12_FILTER_MIN_MAG_MIP_LINEAR EQU 0x15,
-        D3D12_FILTER_ANISOTROPIC EQU 0x55,
-        D3D12_FILTER_COMPARISON_MIN_MAG_MIP_POINT EQU 0x80,
-        D3D12_FILTER_COMPARISON_MIN_MAG_POINT_MIP_LINEAR EQU 0x81,
-        D3D12_FILTER_COMPARISON_MIN_POINT_MAG_LINEAR_MIP_POINT EQU 0x84,
-        D3D12_FILTER_COMPARISON_MIN_POINT_MAG_MIP_LINEAR EQU 0x85,
-        D3D12_FILTER_COMPARISON_MIN_LINEAR_MAG_MIP_POINT EQU 0x90,
-        D3D12_FILTER_COMPARISON_MIN_LINEAR_MAG_POINT_MIP_LINEAR EQU 0x91,
-        D3D12_FILTER_COMPARISON_MIN_MAG_LINEAR_MIP_POINT EQU 0x94,
-        D3D12_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR EQU 0x95,
-        D3D12_FILTER_COMPARISON_ANISOTROPIC EQU 0xd5,
-        D3D12_FILTER_MINIMUM_MIN_MAG_MIP_POINT EQU 0x100,
-        D3D12_FILTER_MINIMUM_MIN_MAG_POINT_MIP_LINEAR EQU 0x101,
-        D3D12_FILTER_MINIMUM_MIN_POINT_MAG_LINEAR_MIP_POINT EQU 0x104,
-        D3D12_FILTER_MINIMUM_MIN_POINT_MAG_MIP_LINEAR EQU 0x105,
-        D3D12_FILTER_MINIMUM_MIN_LINEAR_MAG_MIP_POINT EQU 0x110,
-        D3D12_FILTER_MINIMUM_MIN_LINEAR_MAG_POINT_MIP_LINEAR EQU 0x111,
-        D3D12_FILTER_MINIMUM_MIN_MAG_LINEAR_MIP_POINT EQU 0x114,
-        D3D12_FILTER_MINIMUM_MIN_MAG_MIP_LINEAR EQU 0x115,
-        D3D12_FILTER_MINIMUM_ANISOTROPIC EQU 0x155,
-        D3D12_FILTER_MAXIMUM_MIN_MAG_MIP_POINT EQU 0x180,
-        D3D12_FILTER_MAXIMUM_MIN_MAG_POINT_MIP_LINEAR EQU 0x181,
-        D3D12_FILTER_MAXIMUM_MIN_POINT_MAG_LINEAR_MIP_POINT EQU 0x184,
-        D3D12_FILTER_MAXIMUM_MIN_POINT_MAG_MIP_LINEAR EQU 0x185,
-        D3D12_FILTER_MAXIMUM_MIN_LINEAR_MAG_MIP_POINT EQU 0x190,
-        D3D12_FILTER_MAXIMUM_MIN_LINEAR_MAG_POINT_MIP_LINEAR EQU 0x191,
-        D3D12_FILTER_MAXIMUM_MIN_MAG_LINEAR_MIP_POINT EQU 0x194,
-        D3D12_FILTER_MAXIMUM_MIN_MAG_MIP_LINEAR EQU 0x195,
-        D3D12_FILTER_MAXIMUM_ANISOTROPIC EQU 0x1d5
-    } 	D3D12_FILTER;
-
-typedef 
-enum D3D12_FILTER_TYPE
-    {
-        D3D12_FILTER_TYPE_POINT EQU 0,
-        D3D12_FILTER_TYPE_LINEAR EQU 1
-    } 	D3D12_FILTER_TYPE;
-
-typedef 
-enum D3D12_FILTER_REDUCTION_TYPE
-    {
-        D3D12_FILTER_REDUCTION_TYPE_STANDARD EQU 0,
-        D3D12_FILTER_REDUCTION_TYPE_COMPARISON EQU 1,
-        D3D12_FILTER_REDUCTION_TYPE_MINIMUM EQU 2,
-        D3D12_FILTER_REDUCTION_TYPE_MAXIMUM EQU 3
-    } 	D3D12_FILTER_REDUCTION_TYPE;
-
-#define	D3D12_FILTER_REDUCTION_TYPE_MASK	0x3
-
-#define	D3D12_FILTER_REDUCTION_TYPE_SHIFT	7
-
-#define	D3D12_FILTER_TYPE_MASK	0x3
-
-#define	D3D12_MIN_FILTER_SHIFT	4
-
-#define	D3D12_MAG_FILTER_SHIFT	2
-
-#define	D3D12_MIP_FILTER_SHIFT	0
-
-#define	D3D12_ANISOTROPIC_FILTERING_BIT	0x40
-
-#define D3D12_ENCODE_BASIC_FILTERmin, mag, mip, reduction                                                     \
-                                   D3D12_FILTER                                                           \
-                                   min & D3D12_FILTER_TYPE_MASK << D3D12_MIN_FILTER_SHIFT |           \
-                                   mag & D3D12_FILTER_TYPE_MASK << D3D12_MAG_FILTER_SHIFT |           \
-                                   mip & D3D12_FILTER_TYPE_MASK << D3D12_MIP_FILTER_SHIFT |           \
-                                   reduction & D3D12_FILTER_REDUCTION_TYPE_MASK << D3D12_FILTER_REDUCTION_TYPE_SHIFT 
-#define D3D12_ENCODE_ANISOTROPIC_FILTERreduction                                                  \
-                                         D3D12_FILTER                                         \
-                                         D3D12_ANISOTROPIC_FILTERING_BIT |                            \
-                                         D3D12_ENCODE_BASIC_FILTERD3D12_FILTER_TYPE_LINEAR,         \
-                                                                    D3D12_FILTER_TYPE_LINEAR,         \
-                                                                    D3D12_FILTER_TYPE_LINEAR,         \
-                                                                    reduction                     
-#define D3D12_DECODE_MIN_FILTERD3D12Filter                                                              \
-                                 D3D12_FILTER_TYPE                                                    \
-                                 D3D12Filter >> D3D12_MIN_FILTER_SHIFT & D3D12_FILTER_TYPE_MASK 
-#define D3D12_DECODE_MAG_FILTERD3D12Filter                                                              \
-                                 D3D12_FILTER_TYPE                                                    \
-                                 D3D12Filter >> D3D12_MAG_FILTER_SHIFT & D3D12_FILTER_TYPE_MASK 
-#define D3D12_DECODE_MIP_FILTERD3D12Filter                                                              \
-                                 D3D12_FILTER_TYPE                                                    \
-                                 D3D12Filter >> D3D12_MIP_FILTER_SHIFT & D3D12_FILTER_TYPE_MASK 
-#define D3D12_DECODE_FILTER_REDUCTIOND3D12Filter                                                        \
-                                 D3D12_FILTER_REDUCTION_TYPE                                                      \
-                                 D3D12Filter >> D3D12_FILTER_REDUCTION_TYPE_SHIFT & D3D12_FILTER_REDUCTION_TYPE_MASK 
-#define D3D12_DECODE_IS_COMPARISON_FILTERD3D12Filter                                                    \
-                                 D3D12_DECODE_FILTER_REDUCTIOND3D12Filter EQU= D3D12_FILTER_REDUCTION_TYPE_COMPARISON 
-#define D3D12_DECODE_IS_ANISOTROPIC_FILTERD3D12Filter                                               \
-                            D3D12Filter & D3D12_ANISOTROPIC_FILTERING_BIT &&                  \
-                            D3D12_FILTER_TYPE_LINEAR EQU= D3D12_DECODE_MIN_FILTERD3D12Filter &&   \
-                            D3D12_FILTER_TYPE_LINEAR EQU= D3D12_DECODE_MAG_FILTERD3D12Filter &&   \
-                            D3D12_FILTER_TYPE_LINEAR EQU= D3D12_DECODE_MIP_FILTERD3D12Filter      
-COMMENT |
-; ___ TODO END ___
+    D3D12_MULTISAMPLE_QUALITY_LEVELS_FLAG_NONE          EQU 0
+    D3D12_MULTISAMPLE_QUALITY_LEVELS_FLAG_TILED_RESOURCE        EQU 1
+
+    D3D12_CROSS_NODE_SHARING_TIER_NOT_SUPPORTED         EQU 0
+    D3D12_CROSS_NODE_SHARING_TIER_1_EMULATED            EQU 1
+    D3D12_CROSS_NODE_SHARING_TIER_1                     EQU 2
+    D3D12_CROSS_NODE_SHARING_TIER_2                     EQU 3
+    D3D12_CROSS_NODE_SHARING_TIER_3                     EQU 4
+
+    D3D12_RESOURCE_HEAP_TIER_1                          EQU 1
+    D3D12_RESOURCE_HEAP_TIER_2                          EQU 2
+
+    D3D12_PROGRAMMABLE_SAMPLE_POSITIONS_TIER_NOT_SUPPORTED      EQU 0
+    D3D12_PROGRAMMABLE_SAMPLE_POSITIONS_TIER_1          EQU 1
+    D3D12_PROGRAMMABLE_SAMPLE_POSITIONS_TIER_2          EQU 2
+
+    D3D12_VIEW_INSTANCING_TIER_NOT_SUPPORTED            EQU 0
+    D3D12_VIEW_INSTANCING_TIER_1                        EQU 1
+    D3D12_VIEW_INSTANCING_TIER_2                        EQU 2
+    D3D12_VIEW_INSTANCING_TIER_3                        EQU 3
+
+    D3D12_FEATURE_DATA_D3D12_OPTIONS STRUCT
+        rDoublePrecisionFloatShaderOps                  DB ?
+        rOutputMergerLogicOp                            DB ?,?,?
+        rMinPrecisionSupport                            DD ?
+        rTiledResourcesTier                             DD ?
+        rResourceBindingTier                            DD ?
+        rPSSpecifiedStencilRefSupported                 DB ?
+        rTypedUAVLoadAdditionalFormats                  DB ?
+        rROVsSupported                                  DB ?,?
+        rConservativeRasterizationTier                  DD ?
+        rMaxGPUVirtualAddressBitsPerResource            DD ?
+        rStandardSwizzle64KBSupported                   DB ?,?,?,?
+        rCrossNodeSharingTier                           DD ?
+        rCrossAdapterRowMajorTextureSupported           DB ?
+        rVPAndRTArrayIndexFromAnyShaderFeedingRasterizerSupportedWithoutGSEmulation DB ?,?,?
+        rResourceHeapTier                               DD ?,?
+    D3D12_FEATURE_DATA_D3D12_OPTIONS ENDS
+
+    D3D12_FEATURE_DATA_D3D12_OPTIONS1 STRUCT
+        rWaveOps                                        DB ?,?,?,?
+        rWaveLaneCountMin                               DD ?
+        rWaveLaneCountMax                               DD ?
+        rTotalLaneCount                                 DD ?
+        rExpandedComputeResourceStates                  DB ?
+        rInt64ShaderOps                                 DB ?,?,?
+                                                        DD ?
+    D3D12_FEATURE_DATA_D3D12_OPTIONS1 ENDS
+
+    D3D12_FEATURE_DATA_D3D12_OPTIONS2 STRUCT
+        rDepthBoundsTestSupported                       DB ?,?,?,?
+        rProgrammableSamplePositionsTier                DD ?
+    D3D12_FEATURE_DATA_D3D12_OPTIONS2 ENDS
+
+    D3D_ROOT_SIGNATURE_VERSION_1                        EQU 1
+    D3D_ROOT_SIGNATURE_VERSION_1_0                      EQU 1
+    D3D_ROOT_SIGNATURE_VERSION_1_1                      EQU 2
+
+    D3D12_FEATURE_DATA_ROOT_SIGNATURE STRUCT
+        rHighestVersion                                 DD ?,?
+    D3D12_FEATURE_DATA_ROOT_SIGNATURE ENDS
+
+    D3D12_FEATURE_DATA_ARCHITECTURE STRUCT
+        rNodeIndex                                      DD ?
+        rTileBasedRenderer                              DB ?
+        rUMA                                            DB ?
+        rCacheCoherentUMA                               DB ?,?
+    D3D12_FEATURE_DATA_ARCHITECTURE ENDS
+
+    D3D12_FEATURE_DATA_ARCHITECTURE1 STRUCT
+        rNodeIndex                                      DD ?
+        rTileBasedRenderer                              DB ?
+        rUMA                                            DB ?
+        rCacheCoherentUMA                               DB ?
+        rIsolatedMMU                                    DB ?
+    D3D12_FEATURE_DATA_ARCHITECTURE1 ENDS
+
+    D3D12_FEATURE_DATA_FEATURE_LEVELS STRUCT
+        rNumFeatureLevels                               DD ?,?
+        pFeatureLevelsRequested                         DQ ?
+        rMaxSupportedFeatureLevel                       DD ?,?
+    D3D12_FEATURE_DATA_FEATURE_LEVELS ENDS
+
+    D3D_SHADER_MODEL_5_1                                EQU 051h
+    D3D_SHADER_MODEL_6_0                                EQU 060h
+    D3D_SHADER_MODEL_6_1                                EQU 061h
+    D3D_SHADER_MODEL_6_2                                EQU 062h
+
+    D3D12_FEATURE_DATA_SHADER_MODEL STRUCT
+        rHighestShaderModel                             DD ?,?
+    D3D12_FEATURE_DATA_SHADER_MODEL ENDS
+
+    D3D12_FEATURE_DATA_FORMAT_SUPPORT STRUCT
+        rFormat                                         DD ?
+        rSupport1                                       DD ?
+        rSupport2                                       DD ?,?
+    D3D12_FEATURE_DATA_FORMAT_SUPPORT ENDS
+
+    D3D12_FEATURE_DATA_MULTISAMPLE_QUALITY_LEVELS STRUCT
+        rFormat                                         DD ?
+        rSampleCount                                    DD ?
+        rFlags                                          DD ?
+        rNumQualityLevels                               DD ?
+    D3D12_FEATURE_DATA_MULTISAMPLE_QUALITY_LEVELS ENDS
+
+    D3D12_FEATURE_DATA_FORMAT_INFO STRUCT
+        rFormat                                         DD ?
+        rPlaneCount                                     DB ?,?,?,?
+    D3D12_FEATURE_DATA_FORMAT_INFO ENDS
+
+    D3D12_FEATURE_DATA_GPU_VIRTUAL_ADDRESS_SUPPORT STRUCT
+        rMaxGPUVirtualAddressBitsPerResource            DD ?
+        rMaxGPUVirtualAddressBitsPerProcess             DD ?
+    D3D12_FEATURE_DATA_GPU_VIRTUAL_ADDRESS_SUPPORT ENDS
+
+    D3D12_SHADER_CACHE_SUPPORT_NONE                     EQU 0
+    D3D12_SHADER_CACHE_SUPPORT_SINGLE_PSO               EQU 1
+    D3D12_SHADER_CACHE_SUPPORT_LIBRARY                  EQU 2
+    D3D12_SHADER_CACHE_SUPPORT_AUTOMATIC_INPROC_CACHE   EQU 4
+    D3D12_SHADER_CACHE_SUPPORT_AUTOMATIC_DISK_CACHE     EQU 8
+
+    D3D12_FEATURE_DATA_SHADER_CACHE STRUCT
+        SupportFlags                                    DD ?
+    D3D12_FEATURE_DATA_SHADER_CACHE ENDS
+
+    D3D12_FEATURE_DATA_COMMAND_QUEUE_PRIORITY STRUCT
+        rCommandListType                                DD ?
+        rPriority                                       DD ?
+        rPriorityForTypeIsSupported                     DB ?,?,?,?
+                                                        DD ?
+    D3D12_FEATURE_DATA_COMMAND_QUEUE_PRIORITY ENDS
+
+    D3D12_COMMAND_LIST_SUPPORT_FLAG_NONE                EQU 0
+    D3D12_COMMAND_LIST_SUPPORT_FLAG_DIRECT              EQU 1 SHL D3D12_COMMAND_LIST_TYPE_DIRECT
+    D3D12_COMMAND_LIST_SUPPORT_FLAG_BUNDLE              EQU 1 SHL D3D12_COMMAND_LIST_TYPE_BUNDLE
+    D3D12_COMMAND_LIST_SUPPORT_FLAG_COMPUTE             EQU 1 SHL D3D12_COMMAND_LIST_TYPE_COMPUTE
+    D3D12_COMMAND_LIST_SUPPORT_FLAG_COPY                EQU 1 SHL D3D12_COMMAND_LIST_TYPE_COPY
+    D3D12_COMMAND_LIST_SUPPORT_FLAG_VIDEO_DECODE        EQU 1 SHL D3D12_COMMAND_LIST_TYPE_VIDEO_DECODE
+    D3D12_COMMAND_LIST_SUPPORT_FLAG_VIDEO_PROCESS       EQU 1 SHL D3D12_COMMAND_LIST_TYPE_VIDEO_PROCESS 
+
+    D3D12_FEATURE_DATA_D3D12_OPTIONS3 STRUCT
+        rCopyQueueTimestampQueriesSupported         DB ?
+        rCastingFullyTypedFormatSupported           DB ?,?,?
+        rWriteBufferImmediateSupportFlags           DD ?
+        rViewInstancingTier                         DD ?
+        rBarycentricsSupported                      DB ?,?,?,?
+    D3D12_FEATURE_DATA_D3D12_OPTIONS3 ENDS
+
+    D3D12_FEATURE_DATA_EXISTING_HEAPS STRUCT
+        rSupported                                  DB ?,?,?,?
+                                                    DD ?
+    D3D12_FEATURE_DATA_EXISTING_HEAPS ENDS
+
+    D3D12_SHARED_RESOURCE_COMPATIBILITY_TIER_0      EQU 0
+    D3D12_SHARED_RESOURCE_COMPATIBILITY_TIER_1      EQU D3D12_SHARED_RESOURCE_COMPATIBILITY_TIER_0 + 1
+
+    D3D12_FEATURE_DATA_D3D12_OPTIONS4 STRUCT
+        rMSAA64KBAlignedTextureSupported            DB ?,?,?,?
+        rSharedResourceCompatibilityTier            DD ?
+        rNative16BitShaderOpsSupported              DB ?,?,?,?
+                                                    DD ?
+    D3D12_FEATURE_DATA_D3D12_OPTIONS4 ENDS
+
+    D3D12_HEAP_SERIALIZATION_TIER_0                 EQU 0
+    D3D12_HEAP_SERIALIZATION_TIER_10                EQU 10
+
+    D3D12_FEATURE_DATA_SERIALIZATION STRUCT
+        rNodeIndex                                  DD ?
+        rHeapSerializationTier                      DD ?
+    D3D12_FEATURE_DATA_SERIALIZATION ENDS
+
+    D3D12_FEATURE_DATA_CROSS_NODE STRUCT
+        rSharingTier                                DD ?
+        rAtomicShaderInstructions                   DB ?,?,?,?
+    D3D12_FEATURE_DATA_CROSS_NODE ENDS
+
+    D3D12_RESOURCE_ALLOCATION_INFO STRUCT
+        rSizeInBytes                                DQ ?
+        rAlignment                                  DQ ?
+    D3D12_RESOURCE_ALLOCATION_INFO ENDS
+
+    D3D12_RESOURCE_ALLOCATION_INFO1 STRUCT
+        rOffset                                     DQ ?
+        rAlignment                                  DQ ?
+        rSizeInBytes                                DQ ?
+    D3D12_RESOURCE_ALLOCATION_INFO1 ENDS
+
+    D3D12_HEAP_TYPE_DEFAULT                         EQU 1
+    D3D12_HEAP_TYPE_UPLOAD                          EQU 2
+    D3D12_HEAP_TYPE_READBACK                        EQU 3
+    D3D12_HEAP_TYPE_CUSTOM                          EQU 4
+
+    D3D12_CPU_PAGE_PROPERTY_UNKNOWN                 EQU 0
+    D3D12_CPU_PAGE_PROPERTY_NOT_AVAILABLE           EQU 1
+    D3D12_CPU_PAGE_PROPERTY_WRITE_COMBINE           EQU 2
+    D3D12_CPU_PAGE_PROPERTY_WRITE_BACK              EQU 3
+
+    D3D12_MEMORY_POOL_UNKNOWN                       EQU 0
+    D3D12_MEMORY_POOL_L0                            EQU 1
+    D3D12_MEMORY_POOL_L1                            EQU 2
+
+    D3D12_HEAP_PROPERTIES STRUCT
+        rType                                       DD ?
+        rCPUPageProperty                            DD ?
+        rMemoryPoolPreference                       DD ?
+        rCreationNodeMask                           DD ?
+        rVisibleNodeMask                            DD ?,?
+    D3D12_HEAP_PROPERTIES ENDS
+
+    D3D12_HEAP_FLAG_NONE                            EQU 0
+    D3D12_HEAP_FLAG_SHARED                          EQU 01h
+    D3D12_HEAP_FLAG_DENY_BUFFERS                    EQU 04h
+    D3D12_HEAP_FLAG_ALLOW_DISPLAY                   EQU 08h
+    D3D12_HEAP_FLAG_SHARED_CROSS_ADAPTER            EQU 020h
+    D3D12_HEAP_FLAG_DENY_RT_DS_TEXTURES             EQU 040h
+    D3D12_HEAP_FLAG_DENY_NON_RT_DS_TEXTURES         EQU 080h
+    D3D12_HEAP_FLAG_HARDWARE_PROTECTED              EQU 0100h
+    D3D12_HEAP_FLAG_ALLOW_WRITE_WATCH               EQU 0200h
+    D3D12_HEAP_FLAG_ALLOW_SHADER_ATOMICS            EQU 0400h
+    D3D12_HEAP_FLAG_ALLOW_ALL_BUFFERS_AND_TEXTURES  EQU 0
+    D3D12_HEAP_FLAG_ALLOW_ONLY_BUFFERS              EQU 0c0h
+    D3D12_HEAP_FLAG_ALLOW_ONLY_NON_RT_DS_TEXTURES   EQU 044h
+    D3D12_HEAP_FLAG_ALLOW_ONLY_RT_DS_TEXTURES       EQU 084h
+
+    D3D12_HEAP_DESC STRUCT
+        rSizeInBytes                                DQ ?
+        rProperties                                 D3D12_HEAP_PROPERTIES {}
+        rAlignment                                  DQ ?
+        rFlags                                      DD ?,?
+    D3D12_HEAP_DESC ENDS
+
+    D3D12_RESOURCE_DIMENSION_UNKNOWN                EQU 0
+    D3D12_RESOURCE_DIMENSION_BUFFER                 EQU 1
+    D3D12_RESOURCE_DIMENSION_TEXTURE1D              EQU 2
+    D3D12_RESOURCE_DIMENSION_TEXTURE2D              EQU 3
+    D3D12_RESOURCE_DIMENSION_TEXTURE3D              EQU 4
+
+    D3D12_TEXTURE_LAYOUT_UNKNOWN                    EQU 0
+    D3D12_TEXTURE_LAYOUT_ROW_MAJOR                  EQU 1
+    D3D12_TEXTURE_LAYOUT_64KB_UNDEFINED_SWIZZLE     EQU 2
+    D3D12_TEXTURE_LAYOUT_64KB_STANDARD_SWIZZLE      EQU 3
+
+    D3D12_RESOURCE_FLAG_NONE                        EQU 0
+    D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET         EQU 01h
+    D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL         EQU 02h
+    D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS      EQU 04h
+    D3D12_RESOURCE_FLAG_DENY_SHADER_RESOURCE        EQU 08h
+    D3D12_RESOURCE_FLAG_ALLOW_CROSS_ADAPTER         EQU 010h
+    D3D12_RESOURCE_FLAG_ALLOW_SIMULTANEOUS_ACCESS   EQU 020h
+    D3D12_RESOURCE_FLAG_VIDEO_DECODE_REFERENCE_ONLY EQU 040h
+
+    D3D12_RESOURCE_DESC STRUCT
+        rDimension                                  DD ?,?
+        rAlignment                                  DQ ?
+        rdWidth                                     DQ ?
+        rHeight                                     DD ?
+        rDepthOrArraySize                           DW ?
+        rMipLevels                                  DW ?
+        rFormat                                     DD ?,?
+        rSampleDesc                                 DXGI_SAMPLE_DESC {}
+        rLayout                                     DD ?
+        rFlags                                      DD ?
+    D3D12_RESOURCE_DESC ENDS
+
+    D3D12_DEPTH_STENCIL_VALUE STRUCT
+        rDepth                                      REAL4 ?
+        rStencil                                    DB ?,?,?,?
+    D3D12_DEPTH_STENCIL_VALUE ENDS
+
+    D3D12_CLEAR_VALUE STRUCT
+        rFormat                                     DD ?
+        UNION 
+            rColor                                  REAL4 4 DUP (?)
+            rDepthStencil                           D3D12_DEPTH_STENCIL_VALUE {}
+        ENDS
+    D3D12_CLEAR_VALUE ENDS
+
+    D3D12_RANGE STRUCT
+        rBegin                                      DD ?
+        rEnd                                        DD ?
+    D3D12_RANGE ENDS
+
+    D3D12_RANGE_UINT64 STRUCT
+        rBegin                                      DQ ?
+        rEnd                                        DQ ?
+    D3D12_RANGE_UINT64 ENDS
+
+    D3D12_SUBRESOURCE_RANGE_UINT64 STRUCT
+        rSubresource                                DD ?,?
+        rRange                                      D3D12_RANGE_UINT64 {}
+    D3D12_SUBRESOURCE_RANGE_UINT64 ENDS
+
+    D3D12_SUBRESOURCE_INFO STRUCT
+        rOffset                                     DQ ?
+        rRowPitch                                   DD ?
+        rDepthPitch                                 DD ?
+    D3D12_SUBRESOURCE_INFO ENDS
+
+    D3D12_TILED_RESOURCE_COORDINATE STRUCT
+        rX                                          DD ?
+        rY                                          DD ?
+        rZ                                          DD ?
+        rSubresource                                DD ?
+    D3D12_TILED_RESOURCE_COORDINATE ENDS
+
+    D3D12_TILE_REGION_SIZE STRUCT
+        rNumTiles                                   DD ?
+        rUseBox                                     DB ?,?,?,?
+        rWidth                                      DD ?
+        rHeight                                     DW ?
+        rDepth                                      DW ?
+    D3D12_TILE_REGION_SIZE ENDS
+
+    D3D12_TILE_RANGE_FLAG_NONE                      EQU 0
+    D3D12_TILE_RANGE_FLAG_NULL                      EQU 1
+    D3D12_TILE_RANGE_FLAG_SKIP                      EQU 2
+    D3D12_TILE_RANGE_FLAG_REUSE_SINGLE_TILE         EQU 4
+
+    D3D12_SUBRESOURCE_TILING STRUCT
+        rWidthInTiles                               DD ?
+        rHeightInTiles                              DW ?
+        rDepthInTiles                               DW ?
+        rStartTileIndexInOverallResource            DD ?,?
+    D3D12_SUBRESOURCE_TILING  ENDS
+
+    D3D12_TILE_SHAPE STRUCT
+        rWidthInTexels                              DD ?
+        rHeightInTexels                             DD ?
+        rDepthInTexels                              DD ?,?
+    D3D12_TILE_SHAPE ENDS
+
+    D3D12_PACKED_MIP_INFO STRUCT
+        rNumStandardMips                            DB ?
+        rNumPackedMips                              DB ?,?,?
+        rNumTilesForPackedMips                      DD ?
+        rStartTileIndexInOverallResource            DD ?,?
+    D3D12_PACKED_MIP_INFO ENDS
+
+    D3D12_TILE_MAPPING_FLAG_NONE                    EQU 0
+    D3D12_TILE_MAPPING_FLAG_NO_HAZARD               EQU 1
+
+    D3D12_TILE_COPY_FLAG_NONE                       EQU 0
+    D3D12_TILE_COPY_FLAG_NO_HAZARD                  EQU 1
+    D3D12_TILE_COPY_FLAG_LINEAR_BUFFER_TO_SWIZZLED_TILED_RESOURCE   EQU 2
+    D3D12_TILE_COPY_FLAG_SWIZZLED_TILED_RESOURCE_TO_LINEAR_BUFFER   EQU 4
+
+    D3D12_RESOURCE_STATE_COMMON                     EQU 0
+    D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER EQU 01h
+    D3D12_RESOURCE_STATE_INDEX_BUFFER               EQU 02h
+    D3D12_RESOURCE_STATE_RENDER_TARGET              EQU 04h
+    D3D12_RESOURCE_STATE_UNORDERED_ACCESS           EQU 08h
+    D3D12_RESOURCE_STATE_DEPTH_WRITE                EQU 010h
+    D3D12_RESOURCE_STATE_DEPTH_READ                 EQU 020h
+    D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE  EQU 040h
+    D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE      EQU 080h
+    D3D12_RESOURCE_STATE_STREAM_OUT                 EQU 0100h
+    D3D12_RESOURCE_STATE_INDIRECT_ARGUMENT          EQU 0200h
+    D3D12_RESOURCE_STATE_COPY_DEST                  EQU 0400h
+    D3D12_RESOURCE_STATE_COPY_SOURCE                EQU 0800h
+    D3D12_RESOURCE_STATE_RESOLVE_DEST               EQU 01000h
+    D3D12_RESOURCE_STATE_RESOLVE_SOURCE             EQU 02000h
+    D3D12_RESOURCE_STATE_GENERIC_READ               EQU 01h OR 02h OR 040h OR 080h OR 0200h OR 0800h
+    D3D12_RESOURCE_STATE_PRESENT                    EQU 0
+    D3D12_RESOURCE_STATE_PREDICATION                EQU 0200h
+    D3D12_RESOURCE_STATE_VIDEO_DECODE_READ          EQU 010000h
+    D3D12_RESOURCE_STATE_VIDEO_DECODE_WRITE         EQU 020000h
+    D3D12_RESOURCE_STATE_VIDEO_PROCESS_READ         EQU 040000h
+    D3D12_RESOURCE_STATE_VIDEO_PROCESS_WRITE        EQU 0x80000h
+
+    D3D12_RESOURCE_BARRIER_TYPE_TRANSITION          EQU 0
+    D3D12_RESOURCE_BARRIER_TYPE_ALIASING            EQU D3D12_RESOURCE_BARRIER_TYPE_TRANSITION + 1
+    D3D12_RESOURCE_BARRIER_TYPE_UAV                 EQU D3D12_RESOURCE_BARRIER_TYPE_ALIASING + 1
+
+    D3D12_RESOURCE_TRANSITION_BARRIER STRUCT
+        pResource                                   DQ ?
+        rSubresource                                DD ?
+        rStateBefore                                DD ?
+        rStateAfter                                 DD ?,?
+    D3D12_RESOURCE_TRANSITION_BARRIER ENDS
+
+    D3D12_RESOURCE_ALIASING_BARRIER STRUCT
+        pResourceBefore                             DQ ?
+        pResourceAfter                              DQ ?
+    D3D12_RESOURCE_ALIASING_BARRIER ENDS
+
+    D3D12_RESOURCE_UAV_BARRIER STRUCT
+        pResource                                   DQ ?
+    D3D12_RESOURCE_UAV_BARRIER ENDS
+
+    D3D12_RESOURCE_BARRIER_FLAG_NONE                EQU 0
+    D3D12_RESOURCE_BARRIER_FLAG_BEGIN_ONLY          EQU 1
+    D3D12_RESOURCE_BARRIER_FLAG_END_ONLY            EQU 2
+
+    D3D12_RESOURCE_BARRIER STRUCT
+        rType                                       DD ?
+        rFlags                                      DD ?
+        UNION 
+            rTransition                             D3D12_RESOURCE_TRANSITION_BARRIER {}
+            rAliasing                               D3D12_RESOURCE_ALIASING_BARRIER {}
+            rUAV                                    D3D12_RESOURCE_UAV_BARRIER {}
+        ENDS
+    D3D12_RESOURCE_BARRIER ENDS
+
+    D3D12_SUBRESOURCE_FOOTPRINT STRUCT
+        rFormat                                     DD ?
+        rWidth                                      DD ?
+        rHeight                                     DD ?
+        rDepth                                      DD ?
+        rRowPitch                                   DD ?,?
+    D3D12_SUBRESOURCE_FOOTPRINT ENDS
+
+    D3D12_PLACED_SUBRESOURCE_FOOTPRINT STRUCT
+        rOffset                                     DQ ?
+        rFootprint                                  D3D12_SUBRESOURCE_FOOTPRINT {}
+    D3D12_PLACED_SUBRESOURCE_FOOTPRINT ENDS
+
+    D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX       EQU 0
+    D3D12_TEXTURE_COPY_TYPE_PLACED_FOOTPRINT        EQU 1
+
+    D3D12_TEXTURE_COPY_LOCATION STRUCT
+        pResource                                   DQ ?
+        rType                                       DD ?,?
+        UNION 
+            rPlacedFootprint                        D3D12_PLACED_SUBRESOURCE_FOOTPRINT {}
+            rSubresourceIndex                       DD ?
+        ENDS
+    D3D12_TEXTURE_COPY_LOCATION ENDS
+
+    D3D12_RESOLVE_MODE_DECOMPRESS                   EQU 0
+    D3D12_RESOLVE_MODE_MIN                          EQU 1
+    D3D12_RESOLVE_MODE_MAX                          EQU 2
+    D3D12_RESOLVE_MODE_AVERAGE                      EQU 3
+
+    D3D12_SAMPLE_POSITION STRUCT
+        rX                                          DB ?
+        rY                                          DB ?,?,?
+                                                    DD ?
+    D3D12_SAMPLE_POSITION ENDS
+
+    D3D12_VIEW_INSTANCE_LOCATION STRUCT
+        rViewportArrayIndex                         DD ?
+        rRenderTargetArrayIndex                     DD ?
+    D3D12_VIEW_INSTANCE_LOCATION ENDS
+
+    D3D12_VIEW_INSTANCING_FLAG_NONE                 EQU 0
+    D3D12_VIEW_INSTANCING_FLAG_ENABLE_VIEW_INSTANCE_MASKING EQU 1
+
+    D3D12_VIEW_INSTANCING_DESC STRUCT
+        rViewInstanceCount                          DD ?,?
+        pViewInstanceLocations                      DQ ?
+        rFlags                                      DD ?,?
+    D3D12_VIEW_INSTANCING_DESC ENDS
+
+    D3D12_SHADER_COMPONENT_MAPPING_FROM_MEMORY_COMPONENT_0  EQU 0
+    D3D12_SHADER_COMPONENT_MAPPING_FROM_MEMORY_COMPONENT_1  EQU 1
+    D3D12_SHADER_COMPONENT_MAPPING_FROM_MEMORY_COMPONENT_2  EQU 2
+    D3D12_SHADER_COMPONENT_MAPPING_FROM_MEMORY_COMPONENT_3  EQU 3
+    D3D12_SHADER_COMPONENT_MAPPING_FORCE_VALUE_0    EQU 4
+    D3D12_SHADER_COMPONENT_MAPPING_FORCE_VALUE_1    EQU 5
+
+    D3D12_BUFFER_SRV_FLAG_NONE                      EQU 0
+    D3D12_BUFFER_SRV_FLAG_RAW                       EQU 1
+
+    D3D12_BUFFER_SRV STRUCT
+        rFirstElement                               DQ ?
+        rNumElements                                DD ?
+        StructureByteStride                         DD ?
+        rFlags                                      DD ?,?
+    D3D12_BUFFER_SRV ENDS
+
+    D3D12_TEX1D_SRV STRUCT
+        rMostDetailedMip                            DD ?
+        rMipLevels                                  DD ?
+        rResourceMinLODClamp                        REAL4 ?
+                                                    DD ?
+    D3D12_TEX1D_SRV ENDS
+
+    D3D12_TEX1D_ARRAY_SRV STRUCT
+        rMostDetailedMip                            DD ?
+        rMipLevels                                  DD ?
+        rFirstArraySlice                            DD ?
+        rArraySize                                  DD ?
+        rResourceMinLODClamp                        REAL4 ?
+                                                    DD ?
+    D3D12_TEX1D_ARRAY_SRV ENDS
+
+    D3D12_TEX2D_SRV STRUCT
+        rMostDetailedMip                            DD ?
+        rMipLevels                                  DD ?
+        rPlaneSlice                                 DD ?
+        rResourceMinLODClamp                        REAL4 ?
+    D3D12_TEX2D_SRV ENDS
+
+    D3D12_TEX2D_ARRAY_SRV STRUCT
+        rMostDetailedMip                            DD ?
+        rMipLevels                                  DD ?
+        rFirstArraySlice                            DD ?
+        rArraySize                                  DD ?
+        rPlaneSlice                                 DD ?
+        rResourceMinLODClamp                        REAL4 ?
+    D3D12_TEX2D_ARRAY_SRV ENDS
+
+    D3D12_TEX3D_SRV STRUCT
+        rMostDetailedMip                            DD ?
+        rMipLevels                                  DD ?
+        rResourceMinLODClamp                        REAL4 ?
+                                                    DD ?
+    D3D12_TEX3D_SRV ENDS
+
+    D3D12_TEXCUBE_SRV STRUCT
+        rMostDetailedMip                            DD ?
+        rMipLevels                                  DD ?
+        rResourceMinLODClamp                        REAL4 ?
+                                                    DD ?
+    D3D12_TEXCUBE_SRV ENDS
+
+    D3D12_TEXCUBE_ARRAY_SRV STRUCT
+        rMostDetailedMip                            DD ?
+        rMipLevels                                  DD ?
+        rFirst2DArrayFace                           DD ?
+        rNumCubes                                   DD ?
+        rResourceMinLODClamp                        REAL4 ?
+                                                    DD ?
+    D3D12_TEXCUBE_ARRAY_SRV ENDS
+
+    D3D12_TEX2DMS_SRV STRUCT
+        rUnusedField_NothingToDefine                DD ?,?
+    D3D12_TEX2DMS_SRV ENDS
+
+    D3D12_TEX2DMS_ARRAY_SRV STRUCT
+        rFirstArraySlice                            DD ?
+        rArraySize                                  DD ?
+    D3D12_TEX2DMS_ARRAY_SRV ENDS
+
+    D3D12_SRV_DIMENSION_UNKNOWN                     EQU 0
+    D3D12_SRV_DIMENSION_BUFFER                      EQU 1
+    D3D12_SRV_DIMENSION_TEXTURE1D                   EQU 2
+    D3D12_SRV_DIMENSION_TEXTURE1DARRAY              EQU 3
+    D3D12_SRV_DIMENSION_TEXTURE2D                   EQU 4
+    D3D12_SRV_DIMENSION_TEXTURE2DARRAY              EQU 5
+    D3D12_SRV_DIMENSION_TEXTURE2DMS                 EQU 6
+    D3D12_SRV_DIMENSION_TEXTURE2DMSARRAY            EQU 7
+    D3D12_SRV_DIMENSION_TEXTURE3D                   EQU 8
+    D3D12_SRV_DIMENSION_TEXTURECUBE                 EQU 9
+    D3D12_SRV_DIMENSION_TEXTURECUBEARRAY            EQU 10
+
+    D3D12_SHADER_RESOURCE_VIEW_DESC STRUCT
+        rFormat                                     DD ?
+        rViewDimension                              DD ?
+        rShader4ComponentMapping                    DD ?,?
+        UNION 
+            rBuffer                                 D3D12_BUFFER_SRV {}
+            rTexture1D                              D3D12_TEX1D_SRV {}
+            rTexture1DArray                         D3D12_TEX1D_ARRAY_SRV {}
+            rTexture2D                              D3D12_TEX2D_SRV {}
+            rTexture2DArray                         D3D12_TEX2D_ARRAY_SRV {}
+            rTexture2DMS                            D3D12_TEX2DMS_SRV {}
+            rTexture2DMSArray                       D3D12_TEX2DMS_ARRAY_SRV {}
+            rTexture3D                              D3D12_TEX3D_SRV {}
+            rTextureCube                            D3D12_TEXCUBE_SRV {}
+            rTextureCubeArray                       D3D12_TEXCUBE_ARRAY_SRV {}
+        ENDS
+    D3D12_SHADER_RESOURCE_VIEW_DESC ENDS
+
+    D3D12_CONSTANT_BUFFER_VIEW_DESC STRUCT
+        rBufferLocation                             DQ ?
+        rSizeInBytes                                DD ?,?
+    D3D12_CONSTANT_BUFFER_VIEW_DESC ENDS
+
+    D3D12_FILTER_MIN_MAG_MIP_POINT                  EQU 0
+    D3D12_FILTER_MIN_MAG_POINT_MIP_LINEAR           EQU 01h
+    D3D12_FILTER_MIN_POINT_MAG_LINEAR_MIP_POINT     EQU 04h
+    D3D12_FILTER_MIN_POINT_MAG_MIP_LINEAR           EQU 05h
+    D3D12_FILTER_MIN_LINEAR_MAG_MIP_POINT           EQU 010h
+    D3D12_FILTER_MIN_LINEAR_MAG_POINT_MIP_LINEAR    EQU 011h
+    D3D12_FILTER_MIN_MAG_LINEAR_MIP_POINT           EQU 014h
+    D3D12_FILTER_MIN_MAG_MIP_LINEAR                 EQU 015h
+    D3D12_FILTER_ANISOTROPIC                        EQU 055h
+    D3D12_FILTER_COMPARISON_MIN_MAG_MIP_POINT       EQU 080h
+    D3D12_FILTER_COMPARISON_MIN_MAG_POINT_MIP_LINEAR        EQU 081h
+    D3D12_FILTER_COMPARISON_MIN_POINT_MAG_LINEAR_MIP_POINT  EQU 084h
+    D3D12_FILTER_COMPARISON_MIN_POINT_MAG_MIP_LINEAR        EQU 085h
+    D3D12_FILTER_COMPARISON_MIN_LINEAR_MAG_MIP_POINT        EQU 090h
+    D3D12_FILTER_COMPARISON_MIN_LINEAR_MAG_POINT_MIP_LINEAR EQU 091h
+    D3D12_FILTER_COMPARISON_MIN_MAG_LINEAR_MIP_POINT        EQU 094h
+    D3D12_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR      EQU 095h
+    D3D12_FILTER_COMPARISON_ANISOTROPIC             EQU 0d5h
+    D3D12_FILTER_MINIMUM_MIN_MAG_MIP_POINT          EQU 0100h
+    D3D12_FILTER_MINIMUM_MIN_MAG_POINT_MIP_LINEAR   EQU 0101h
+    D3D12_FILTER_MINIMUM_MIN_POINT_MAG_LINEAR_MIP_POINT     EQU 0104h
+    D3D12_FILTER_MINIMUM_MIN_POINT_MAG_MIP_LINEAR   EQU 0105h
+    D3D12_FILTER_MINIMUM_MIN_LINEAR_MAG_MIP_POINT   EQU 0110h
+    D3D12_FILTER_MINIMUM_MIN_LINEAR_MAG_POINT_MIP_LINEAR    EQU 0111h
+    D3D12_FILTER_MINIMUM_MIN_MAG_LINEAR_MIP_POINT   EQU 0114h
+    D3D12_FILTER_MINIMUM_MIN_MAG_MIP_LINEAR         EQU 0115h
+    D3D12_FILTER_MINIMUM_ANISOTROPIC                EQU 0155h
+    D3D12_FILTER_MAXIMUM_MIN_MAG_MIP_POINT          EQU 0180h
+    D3D12_FILTER_MAXIMUM_MIN_MAG_POINT_MIP_LINEAR   EQU 0181h
+    D3D12_FILTER_MAXIMUM_MIN_POINT_MAG_LINEAR_MIP_POINT     EQU 0184h
+    D3D12_FILTER_MAXIMUM_MIN_POINT_MAG_MIP_LINEAR   EQU 0185h
+    D3D12_FILTER_MAXIMUM_MIN_LINEAR_MAG_MIP_POINT   EQU 0190h
+    D3D12_FILTER_MAXIMUM_MIN_LINEAR_MAG_POINT_MIP_LINEAR    EQU 0191h
+    D3D12_FILTER_MAXIMUM_MIN_MAG_LINEAR_MIP_POINT   EQU 0194h
+    D3D12_FILTER_MAXIMUM_MIN_MAG_MIP_LINEAR         EQU 0195h
+    D3D12_FILTER_MAXIMUM_ANISOTROPIC                EQU 01d5h
+ 
+    D3D12_FILTER_TYPE_POINT                         EQU 0
+    D3D12_FILTER_TYPE_LINEAR                        EQU 1
+
+    D3D12_FILTER_REDUCTION_TYPE_STANDARD            EQU 0
+    D3D12_FILTER_REDUCTION_TYPE_COMPARISON          EQU 1
+    D3D12_FILTER_REDUCTION_TYPE_MINIMUM             EQU 2
+    D3D12_FILTER_REDUCTION_TYPE_MAXIMUM             EQU 3
 
     D3D12_TEXTURE_ADDRESS_MODE_WRAP                 EQU 1
     D3D12_TEXTURE_ADDRESS_MODE_MIRROR               EQU 2
@@ -1684,56 +1429,55 @@ COMMENT |
     D3D12_TEXTURE_ADDRESS_MODE_MIRROR_ONCE          EQU 5
 
     D3D12_SAMPLER_DESC STRUCT
-        Filter                                      DD ?
-        AddressU                                    DD ?
-        AddressV                                    DD ?
-        AddressW                                    DD ?
-        MipLODBias                                  REAL4 ?
-        MaxAnisotropy                               DD ?
-        ComparisonFunc                              DD ?
-        BorderColor                                 REAL4 4 DUP (?)
-        MinLOD                                      REAL4 ?
-        MaxLOD                                      REAL4 ?
+        rFilter                                     DD ?
+        rAddressU                                   DD ?
+        rAddressV                                   DD ?
+        rAddressW                                   DD ?
+        rMipLODBias                                 REAL4 ?
+        rMaxAnisotropy                              DD ?
+        rComparisonFunc                             DD ?
+        rBorderColor                                REAL4 4 DUP (?)
+        rMinLOD                                     REAL4 ?
+        rMaxLOD                                     REAL4 ?
     D3D12_SAMPLER_DESC ENDS
-
 
     D3D12_BUFFER_UAV_FLAG_NONE                      EQU 0
     D3D12_BUFFER_UAV_FLAG_RAW                       EQU 1
 
     D3D12_BUFFER_UAV STRUCT
-        FirstElement                                DQ ?
-        NumElements                                 DD ?
-        StructureByteStride                         DD ?
-        CounterOffsetInBytes                        DQ ?
-        Flags                                       DD ?,?
+        rFirstElement                               DQ ?
+        rNumElements                                DD ?
+        rStructureByteStride                        DD ?
+        rCounterOffsetInBytes                       DQ ?
+        rFlags                                      DD ?,?
     D3D12_BUFFER_UAV ENDS
 
     D3D12_TEX1D_UAV STRUCT
-        MipSlice                                    DD ?,?
+        rMipSlice                                   DD ?,?
     D3D12_TEX1D_UAV ENDS
 
     D3D12_TEX1D_ARRAY_UAV STRUCT
-        MipSlice                                    DD ?
-        FirstArraySlice                             DD ?
-        ArraySize                                   DD ?,?
+        rMipSlice                                   DD ?
+        rFirstArraySlice                            DD ?
+        rArraySize                                  DD ?,?
     D3D12_TEX1D_ARRAY_UAV ENDS
 
     D3D12_TEX2D_UAV STRUCT
-        MipSlice                                    DD ?
-        PlaneSlice                                  DD ?
+        rMipSlice                                   DD ?
+        rPlaneSlice                                 DD ?
     D3D12_TEX2D_UAV ENDS
 
     D3D12_TEX2D_ARRAY_UAV STRUCT
-        MipSlice                                    DD ?
-        FirstArraySlice                             DD ?
-        ArraySize                                   DD ?
-        PlaneSlice                                  DD ?
+        rMipSlice                                   DD ?
+        rFirstArraySlice                            DD ?
+        rArraySize                                  DD ?
+        rPlaneSlice                                 DD ?
     D3D12_TEX2D_ARRAY_UAV ENDS
 
     D3D12_TEX3D_UAV STRUCT
-        MipSlice                                    DD ?
-        FirstWSlice                                 DD ?
-        WSize                                       DD ?,?
+        rMipSlice                                   DD ?
+        rFirstWSlice                                DD ?
+        rWSize                                      DD ?,?
     D3D12_TEX3D_UAV ENDS
 
     D3D12_UAV_DIMENSION_UNKNOWN                     EQU 0
@@ -1745,58 +1489,58 @@ COMMENT |
     D3D12_UAV_DIMENSION_TEXTURE3D                   EQU 8
 
     D3D12_UNORDERED_ACCESS_VIEW_DESC STRUCT
-        Format                                      DD ?
-        ViewDimension                               DD ?
+        rFormat                                     DD ?
+        rViewDimension                              DD ?
         UNION 
-            Buffer                                  D3D12_BUFFER_UAV {}
-            Texture1D                               D3D12_TEX1D_UAV {}
-            Texture1DArray                          D3D12_TEX1D_ARRAY_UAV {}
-            Texture2D                               D3D12_TEX2D_UAV {}
-            Texture2DArray                          D3D12_TEX2D_ARRAY_UAV {}
-            Texture3D                               D3D12_TEX3D_UAV {}
+            rBuffer                                 D3D12_BUFFER_UAV {}
+            rTexture1D                              D3D12_TEX1D_UAV {}
+            rTexture1DArray                         D3D12_TEX1D_ARRAY_UAV {}
+            rTexture2D                              D3D12_TEX2D_UAV {}
+            rTexture2DArray                         D3D12_TEX2D_ARRAY_UAV {}
+            rTexture3D                              D3D12_TEX3D_UAV {}
         ENDS
     D3D12_UNORDERED_ACCESS_VIEW_DESC ENDS
 
     D3D12_BUFFER_RTV STRUCT
-        FirstElement                                DQ ?
-        NumElements                                 DD ?,?
+        rFirstElement                               DQ ?
+        rNumElements                                DD ?,?
     D3D12_BUFFER_RTV ENDS
 
      D3D12_TEX1D_RTV STRUCT
-        UINT MipSlice                               DD ?,?
+        rMipSlice                                   DD ?,?
     D3D12_TEX1D_RTV ENDS
 
     D3D12_TEX1D_ARRAY_RTV STRUCT
-        MipSlice                                    DD ?
-        FirstArraySlice                             DD ?
-        ArraySize                                   DD ?,?
+        rMipSlice                                   DD ?
+        rFirstArraySlice                            DD ?
+        rArraySize                                  DD ?,?
     D3D12_TEX1D_ARRAY_RTV ENDS
 
     D3D12_TEX2D_RTV STRUCT
-        MipSlice                                    DD ?
-        PlaneSlice                                  DD ?
+        rMipSlice                                   DD ?
+        rPlaneSlice                                 DD ?
     D3D12_TEX2D_RTV ENDS
 
     D3D12_TEX2DMS_RTV STRUCT
-        UnusedField_NothingToDefine                 DD ?,?
+        rUnusedField_NothingToDefine                DD ?,?
     D3D12_TEX2DMS_RTV ENDS
 
     D3D12_TEX2D_ARRAY_RTV STRUCT
-        MipSlice                                    DD ?
-        FirstArraySlice                             DD ?
-        ArraySize                                   DD ?
-        PlaneSlice                                  DD ?
+        rMipSlice                                   DD ?
+        rFirstArraySlice                            DD ?
+        rArraySize                                  DD ?
+        rPlaneSlice                                 DD ?
     D3D12_TEX2D_ARRAY_RTV ENDS
 
     D3D12_TEX2DMS_ARRAY_RTV STRUCT
-        FirstArraySlice                             DD ?
-        ArraySize                                   DD ?
+        rFirstArraySlice                            DD ?
+        rArraySize                                  DD ?
     D3D12_TEX2DMS_ARRAY_RTV ENDS
 
     D3D12_TEX3D_RTV STRUCT
-        MipSlice                                    DD ?
-        FirstWSlice                                 DD ?
-        WSize                                       DD ?,?
+        rMipSlice                                   DD ?
+        rFirstWSlice                                DD ?
+        rWSize                                      DD ?,?
     D3D12_TEX3D_RTV ENDS
 
     D3D12_RTV_DIMENSION_UNKNOWN                     EQU 0
@@ -1810,47 +1554,47 @@ COMMENT |
     D3D12_RTV_DIMENSION_TEXTURE3D                   EQU 8
 
     D3D12_RENDER_TARGET_VIEW_DESC STRUCT
-        Format                                      DD ?
-        ViewDimension                               DD ?
+        rFormat                                     DD ?
+        rViewDimension                              DD ?
         UNION 
-            Buffer                                  D3D12_BUFFER_RTV {}
-            Texture1D                               D3D12_TEX1D_RTV {}
-            Texture1DArray                          D3D12_TEX1D_ARRAY_RTV {}
-            Texture2D                               D3D12_TEX2D_RTV {}
-            Texture2DArray                          D3D12_TEX2D_ARRAY_RTV {}
-            Texture2DMS                             D3D12_TEX2DMS_RTV {}
-            Texture2DMSArray                        D3D12_TEX2DMS_ARRAY_RTV {}
-            Texture3D                               D3D12_TEX3D_RTV {}
+            rBuffer                                 D3D12_BUFFER_RTV {}
+            rTexture1D                              D3D12_TEX1D_RTV {}
+            rTexture1DArray                         D3D12_TEX1D_ARRAY_RTV {}
+            rTexture2D                              D3D12_TEX2D_RTV {}
+            rTexture2DArray                         D3D12_TEX2D_ARRAY_RTV {}
+            rTexture2DMS                            D3D12_TEX2DMS_RTV {}
+            rTexture2DMSArray                       D3D12_TEX2DMS_ARRAY_RTV {}
+            rTexture3D                              D3D12_TEX3D_RTV {}
         ENDS
     D3D12_RENDER_TARGET_VIEW_DESC ENDS
 
     D3D12_TEX1D_DSV STRUCT
-        MipSlice                                    DD ?,?
+        rMipSlice                                   DD ?,?
     D3D12_TEX1D_DSV ENDS
 
     D3D12_TEX1D_ARRAY_DSV STRUCT
-        MipSlice                                    DD ?
-        FirstArraySlice                             DD ?
-        ArraySize                                   DD ?,?
+        rMipSlice                                   DD ?
+        rFirstArraySlice                            DD ?
+        rArraySize                                  DD ?,?
     D3D12_TEX1D_ARRAY_DSV ENDS
 
     D3D12_TEX2D_DSV STRUCT
-        MipSlice                                    DD ?,?
+        rMipSlice                                   DD ?,?
     D3D12_TEX2D_DSV ENDS
 
     D3D12_TEX2D_ARRAY_DSV STRUCT
-        MipSlice                                    DD ?
-        FirstArraySlice                             DD ?
-        ArraySize                                   DD ?,?
+        rMipSlice                                   DD ?
+        rFirstArraySlice                            DD ?
+        rArraySize                                  DD ?,?
     D3D12_TEX2D_ARRAY_DSV ENDS
 
     D3D12_TEX2DMS_DSV STRUCT
-        UnusedField_NothingToDefine                 DD ?,?
+        rUnusedField_NothingToDefine                DD ?,?
     D3D12_TEX2DMS_DSV ENDS
 
     D3D12_TEX2DMS_ARRAY_DSV STRUCT
-        FirstArraySlice                             DD ?
-        ArraySize                                   DD ?
+        rFirstArraySlice                            DD ?
+        rArraySize                                  DD ?
     D3D12_TEX2DMS_ARRAY_DSV ENDS
 
     D3D12_DSV_FLAG_NONE                             EQU 0
@@ -1866,16 +1610,16 @@ COMMENT |
     D3D12_DSV_DIMENSION_TEXTURE2DMSARRAY            EQU 6
 
     D3D12_DEPTH_STENCIL_VIEW_DESC STRUCT
-        Format                                      DD ?
-        ViewDimension                               DD ?
-        Flags                                       DD ?
+        rFormat                                     DD ?
+        rViewDimension                              DD ?
+        rFlags                                      DD ?
         UNION
-            Texture1D                               D3D12_TEX1D_DSV {}
-            Texture1DArray                          D3D12_TEX1D_ARRAY_DSV {}
-            Texture2D                               D3D12_TEX2D_DSV {}
-            Texture2DArray                          D3D12_TEX2D_ARRAY_DSV {}
-            Texture2DMS                             D3D12_TEX2DMS_DSV {}
-            Texture2DMSArray                        D3D12_TEX2DMS_ARRAY_DSV {}
+            rTexture1D                              D3D12_TEX1D_DSV {}
+            rTexture1DArray                         D3D12_TEX1D_ARRAY_DSV {}
+            rTexture2D                              D3D12_TEX2D_DSV {}
+            rTexture2DArray                         D3D12_TEX2D_ARRAY_DSV {}
+            rTexture2DMS                            D3D12_TEX2DMS_DSV {}
+            rTexture2DMSArray                       D3D12_TEX2DMS_ARRAY_DSV {}
         ENDS
     D3D12_DEPTH_STENCIL_VIEW_DESC ENDS
 
@@ -1897,12 +1641,11 @@ COMMENT |
     D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE       EQU 1
 
     D3D12_DESCRIPTOR_HEAP_DESC STRUCT
-        dType                                       DD ?
-        NumDescriptors                              DD ?
-        Flags                                       DD ?
-        NodeMask                                    DD ?
+        rType                                       DD ?
+        rNumDescriptors                             DD ?
+        rFlags                                      DD ?
+        rNodeMask                                   DD ?
     D3D12_DESCRIPTOR_HEAP_DESC ENDS
-
 
     D3D12_DESCRIPTOR_RANGE_TYPE_SRV                 EQU 0
     D3D12_DESCRIPTOR_RANGE_TYPE_UAV                 EQU D3D12_DESCRIPTOR_RANGE_TYPE_SRV + 1
@@ -1910,27 +1653,27 @@ COMMENT |
     D3D12_DESCRIPTOR_RANGE_TYPE_SAMPLER             EQU D3D12_DESCRIPTOR_RANGE_TYPE_CBV + 1 
 
     D3D12_DESCRIPTOR_RANGE STRUCT
-        RangeType                                   DD ?
-        NumDescriptors                              DD ?
-        BaseShaderRegister                          DD ?
-        RegisterSpace                               DD ?
-        OffsetInDescriptorsFromTableStart           DD ?,?
+        rRangeType                                  DD ?
+        rNumDescriptors                             DD ?
+        rBaseShaderRegister                         DD ?
+        rRegisterSpace                              DD ?
+        rOffsetInDescriptorsFromTableStart          DD ?,?
     D3D12_DESCRIPTOR_RANGE ENDS
 
     D3D12_ROOT_DESCRIPTOR_TABLE STRUCT
-        NumDescriptorRanges                         DD ?,?
-        pDescriptorRanges                           DQ ?
+        rNumDescriptorRanges                        DD ?,?
+        rpDescriptorRanges                          DQ ?
     D3D12_ROOT_DESCRIPTOR_TABLE ENDS
 
     D3D12_ROOT_CONSTANTS STRUCT
-        ShaderRegister                              DD ?
-        RegisterSpace                               DD ?
-        Num32BitValues                              DD ?,?
+        rShaderRegister                             DD ?
+        rRegisterSpace                              DD ?
+        rNum32BitValues                             DD ?,?
     D3D12_ROOT_CONSTANTS ENDS
 
     D3D12_ROOT_DESCRIPTOR STRUCT
-        ShaderRegister                              DD ?
-        RegisterSpace                               DD ?
+        rShaderRegister                             DD ?
+        rRegisterSpace                              DD ?
     D3D12_ROOT_DESCRIPTOR ENDS
 
     D3D12_SHADER_VISIBILITY_ALL                     EQU 0
@@ -1947,13 +1690,13 @@ COMMENT |
     D3D12_ROOT_PARAMETER_TYPE_UAV                   EQU D3D12_ROOT_PARAMETER_TYPE_SRV + 1
 
     D3D12_ROOT_PARAMETER STRUCT
-        ParameterType                               DD ?
+        rParameterType                              DD ?,?
         UNION 
-            DescriptorTable                         D3D12_ROOT_DESCRIPTOR_TABLE {}
-            Constants                               D3D12_ROOT_CONSTANTS {}
-            Descriptor                              D3D12_ROOT_DESCRIPTOR {}
+            rDescriptorTable                        D3D12_ROOT_DESCRIPTOR_TABLE {}
+            rConstants                              D3D12_ROOT_CONSTANTS {}
+            rDescriptor                             D3D12_ROOT_DESCRIPTOR {}
         ENDS
-        ShaderVisibility                            DD ?
+        rShaderVisibility                           DD ?
     D3D12_ROOT_PARAMETER ENDS
 
     D3D12_ROOT_SIGNATURE_FLAG_NONE                  EQU 0
@@ -1970,27 +1713,27 @@ COMMENT |
     D3D12_STATIC_BORDER_COLOR_OPAQUE_WHITE          EQU D3D12_STATIC_BORDER_COLOR_OPAQUE_BLACK + 1
 
     D3D12_STATIC_SAMPLER_DESC STRUCT
-        Filter                                      DD ?
-        AddressU                                    DD ?
-        AddressV                                    DD ?
-        AddressW                                    DD ?
-        MipLODBias                                  REAL4 ?
-        MaxAnisotropy                               DD ?
-        ComparisonFunc                              DD ?
-        BorderColor                                 DD ?
-        MinLOD                                      REAL4 ?
-        MaxLOD                                      REAL4 ?
-        ShaderRegister                              DD ?
-        RegisterSpace                               DD ?
-        ShaderVisibility                            DD ?,?
+        rFilter                                     DD ?
+        rAddressU                                   DD ?
+        rAddressV                                   DD ?
+        rAddressW                                   DD ?
+        rMipLODBias                                 REAL4 ?
+        rMaxAnisotropy                              DD ?
+        rComparisonFunc                             DD ?
+        rBorderColor                                DD ?
+        rMinLOD                                     REAL4 ?
+        rMaxLOD                                     REAL4 ?
+        rShaderRegister                             DD ?
+        rRegisterSpace                              DD ?
+        rShaderVisibility                           DD ?,?
     D3D12_STATIC_SAMPLER_DESC ENDS
 
     D3D12_ROOT_SIGNATURE_DESC STRUCT
-        NumParameters                               DD ?,?
+        rNumParameters                              DD ?,?
         pParameters                                 DQ ?
-        NumStaticSamplers                           DD ?,?
+        rNumStaticSamplers                          DD ?,?
         pStaticSamplers                             DQ ?
-        Flags                                       DD ?,?
+        rFlags                                      DD ?,?
     D3D12_ROOT_SIGNATURE_DESC ENDS
 
     D3D12_DESCRIPTOR_RANGE_FLAG_NONE                EQU 0
@@ -2000,16 +1743,16 @@ COMMENT |
     D3D12_DESCRIPTOR_RANGE_FLAG_DATA_STATIC         EQU 8
 
     D3D12_DESCRIPTOR_RANGE1 STRUCT
-        RangeType                                   DD ?
-        NumDescriptors                              DD ?
-        BaseShaderRegister                          DD ?
-        RegisterSpace                               DD ?
-        Flags                                       DD ?
-        OffsetInDescriptorsFromTableStart           DD ?
+        rRangeType                                  DD ?
+        rNumDescriptors                             DD ?
+        rBaseShaderRegister                         DD ?
+        rRegisterSpace                              DD ?
+        rFlags                                      DD ?
+        rOffsetInDescriptorsFromTableStart          DD ?
     D3D12_DESCRIPTOR_RANGE1 ENDS
 
     D3D12_ROOT_DESCRIPTOR_TABLE1 STRUCT
-        NumDescriptorRanges                         DD ?,?
+        rNumDescriptorRanges                        DD ?,?
         pDescriptorRanges                           DQ ?
     D3D12_ROOT_DESCRIPTOR_TABLE1 ENDS
 
@@ -2019,50 +1762,50 @@ COMMENT |
     D3D12_ROOT_DESCRIPTOR_FLAG_DATA_STATIC          EQU 8
 
     D3D12_ROOT_DESCRIPTOR1 STRUCT
-        ShaderRegister                              DD ?
-        RegisterSpace                               DD ?
-        Flags                                       DD ?,?
+        rShaderRegister                             DD ?
+        rRegisterSpace                              DD ?
+        rFlags                                      DD ?,?
     D3D12_ROOT_DESCRIPTOR1 ENDS
 
     D3D12_ROOT_PARAMETER1 STRUCT
-        ParameterType                               DD ?,?
+        rParameterType                              DD ?,?
         UNION 
-            DescriptorTable                         D3D12_ROOT_DESCRIPTOR_TABLE1 {}
-            Constants                               D3D12_ROOT_CONSTANTS {}
-            Descriptor                              D3D12_ROOT_DESCRIPTOR1 {}
+            rDescriptorTable                        D3D12_ROOT_DESCRIPTOR_TABLE1 {}
+            rConstants                              D3D12_ROOT_CONSTANTS {}
+            rDescriptor                             D3D12_ROOT_DESCRIPTOR1 {}
         ENDS
-        ShaderVisibility                            DD ?,?
+        rShaderVisibility                           DD ?,?
     D3D12_ROOT_PARAMETER1 ENDS
 
     D3D12_ROOT_SIGNATURE_DESC1 STRUCT
-        NumParameters                               DD ?,?
+        rNumParameters                              DD ?,?
         pParameters                                 DQ ?
-        NumStaticSamplers                           DD ?,?
+        rNumStaticSamplers                          DD ?,?
         pStaticSamplers                             DQ ?
-        Flags                                       DD ?,?
+        rFlags                                      DD ?,?
     D3D12_ROOT_SIGNATURE_DESC1 ENDS
 
     D3D12_VERSIONED_ROOT_SIGNATURE_DESC STRUCT
-        Version                                     DD ?,?
+        rVersion                                    DD ?,?
         UNION
-            Desc_1_0                                D3D12_ROOT_SIGNATURE_DESC {}
-            Desc_1_1                                D3D12_ROOT_SIGNATURE_DESC1 {}
+            rDesc_1_0                               D3D12_ROOT_SIGNATURE_DESC {}
+            rDesc_1_1                               D3D12_ROOT_SIGNATURE_DESC1 {}
         ENDS
     D3D12_VERSIONED_ROOT_SIGNATURE_DESC ENDS
 
     D3D12_CPU_DESCRIPTOR_HANDLE STRUCT
-        dptr                                        DD ?
+        rptr                                        DD ?,?
     D3D12_CPU_DESCRIPTOR_HANDLE ENDS
 
     D3D12_GPU_DESCRIPTOR_HANDLE STRUCT
-        dptr                                        DQ ?
+        rptr                                        DQ ?
     D3D12_GPU_DESCRIPTOR_HANDLE ENDS
 
     D3D12_DISCARD_REGION STRUCT
-        NumRects                                    DD ?,?
+        rNumRects                                   DD ?,?
         pRects                                      DQ ?
-        FirstSubresource                            DD ?
-        NumSubresources                             DD ?
+        rFirstSubresource                           DD ?
+        rNumSubresources                            DD ?
     D3D12_DISCARD_REGION ENDS
 
     D3D12_QUERY_HEAP_TYPE_OCCLUSION                 EQU 0
@@ -2073,10 +1816,10 @@ COMMENT |
     D3D12_QUERY_HEAP_TYPE_COPY_QUEUE_TIMESTAMP      EQU 5
 
     D3D12_QUERY_HEAP_DESC STRUCT
-        dType                                       DD ?
-        Count                                       DD ?
-        NodeMask                                    DD ?,?
-    D3D12_QUERY_HEAP_DESC STRUCT
+        rType                                       DD ?
+        rCount                                      DD ?
+        rNodeMask                                   DD ?,?
+    D3D12_QUERY_HEAP_DESC ENDS
 
     D3D12_QUERY_TYPE_OCCLUSION                      EQU 0
     D3D12_QUERY_TYPE_BINARY_OCCLUSION               EQU 1
@@ -2092,61 +1835,61 @@ COMMENT |
     D3D12_PREDICATION_OP_NOT_EQUAL_ZERO             EQU 1
 
     D3D12_QUERY_DATA_PIPELINE_STATISTICS STRUCT
-        IAVertices                                  DQ ?
-        IAPrimitives                                DQ ?
-        VSInvocations                               DQ ?
-        GSInvocations                               DQ ?
-        GSPrimitives                                DQ ?
-        CInvocations                                DQ ?
-        CPrimitives                                 DQ ?
-        PSInvocations                               DQ ?
-        HSInvocations                               DQ ?
-        DSInvocations                               DQ ?
-        CSInvocations                               DQ ?
+        rIAVertices                                 DQ ?
+        rIAPrimitives                               DQ ?
+        rVSInvocations                              DQ ?
+        rGSInvocations                              DQ ?
+        rGSPrimitives                               DQ ?
+        rCInvocations                               DQ ?
+        rCPrimitives                                DQ ?
+        rPSInvocations                              DQ ?
+        rHSInvocations                              DQ ?
+        rDSInvocations                              DQ ?
+        rCSInvocations                              DQ ?
     D3D12_QUERY_DATA_PIPELINE_STATISTICS ENDS
 
     D3D12_QUERY_DATA_SO_STATISTICS STRUCT
-        NumPrimitivesWritten                        DQ ?
-        PrimitivesStorageNeeded                     DQ ?
+        rNumPrimitivesWritten                       DQ ?
+        rPrimitivesStorageNeeded                    DQ ?
     D3D12_QUERY_DATA_SO_STATISTICS ENDS
 
     D3D12_STREAM_OUTPUT_BUFFER_VIEW STRUCT
-        BufferLocation                              DQ ?
-        SizeInBytes                                 DQ ?
-        BufferFilledSizeLocation                    DQ ?
+        rBufferLocation                             DQ ?
+        rSizeInBytes                                DQ ?
+        rBufferFilledSizeLocation                   DQ ?
     D3D12_STREAM_OUTPUT_BUFFER_VIEW ENDS
 
     D3D12_DRAW_ARGUMENTS STRUCT
-        VertexCountPerInstance                      DD ?
-        InstanceCount                               DD ?
-        StartVertexLocation                         DD ?
-        StartInstanceLocation                       DD ?
+        rVertexCountPerInstance                     DD ?
+        rInstanceCount                              DD ?
+        rStartVertexLocation                        DD ?
+        rStartInstanceLocation                      DD ?
     D3D12_DRAW_ARGUMENTS ENDS
 
     D3D12_DRAW_INDEXED_ARGUMENTS STRUCT
-        IndexCountPerInstance                       DD ?
-        InstanceCount                               DD ?
-        StartIndexLocation                          DD ?
-        BaseVertexLocation                          DD ?
-        StartInstanceLocation                       DD ?,?
+        rIndexCountPerInstance                      DD ?
+        rInstanceCount                              DD ?
+        rStartIndexLocation                         DD ?
+        rBaseVertexLocation                         DD ?
+        rStartInstanceLocation                      DD ?,?
     D3D12_DRAW_INDEXED_ARGUMENTS ENDS
 
     D3D12_DISPATCH_ARGUMENTS STRUCT
-        ThreadGroupCountX                           DD ?
-        ThreadGroupCountY                           DD ?
-        ThreadGroupCountZ                           DD ?,?
+        rThreadGroupCountX                          DD ?
+        rThreadGroupCountY                          DD ?
+        rThreadGroupCountZ                          DD ?,?
     D3D12_DISPATCH_ARGUMENTS ENDS
 
     D3D12_VERTEX_BUFFER_VIEW STRUCT
-        BufferLocation                              DQ ?
-        SizeInBytes                                 DD ?
-        StrideInBytes                               DD ?
+        rBufferLocation                             DQ ?
+        rSizeInBytes                                DD ?
+        rStrideInBytes                              DD ?
     D3D12_VERTEX_BUFFER_VIEW ENDS
 
     D3D12_INDEX_BUFFER_VIEW STRUCT
-        BufferLocation                              DQ ?
-        SizeInBytes                                 DD ?
-        Format                                      DD ?
+        rBufferLocation                             DQ ?
+        rSizeInBytes                                DD ?
+        rFormat                                     DD ?
     D3D12_INDEX_BUFFER_VIEW ENDS
 
     D3D12_INDIRECT_ARGUMENT_TYPE_DRAW               EQU 0
@@ -2160,38 +1903,29 @@ COMMENT |
     D3D12_INDIRECT_ARGUMENT_TYPE_UNORDERED_ACCESS_VIEW      EQU D3D12_INDIRECT_ARGUMENT_TYPE_SHADER_RESOURCE_VIEW + 1 
 
     D3D12_INDIRECT_ARGUMENT_DESC STRUCT
-        dType                                       DD ?
+        rType                                       DD ?
         UNION 
-            VertexBuffer STRUCT 
-                Slot                                DD ?
-            VertexBuffer ENDS
-            Constant STRUCT 
-                RootParameterIndex                  DD ?
-                DestOffsetIn32BitValues             DD ?
-                Num32BitValuesToSet                 DD ?
-            Constant END
-            ConstantBufferView STRUCT 
-                RootParameterIndex                  DD ?
-            ConstantBufferView ENDS
-            ShaderResourceView STRUCT
-                RootParameterIndex                  DD ?
-            ShaderResourceView ENDS
-            UnorderedAccessView STRUCT
-                RootParameterIndex                  DD ?
-            UnorderedAccessView ENDS
+            STRUCT 
+                rSlot                               DD ?
+            ENDS
+            STRUCT 
+                rRootParameterIndex                 DD ?
+                rDestOffsetIn32BitValues            DD ?
+                rNum32BitValuesToSet                DD ?
+            ENDS
         ENDS
     D3D12_INDIRECT_ARGUMENT_DESC ENDS
 
     D3D12_COMMAND_SIGNATURE_DESC STRUCT
-        ByteStride                                  DD ?
-        NumArgumentDescs                            DD ?
+        rByteStride                                 DD ?
+        rNumArgumentDescs                           DD ?
         pArgumentDescs                              DQ ?
-        NodeMask                                    DD ?,?
+        rNodeMask                                   DD ?,?
     D3D12_COMMAND_SIGNATURE_DESC ENDS
 
     D3D12_WRITEBUFFERIMMEDIATE_PARAMETER STRUCT
-        Dest                                        DQ ?
-        Value                                       DD ?,?
+        rDest                                       DQ ?
+        rValue                                      DD ?,?
     D3D12_WRITEBUFFERIMMEDIATE_PARAMETER ENDS
 
     D3D12_WRITEBUFFERIMMEDIATE_MODE_DEFAULT         EQU 0
@@ -2223,38 +1957,38 @@ COMMENT |
     D3D12_PROTECTED_RESOURCE_SESSION_SUPPORT_FLAG_NONE      EQU 0
     D3D12_PROTECTED_RESOURCE_SESSION_SUPPORT_FLAG_SUPPORTED EQU 1
 
-    D3D12_FEATURE_DATA_PROTECTED_RESOURCE_SESSION_SUPPORT
-        NodeIndex                                   DD ?
-        Support                                     DD ?
-    D3D12_FEATURE_DATA_PROTECTED_RESOURCE_SESSION_SUPPORT
+    D3D12_FEATURE_DATA_PROTECTED_RESOURCE_SESSION_SUPPORT STRUCT
+        rNodeIndex                                  DD ?
+        rSupport                                    DD ?
+    D3D12_FEATURE_DATA_PROTECTED_RESOURCE_SESSION_SUPPORT ENDS
 
     D3D12_PROTECTED_RESOURCE_SESSION_FLAG_NONE      EQU 0
 
     D3D12_PROTECTED_RESOURCE_SESSION_DESC STRUCT
-        NodeMask                                    DD ?
-        Flags                                       DD ?
+        rNodeMask                                   DD ?
+        rFlags                                      DD ?
     D3D12_PROTECTED_RESOURCE_SESSION_DESC ENDS
 
     D3D12_SUBRESOURCE_DATA STRUCT
         pData                                       DQ ?
-        RowPitch                                    DQ ?
-        SlicePitch                                  DQ ?
-    D3D12_SUBRESOURCE_DATA END
+        rRowPitch                                   DQ ?
+        rSlicePitch                                 DQ ?
+    D3D12_SUBRESOURCE_DATA ENDS
 
     D3D12_MEMCPY_DEST STRUCT
         pData                                       DQ ?
-        RowPitch                                    DD ?
-        SlicePitch                                  DD ?
+        rRowPitch                                   DD ?
+        rSlicePitch                                 DD ?
     D3D12_MEMCPY_DEST ENDS
 
 ; --- D3D12 Object ---
 
     _ID3D12Object MACRO
         _IUnknown
-        GetPrivateData                              DQ ?
-        SetPrivateData                              DQ ?
-        SetPrivateDataInterface                     DQ ?
-        SetName                                     DQ ?
+        rGetPrivateData                             DQ ?
+        rSetPrivateData                             DQ ?
+        rSetPrivateDataInterface                    DQ ?
+        rSetName                                    DQ ?
     ENDM
 
     _ComTable ID3D12Object, _ID3D12Object
@@ -2263,7 +1997,7 @@ COMMENT |
 
     _ID3D12DeviceChild MACRO
         _ID3D12Object
-        GetDevice                                   DQ ?
+        rGetDevice                                  DQ ?
     ENDM
 
     _ComTable ID3D12DeviceChild, _ID3D12DeviceChild
@@ -2280,7 +2014,7 @@ COMMENT |
 
     _ID3D12RootSignatureDeserializer MACRO
         _IUnknown
-        GetRootSignatureDesc                        DQ ?
+        rGetRootSignatureDesc                       DQ ?
     ENDM
 
     _ComTable ID3D12RootSignatureDeserializer, _ID3D12RootSignatureDeserializer
@@ -2289,8 +2023,8 @@ COMMENT |
 
     _ID3D12VersionedRootSignatureDeserializer MACRO
         _IUnknown
-        GetRootSignatureDescAtVersion               DQ ?
-        GetUnconvertedRootSignatureDesc             DQ ?
+        rGetRootSignatureDescAtVersion              DQ ?
+        rGetUnconvertedRootSignatureDesc            DQ ?
     ENDM
 
     _ComTable ID3D12VersionedRootSignatureDeserializer, _ID3D12VersionedRootSignatureDeserializer
@@ -2307,7 +2041,7 @@ COMMENT |
 
     _ID3D12Heap MACRO
         _ID3D12Pageable
-        GetDesc                                     DQ ?
+        rGetDesc                                    DQ ?
     ENDM
 
     _ComTable ID3D12Heap, _ID3D12Heap
@@ -2316,7 +2050,7 @@ COMMENT |
 
     _ID3D12Heap1 MACRO
         _ID3D12Heap
-        GetProtectedResourceSession                 DQ ?
+        rGetProtectedResourceSession                DQ ?
     ENDM
 
     _ComTable ID3D12Heap1, _ID3D12Heap1
@@ -2325,13 +2059,13 @@ COMMENT |
 
     _ID3D12Resource MACRO
         _ID3D12Pageable
-        Map                                         DQ ?
-        Unmap                                       DQ ?
-        GetDesc                                     DQ ?
-        GetGPUVirtualAddress                        DQ ?
-        WriteToSubresource                          DQ ?
-        ReadFromSubresource                         DQ ?
-        GetHeapProperties                           DQ ?
+        rMap                                        DQ ?
+        rUnmap                                      DQ ?
+        rGetDesc                                    DQ ?
+        rGetGPUVirtualAddress                       DQ ?
+        rWriteToSubresource                         DQ ?
+        rReadFromSubresource                        DQ ?
+        rGetHeapProperties                          DQ ?
     ENDM
 
     _ComTable ID3D12Resource, _ID3D12Resource
@@ -2340,7 +2074,7 @@ COMMENT |
 
     _ID3D12Resource1 MACRO
         _ID3D12Resource
-        GetProtectedResourceSession                 DQ ?
+        rGetProtectedResourceSession                DQ ?
     ENDM
 
     _ComTable ID3D12Resource1, _ID3D12Resource1
@@ -2349,7 +2083,7 @@ COMMENT |
 
     _ID3D12CommandAllocator MACRO
         _ID3D12Pageable
-        Reset                                       DQ ?
+        rReset                                      DQ ?
     ENDM
 
     _ComTable ID3D12CommandAllocator, _ID3D12CommandAllocator
@@ -2358,9 +2092,9 @@ COMMENT |
 
     _ID3D12Fence MACRO
         _ID3D12Pageable
-        GetCompletedValue                           DQ ?
-        SetEventOnCompletion                        DQ ?
-        Signal                                      DQ ?
+        rGetCompletedValue                          DQ ?
+        rSetEventOnCompletion                       DQ ?
+        rSignal                                     DQ ?
     ENDM
 
     _ComTable ID3D12Fence, _ID3D12Fence
@@ -2369,14 +2103,14 @@ COMMENT |
 
     _ID3D12Fence1 MACRO
         _ID3D12Fence1
-        GetCreationFlags                            DQ ?
+        rGetCreationFlags                           DQ ?
     ENDM
 
 ; --- D3D12 PipelineState ---
 
     _ID3D12PipelineState MACRO
         _ID3D12Pageable
-        GetCachedBlob                               DQ ?
+        rGetCachedBlob                              DQ ?
     ENDM
 
     _ComTable ID3D12PipelineState, _ID3D12PipelineState
@@ -2385,9 +2119,9 @@ COMMENT |
 
     _ID3D12DescriptorHeap MACRO
         _ID3D12Pageable
-        GetDesc                                     DQ ?
-        GetCPUDescriptorHandleForHeapStart          DQ ?
-        GetGPUDescriptorHandleForHeapStart          DQ ?
+        rGetDesc                                    DQ ?
+        rGetCPUDescriptorHandleForHeapStart         DQ ?
+        rGetGPUDescriptorHandleForHeapStart         DQ ?
     ENDM
 
     _ComTable ID3D12DescriptorHeap, _ID3D12DescriptorHeap
@@ -2412,7 +2146,7 @@ COMMENT |
 
     _ID3D12CommandList MACRO
         _ID3D12DeviceChild
-        GetType                                     DQ ?
+        rGetType                                    DQ ?
     ENDM
 
     _ComTable ID3D12CommandList, _ID3D12CommandList
@@ -2421,57 +2155,57 @@ COMMENT |
 
     _ID3D12GraphicsCommandList MACRO
         _ID3D12CommandList
-        Close                                       DQ ?
-        Reset                                       DQ ?
-        ClearState                                  DQ ?
-        DrawInstanced                               DQ ?
-        DrawIndexedInstanced                        DQ ?
-        Dispatch                                    DQ ?
-        CopyBufferRegion                            DQ ?
-        CopyTextureRegion                           DQ ?
-        CopyResource                                DQ ?
-        CopyTiles                                   DQ ?
-        ResolveSubresource                          DQ ?
-        IASetPrimitiveTopology                      DQ ?
-        RSSetViewports                              DQ ?
-        RSSetScissorRects                           DQ ?
-        OMSetBlendFactor                            DQ ?
-        OMSetStencilRef                             DQ ?
-        SetPipelineState                            DQ ?
-        ResourceBarrier                             DQ ?
-        ExecuteBundle                               DQ ?
-        SetDescriptorHeaps                          DQ ?
-        SetComputeRootSignature                     DQ ?
-        SetGraphicsRootSignature                    DQ ?
-        SetComputeRootDescriptorTable               DQ ?
-        SetGraphicsRootDescriptorTable              DQ ?
-        SetComputeRoot32BitConstant                 DQ ?
-        SetGraphicsRoot32BitConstant                DQ ?
-        SetComputeRoot32BitConstants                DQ ?
-        SetGraphicsRoot32BitConstants               DQ ?
-        SetComputeRootConstantBufferView            DQ ?
-        SetGraphicsRootConstantBufferView           DQ ?
-        SetComputeRootShaderResourceView            DQ ?
-        SetGraphicsRootShaderResourceView           DQ ?
-        SetComputeRootUnorderedAccessView           DQ ?
-        SetGraphicsRootUnorderedAccessView          DQ ?
-        IASetIndexBuffer                            DQ ?
-        IASetVertexBuffers                          DQ ?
-        SOSetTargets                                DQ ?
-        OMSetRenderTargets                          DQ ?
-        ClearDepthStencilView                       DQ ?
-        ClearRenderTargetView                       DQ ?
-        ClearUnorderedAccessViewUint                DQ ?
-        ClearUnorderedAccessViewFloat               DQ ?
-        DiscardResource                             DQ ?
-        BeginQuery                                  DQ ?
-        EndQuery                                    DQ ?
-        ResolveQueryData                            DQ ?
-        SetPredication                              DQ ?
-        SetMarker                                   DQ ?
-        BeginEvent                                  DQ ?
-        EndEvent                                    DQ ?
-        ExecuteIndirect                             DQ ?
+        rClose                                      DQ ?
+        rReset                                      DQ ?
+        rClearState                                 DQ ?
+        rDrawInstanced                              DQ ?
+        rDrawIndexedInstanced                       DQ ?
+        rDispatch                                   DQ ?
+        rCopyBufferRegion                           DQ ?
+        rCopyTextureRegion                          DQ ?
+        rCopyResource                               DQ ?
+        rCopyTiles                                  DQ ?
+        rResolveSubresource                         DQ ?
+        rIASetPrimitiveTopology                     DQ ?
+        rRSSetViewports                             DQ ?
+        rRSSetScissorRects                          DQ ?
+        rOMSetBlendFactor                           DQ ?
+        rOMSetStencilRef                            DQ ?
+        rSetPipelineState                           DQ ?
+        rResourceBarrier                            DQ ?
+        rExecuteBundle                              DQ ?
+        rSetDescriptorHeaps                         DQ ?
+        rSetComputeRootSignature                    DQ ?
+        rSetGraphicsRootSignature                   DQ ?
+        rSetComputeRootDescriptorTable              DQ ?
+        rSetGraphicsRootDescriptorTable             DQ ?
+        rSetComputeRoot32BitConstant                DQ ?
+        rSetGraphicsRoot32BitConstant               DQ ?
+        rSetComputeRoot32BitConstants               DQ ?
+        rSetGraphicsRoot32BitConstants              DQ ?
+        rSetComputeRootConstantBufferView           DQ ?
+        rSetGraphicsRootConstantBufferView          DQ ?
+        rSetComputeRootShaderResourceView           DQ ?
+        rSetGraphicsRootShaderResourceView          DQ ?
+        rSetComputeRootUnorderedAccessView          DQ ?
+        rSetGraphicsRootUnorderedAccessView         DQ ?
+        rIASetIndexBuffer                           DQ ?
+        rIASetVertexBuffers                         DQ ?
+        rSOSetTargets                               DQ ?
+        rOMSetRenderTargets                         DQ ?
+        rClearDepthStencilView                      DQ ?
+        rClearRenderTargetView                      DQ ?
+        rClearUnorderedAccessViewUint               DQ ?
+        rClearUnorderedAccessViewFloat              DQ ?
+        rDiscardResource                            DQ ?
+        rBeginQuery                                 DQ ?
+        rEndQuery                                   DQ ?
+        rResolveQueryData                           DQ ?
+        rSetPredication                             DQ ?
+        rSetMarker                                  DQ ?
+        rBeginEvent                                 DQ ?
+        rEndEvent                                   DQ ?
+        rExecuteIndirect                            DQ ?
     ENDM
 
     _ComTable ID3D12GraphicsCommandList, _ID3D12GraphicsCommandList
@@ -2480,12 +2214,12 @@ COMMENT |
 
     _ID3D12GraphicsCommandList1 MACRO
         _ID3D12GraphicsCommandList
-        AtomicCopyBufferUINT                        DQ ?
-        AtomicCopyBufferUINT64                      DQ ?
-        OMSetDepthBounds                            DQ ?
-        SetSamplePositions                          DQ ?
-        ResolveSubresourceRegion                    DQ ?
-        SetViewInstanceMask                         DQ ?
+        rAtomicCopyBufferUINT                       DQ ?
+        rAtomicCopyBufferUINT64                     DQ ?
+        rOMSetDepthBounds                           DQ ?
+        rSetSamplePositions                         DQ ?
+        rResolveSubresourceRegion                   DQ ?
+        rSetViewInstanceMask                        DQ ?
     ENDM
 
     _ComTable ID3D12GraphicsCommandList1, _ID3D12GraphicsCommandList1
@@ -2494,7 +2228,7 @@ COMMENT |
 
     _ID3D12GraphicsCommandList2 MACRO
         _ID3D12GraphicsCommandList1
-        WriteBufferImmediate                        DQ ?
+        rWriteBufferImmediate                       DQ ?
     ENDM
 
     _ComTable ID3D12GraphicsCommandList2, _ID3D12GraphicsCommandList2
@@ -2503,7 +2237,7 @@ COMMENT |
 
     _ID3D12GraphicsCommandList3 MACRO
         _ID3D12GraphicsCommandList2
-        SetProtectedResourceSession                 DQ ?
+        rSetProtectedResourceSession                DQ ?
     ENDM
 
     _ComTable ID3D12GraphicsCommandList3, _ID3D12GraphicsCommandList3
@@ -2512,17 +2246,17 @@ COMMENT |
 
     _ID3D12CommandQueue MACRO
         _ID3D12Pageable
-        UpdateTileMappings                          DQ ?
-        CopyTileMappings                            DQ ?
-        ExecuteCommandLists                         DQ ?
-        SetMarker                                   DQ ?
-        BeginEvent                                  DQ ?
-        EndEvent                                    DQ ?
-        Signal                                      DQ ?
-        dWait                                       DQ ?
-        GetTimestampFrequency                       DQ ?
-        GetClockCalibration                         DQ ?
-        GetDesc                                     DQ ?
+        rUpdateTileMappings                         DQ ?
+        rCopyTileMappings                           DQ ?
+        rExecuteCommandLists                        DQ ?
+        rSetMarker                                  DQ ?
+        rBeginEvent                                 DQ ?
+        rEndEvent                                   DQ ?
+        rSignal                                     DQ ?
+        rWait                                       DQ ?
+        rGetTimestampFrequency                      DQ ?
+        rGetClockCalibration                        DQ ?
+        rGetDesc                                    DQ ?
     ENDM
 
     _ComTable ID3D12CommandQueue, _ID3D12CommandQueue
@@ -2531,43 +2265,43 @@ COMMENT |
 
     _ID3D12Device MACRO
         _ID3D12Object
-        GetNodeCount                                DQ ?
-        CreateCommandQueue                          DQ ?
-        CreateCommandAllocator                      DQ ?
-        CreateGraphicsPipelineState                 DQ ?
-        CreateComputePipelineState                  DQ ?
-        CreateCommandList                           DQ ?
-        CheckFeatureSupport                         DQ ?
-        CreateDescriptorHeap                        DQ ?
-        GetDescriptorHandleIncrementSize            DQ ?
-        CreateRootSignature                         DQ ?
-        CreateConstantBufferView                    DQ ?
-        CreateShaderResourceView                    DQ ?
-        CreateUnorderedAccessView                   DQ ?
-        CreateRenderTargetView                      DQ ?
-        CreateDepthStencilView                      DQ ?
-        CreateSampler                               DQ ?
-        CopyDescriptors                             DQ ?
-        CopyDescriptorsSimple                       DQ ?
-        GetResourceAllocationInfo                   DQ ?
-        GetCustomHeapProperties                     DQ ?
-        CreateCommittedResource                     DQ ?
-        CreateHeap                                  DQ ?
-        CreatePlacedResource                        DQ ?
-        CreateReservedResource                      DQ ?
-        CreateSharedHandle                          DQ ?
-        OpenSharedHandle                            DQ ?
-        OpenSharedHandleByName                      DQ ?
-        MakeResident                                DQ ?
-        Evict                                       DQ ?
-        CreateFence                                 DQ ?
-        GetDeviceRemovedReason                      DQ ?
-        GetCopyableFootprints                       DQ ?
-        CreateQueryHeap                             DQ ?
-        SetStablePowerState                         DQ ?
-        CreateCommandSignature                      DQ ?
-        GetResourceTiling                           DQ ?
-        GetAdapterLuid                              DQ ?
+        rGetNodeCount                               DQ ?
+        rCreateCommandQueue                         DQ ?
+        rCreateCommandAllocator                     DQ ?
+        rCreateGraphicsPipelineState                DQ ?
+        rCreateComputePipelineState                 DQ ?
+        rCreateCommandList                          DQ ?
+        rCheckFeatureSupport                        DQ ?
+        rCreateDescriptorHeap                       DQ ?
+        rGetDescriptorHandleIncrementSize           DQ ?
+        rCreateRootSignature                        DQ ?
+        rCreateConstantBufferView                   DQ ?
+        rCreateShaderResourceView                   DQ ?
+        rCreateUnorderedAccessView                  DQ ?
+        rCreateRenderTargetView                     DQ ?
+        rCreateDepthStencilView                     DQ ?
+        rCreateSampler                              DQ ?
+        rCopyDescriptors                            DQ ?
+        rCopyDescriptorsSimple                      DQ ?
+        rGetResourceAllocationInfo                  DQ ?
+        rGetCustomHeapProperties                    DQ ?
+        rCreateCommittedResource                    DQ ?
+        rCreateHeap                                 DQ ?
+        rCreatePlacedResource                       DQ ?
+        rCreateReservedResource                     DQ ?
+        rCreateSharedHandle                         DQ ?
+        rOpenSharedHandle                           DQ ?
+        rOpenSharedHandleByName                     DQ ?
+        rMakeResident                               DQ ?
+        rEvict                                      DQ ?
+        rCreateFence                                DQ ?
+        rGetDeviceRemovedReason                     DQ ?
+        rGetCopyableFootprints                      DQ ?
+        rCreateQueryHeap                            DQ ?
+        rSetStablePowerState                        DQ ?
+        rCreateCommandSignature                     DQ ?
+        rGetResourceTiling                          DQ ?
+        rGetAdapterLuid                             DQ ?
     ENDM
 
     _ComTable ID3D12Device, _ID3D12Device
@@ -2576,9 +2310,9 @@ COMMENT |
 
     _ID3D12Device1 MACRO
         _ID3D12Device
-        CreatePipelineLibrary                       DQ ?
-        SetEventOnMultipleFenceCompletion           DQ ?
-        SetResidencyPriority                        DQ ?
+        rCreatePipelineLibrary                      DQ ?
+        rSetEventOnMultipleFenceCompletion          DQ ?
+        rSetResidencyPriority                       DQ ?
     ENDM
 
     _ComTable ID3D12Device1, _ID3D12Device1
@@ -2587,7 +2321,7 @@ COMMENT |
 
     _ID3D12Device2 MACRO
         _ID3D12Device1
-        CreatePipelineState                         DQ ?
+        rCreatePipelineState                        DQ ?
     ENDM
 
     _ComTable ID3D12Device2, _ID3D12Device2
@@ -2596,9 +2330,9 @@ COMMENT |
 
     _ID3D12Device3 MACRO
         _ID3D12Device2
-        OpenExistingHeapFromAddress                 DQ ?
-        OpenExistingHeapFromFileMapping             DQ ?
-        EnqueueMakeResident                         DQ ?
+        rOpenExistingHeapFromAddress                DQ ?
+        rOpenExistingHeapFromFileMapping            DQ ?
+        rEnqueueMakeResident                        DQ ?
     ENDM
 
     _ComTable ID3D12Device3, _ID3D12Device3
@@ -2607,12 +2341,12 @@ COMMENT |
 
     _ID3D12Device4 MACRO
         _ID3D12Device3
-        CreateCommandList1                          DQ ?
-        CreateProtectedResourceSession              DQ ?
-        CreateCommittedResource1                    DQ ?
-        CreateHeap1                                 DQ ?
-        CreateReservedResource1                     DQ ?
-        GetResourceAllocationInfo1                  DQ ?
+        rCreateCommandList1                         DQ ?
+        rCreateProtectedResourceSession             DQ ?
+        rCreateCommittedResource1                   DQ ?
+        rCreateHeap1                                DQ ?
+        rCreateReservedResource1                    DQ ?
+        rGetResourceAllocationInfo1                 DQ ?
     ENDM
 
     _ComTable ID3D12Device4, _ID3D12Device4
@@ -2621,11 +2355,11 @@ COMMENT |
 
     _ID3D12PipelineLibrary MACRO
         _ID3D12DeviceChild
-        StorePipeline                               DQ ?
-        LoadGraphicsPipeline                        DQ ?
-        LoadComputePipeline                         DQ ?
-        GetSerializedSize                           DQ ?
-        Serialize                                   DQ ?
+        rStorePipeline                              DQ ?
+        rLoadGraphicsPipeline                       DQ ?
+        rLoadComputePipeline                        DQ ?
+        rGetSerializedSize                          DQ ?
+        rSerialize                                  DQ ?
     ENDM
 
     _ComTable ID3D12PipelineLibrary, _ID3D12PipelineLibrary
@@ -2634,7 +2368,7 @@ COMMENT |
 
     _ID3D12PipelineLibrary1 MACRO
         _ID3D12PipelineLibrary
-        LoadPipeline                                DQ ?
+        rLoadPipeline                               DQ ?
     ENDM
 
     _ComTable ID3D12PipelineLibrary1, _ID3D12PipelineLibrary1
@@ -2643,8 +2377,8 @@ COMMENT |
 
     _ID3D12ProtectedSession MACRO
         _ID3D12DeviceChild
-        GetStatusFence                              DQ ?
-        GetSessionStatus                            DQ ?
+        rGetStatusFence                             DQ ?
+        rGetSessionStatus                           DQ ?
     ENDM
 
     _ComTable ID3D12ProtectedSession, _ID3D12ProtectedSession
@@ -2653,7 +2387,7 @@ COMMENT |
 
     _ID3D12ProtectedResourceSession MACRO
         _ID3D12ProtectedSession
-        GetDesc                                     DQ ?
+        rGetDesc                                    DQ ?
     ENDM
 
     _ComTable ID3D12ProtectedResourceSession, _ID3D12ProtectedResourceSession
@@ -2662,8 +2396,8 @@ COMMENT |
 
     _ID3D12Tools MACRO
         _IUnknown
-        EnableShaderInstrumentation                 DQ ?
-        ShaderInstrumentationEnabled                DQ ?
+        rEnableShaderInstrumentation                DQ ?
+        rShaderInstrumentationEnabled               DQ ?
     ENDM
 
     _ComTable ID3D12Tools, _ID3D12Tools
