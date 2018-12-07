@@ -13,11 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Included">
-      <UniqueIdentifier>{971eb1f6-2b11-4de3-a316-db0288805400}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Included\COM">
+    <Filter Include="Source Files\COM">
       <UniqueIdentifier>{f571c225-fcfa-470e-9ee1-0a6b5b4c3bf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Units">
+      <UniqueIdentifier>{971eb1f6-2b11-4de3-a316-db0288805400}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -26,38 +26,41 @@
     </MASM>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Macros.inc">
-      <Filter>Source Files\Included</Filter>
-    </None>
     <None Include="Heaps.inc">
-      <Filter>Source Files\Included</Filter>
+      <Filter>Source Files\Units</Filter>
     </None>
     <None Include="Random.inc">
-      <Filter>Source Files\Included</Filter>
+      <Filter>Source Files\Units</Filter>
     </None>
     <None Include="Strings.inc">
-      <Filter>Source Files\Included</Filter>
-    </None>
-    <None Include="Externals.inc">
-      <Filter>Source Files\Included</Filter>
-    </None>
-    <None Include="Defines.inc">
-      <Filter>Source Files\Included</Filter>
+      <Filter>Source Files\Units</Filter>
     </None>
     <None Include="COM.inc">
-      <Filter>Source Files\Included\COM</Filter>
+      <Filter>Source Files\COM</Filter>
     </None>
     <None Include="IID.inc">
-      <Filter>Source Files\Included\COM</Filter>
+      <Filter>Source Files\COM</Filter>
     </None>
     <None Include="DXGI.inc">
-      <Filter>Source Files\Included\COM</Filter>
+      <Filter>Source Files\COM</Filter>
     </None>
     <None Include="D3D12.inc">
-      <Filter>Source Files\Included\COM</Filter>
+      <Filter>Source Files\COM</Filter>
     </None>
     <None Include="D3D.inc">
-      <Filter>Source Files\Included\COM</Filter>
+      <Filter>Source Files\COM</Filter>
+    </None>
+    <None Include="Defines.inc">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Externals.inc">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Macros.inc">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Window.inc">
+      <Filter>Source Files\Units</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -86,7 +86,7 @@
         ENDM
 
         IF cnd EQ 0
-            EXITM <1>
+            EXITM <-1>
         ENDIF
     ENDM
 

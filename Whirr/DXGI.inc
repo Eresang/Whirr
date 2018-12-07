@@ -7,17 +7,43 @@
 
     LUID                                            EQU DQ
 
+    DXGI_ERROR_ACCESS_DENIED                        EQU 0887A002Bh
+    DXGI_ERROR_ACCESS_LOST                          EQU 0887A0026h
+    DXGI_ERROR_ALREADY_EXISTS                       EQU 0887A0036h
+    DXGI_ERROR_CANNOT_PROTECT_CONTENT               EQU 0887A002Ah
+    DXGI_ERROR_DEVICE_HUNG                          EQU 0887A0006h
+    DXGI_ERROR_DEVICE_REMOVED                       EQU 0887A0005h
+    DXGI_ERROR_DEVICE_RESET                         EQU 0887A0007h
+    DXGI_ERROR_DRIVER_INTERNAL_ERROR                EQU 0887A0020h
+    DXGI_ERROR_FRAME_STATISTICS_DISJOINT            EQU 0887A000Bh
+    DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE         EQU 0887A000Ch
+    DXGI_ERROR_INVALID_CALL                         EQU 0887A0001h
+    DXGI_ERROR_MORE_DATA                            EQU 0887A0003h
+    DXGI_ERROR_NAME_ALREADY_EXISTS                  EQU 0887A002Ch
+    DXGI_ERROR_NONEXCLUSIVE                         EQU 0887A0021h
+    DXGI_ERROR_NOT_CURRENTLY_AVAILABLE              EQU 0887A0022h
+    DXGI_ERROR_NOT_FOUND                            EQU 0887A0002h
+    DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED           EQU 0887A0023h
+    DXGI_ERROR_REMOTE_OUTOFMEMORY                   EQU 0887A0024h
+    DXGI_ERROR_RESTRICT_TO_OUTPUT_STALE             EQU 0887A0029h
+    DXGI_ERROR_SDK_COMPONENT_MISSING                EQU 0887A002Dh
+    DXGI_ERROR_SESSION_DISCONNECTED                 EQU 0887A0028h
+    DXGI_ERROR_UNSUPPORTED                          EQU 0887A0004h
+    DXGI_ERROR_WAIT_TIMEOUT                         EQU 0887A0027h
+    DXGI_ERROR_WAS_STILL_DRAWING                    EQU 0887A000Ah
+    S_OK                                            EQU 0
+
     DXGI_RATIONAL STRUCT
-        rNumerator                                  DD ?
-        rDenominator                                DD ?
+        _Numerator                                  DD ?
+        _Denominator                                DD ?
     DXGI_RATIONAL ENDS
 
     DXGI_STANDARD_MULTISAMPLE_QUALITY_PATTERN       EQU 0ffffffffh
     DXGI_CENTER_MULTISAMPLE_QUALITY_PATTERN         EQU 0fffffffeh
 
     DXGI_SAMPLE_DESC STRUCT
-        rCount                                      DD ?
-        rQuality                                    DD ?
+        _Count                                      DD ?
+        _Quality                                    DD ?
     DXGI_SAMPLE_DESC ENDS
 
     DXGI_COLOR_SPACE_RGB_FULL_G22_NONE_P709             EQU 0
@@ -185,41 +211,50 @@
 
     DXGI_USAGE                                          EQU DD
 
+    DXGI_MODE_DESC STRUCT
+        _Width                                      DD ?
+        _Height                                     DD ?
+        _RefreshRate                                DXGI_RATIONAL {}
+        _Format                                     DD ?
+        _ScanlineOrdering                           DD ?
+        _Scaling                                    DD ?,?
+    DXGI_MODE_DESC ENDS
+
     DXGI_FRAME_STATISTICS STRUCT
-        rPresentCount                               DD ?
-        rPresentRefreshCount                        DD ?
-        rSyncRefreshCount                           DD ?,?
-        rSyncQPCTime                                DQ ?
-        rSyncGPUTime                                DQ ?
+        _PresentCount                               DD ?
+        _PresentRefreshCount                        DD ?
+        _SyncRefreshCount                           DD ?,?
+        _SyncQPCTime                                DQ ?
+        _SyncGPUTime                                DQ ?
     DXGI_FRAME_STATISTICS ENDS
 
     DXGI_MAPPED_RECT STRUCT
-        rPitch                                      DD ?,?
-        pBits                                       DQ ?
+        _Pitch                                      DD ?,?
+        _pBits                                      DQ ?
     DXGI_MAPPED_RECT ENDS
 
     DXGI_ADAPTER_DESC STRUCT
-        rDescription                                DW 128 DUP (?)
-        rVendorId                                   DD ?
-        rDeviceId                                   DD ?
-        rSubSysId                                   DD ?
-        rRevision                                   DD ?
-        rDedicatedVideoMemory                       DD ?
-        rDedicatedSystemMemory                      DD ?
-        rSharedSystemMemory                         DD ?,?
-        rAdapterLuid                                LUID ?
+        _Description                                DW 128 DUP (?)
+        _VendorId                                   DD ?
+        _DeviceId                                   DD ?
+        _SubSysId                                   DD ?
+        _Revision                                   DD ?
+        _DedicatedVideoMemory                       DQ ?
+        _DedicatedSystemMemory                      DQ ?
+        _SharedSystemMemory                         DQ ?
+        _AdapterLuid                                LUID ?
     DXGI_ADAPTER_DESC ENDS
 
     DXGI_OUTPUT_DESC STRUCT
-        rDeviceName                                 DW 32 DUP (?)
-        rDesktopCoordinates                         RECT {}
-        rAttachedToDesktop                          DB ?,?,?,?
-        rRotation                                   DD ?
-        rMonitor                                    DQ ?
+        _DeviceName                                 DW 32 DUP (?)
+        _DesktopCoordinates                         RECT {}
+        _AttachedToDesktop                          DB ?,?,?,?
+        _Rotation                                   DD ?
+        _Monitor                                    DQ ?
     DXGI_OUTPUT_DESC ENDS
 
     DXGI_SHARED_RESOURCE STRUCT
-        rHandle                                     DQ ?
+        _Handle                                     DQ ?
     DXGI_SHARED_RESOURCE ENDS
 
     DXGI_RESOURCE_PRIORITY_MINIMUM                  EQU 028000000h
@@ -233,10 +268,10 @@
     DXGI_RESIDENCY_EVICTED_TO_DISK                  EQU 3
 
     DXGI_SURFACE_DESC STRUCT
-        rWidth                                      DD ?
-        rHeight                                     DD ?
-        rFormat                                     DD ?
-        rSampleDesc                                 DD ?
+        _Width                                      DD ?
+        _Height                                     DD ?
+        _Format                                     DD ?
+        _SampleDesc                                 DD ?
     DXGI_SURFACE_DESC ENDS
 
     DXGI_SWAP_EFFECT_DISCARD                        EQU 0
@@ -259,14 +294,14 @@
     DXGI_SWAP_CHAIN_FLAG_RESTRICTED_TO_ALL_HOLOGRAPHIC_DISPLAYS EQU 4096
 
     DXGI_SWAP_CHAIN_DESC STRUCT
-        rBufferDesc                                 DD ?
-        rSampleDesc                                 DD ?
-        rBufferUsage                                DD ?
-        rBufferCount                                DD ?
-        rOutputWindow                               DQ ?
-        rWindowed                                   DB ?,?,?,?
-        rSwapEffect                                 DD ?
-        rFlags                                      DD ?,?
+        _BufferDesc                                 DXGI_MODE_DESC {}
+        _SampleDesc                                 DXGI_SAMPLE_DESC {}
+        _BufferUsage                                DD ?
+        _BufferCount                                DD ?
+        _OutputWindow                               DQ ?
+        _Windowed                                   DB ?,?,?,?
+        _SwapEffect                                 DD ?
+        _Flags                                      DD ?,?
     DXGI_SWAP_CHAIN_DESC ENDS
 
     DXGI_ADAPTER_FLAG_NONE                          EQU 0
@@ -275,39 +310,39 @@
     DXGI_ADAPTER_FLAG_FORCE_DWORD                   EQU 0ffffffffh
 
     DXGI_ADAPTER_DESC1 STRUCT
-        rDescription                                DW 128 DUP (?)
-        rVendorId                                   DD ?
-        rDeviceId                                   DD ?
-        rSubSysId                                   DD ?
-        rRevision                                   DD ?
-        rDedicatedVideoMemory                       DD ?
-        rDedicatedSystemMemory                      DD ?
-        rSharedSystemMemory                         DD ?,?
-        rAdapterLuid                                DQ ?
-        rFlags                                      DD ?,?
+        _Description                                DW 128 DUP (?)
+        _VendorId                                   DD ?
+        _DeviceId                                   DD ?
+        _SubSysId                                   DD ?
+        _Revision                                   DD ?
+        _DedicatedVideoMemory                       DQ ?
+        _DedicatedSystemMemory                      DQ ?
+        _SharedSystemMemory                         DQ ?
+        _AdapterLuid                                DQ ?
+        _Flags                                      DD ?,?
     DXGI_ADAPTER_DESC1 ENDS
 
     DXGI_DISPLAY_COLOR_SPACE STRUCT
-        rPrimaryCoordinates                          REAL4 16 DUP (?)
-        rWhitePoints                                 REAL4 32 DUP (?)
+        _PrimaryCoordinates                          REAL4 16 DUP (?)
+        _WhitePoints                                 REAL4 32 DUP (?)
     DXGI_DISPLAY_COLOR_SPACE ENDS
 
 ; --- DXGI 2 structs and values ---
 
     DXGI_OUTDUPL_MOVE_RECT STRUCT
-        rSourcePoint                                POINT {}
-        rDestinationRect                            RECT {}
+        _SourcePoint                                POINT {}
+        _DestinationRect                            RECT {}
     DXGI_OUTDUPL_MOVE_RECT ENDS
 
     DXGI_OUTDUPL_DESC STRUCT
-        rModeDesc                                   DD ?
-        rRotation                                   DD ?
-        rDesktopImageInSystemMemory                 DB ?,?,?,?,?,?,?,?
+        _ModeDesc                                   DD ?
+        _Rotation                                   DD ?
+        _DesktopImageInSystemMemory                 DB ?,?,?,?,?,?,?,?
     DXGI_OUTDUPL_DESC ENDS
 
     DXGI_OUTDUPL_POINTER_POSITION STRUCT
-        rPosition                                   POINT {}
-        rVisible                                    DB ?,?,?,?,?,?,?,?
+        _Position                                   POINT {}
+        _Visible                                    DB ?,?,?,?,?,?,?,?
     DXGI_OUTDUPL_POINTER_POSITION ENDS
 
     DXGI_OUTDUPL_POINTER_SHAPE_TYPE_MONOCHROME      EQU 1
@@ -315,22 +350,22 @@
     DXGI_OUTDUPL_POINTER_SHAPE_TYPE_MASKED_COLOR    EQU 4
 
     DXGI_OUTDUPL_POINTER_SHAPE_INFO STRUCT
-        rType                                       DD ?
-        rWidth                                      DD ?
-        rHeight                                     DD ?
-        rPitch                                      DD ?
-        rHotSpot                                    POINT {}
+        _Type                                       DD ?
+        _Width                                      DD ?
+        _Height                                     DD ?
+        _Pitch                                      DD ?
+        _HotSpot                                    POINT {}
     DXGI_OUTDUPL_POINTER_SHAPE_INFO ENDS
 
     DXGI_OUTDUPL_FRAME_INFO STRUCT
-        rLastPresentTime                            DQ ?
-        rLastMouseUpdateTime                        DQ ?
-        rAccumulatedFrames                          DD ?
-        rRectsCoalesced                             DB ?
-        rProtectedContentMaskedOut                  DB ?,?,?
-        rPointerPosition                            DD ?
-        rTotalMetadataBufferSize                    DD ?
-        rPointerShapeBufferSize                     DD ?
+        _LastPresentTime                            DQ ?
+        _LastMouseUpdateTime                        DQ ?
+        _AccumulatedFrames                          DD ?
+        _RectsCoalesced                             DB ?
+        _ProtectedContentMaskedOut                  DB ?,?,?
+        _PointerPosition                            DD ?
+        _TotalMetadataBufferSize                    DD ?
+        _PointerShapeBufferSize                     DD ?
     DXGI_OUTDUPL_FRAME_INFO ENDS
 
     DXGI_ALPHA_MODE_UNSPECIFIED                     EQU 0
@@ -349,13 +384,13 @@
     DXGI_SHARED_RESOURCE_WRITE                      EQU 1
 
     DXGI_MODE_DESC1 STRUCT
-        rWidth                                      DD ?
-        rHeight                                     DD ?
-        rRefreshRate                                DXGI_RATIONAL {}
-        rFormat                                     DD ?
-        rScanlineOrdering                           DD ?
-        rScaling                                    DD ?
-        rStereo                                     DB ?,?,?,?,?,?,?,?
+        _Width                                      DD ?
+        _Height                                     DD ?
+        _RefreshRate                                DXGI_RATIONAL {}
+        _Format                                     DD ?
+        _ScanlineOrdering                           DD ?
+        _Scaling                                    DD ?
+        _Stereo                                     DB ?,?,?,?,?,?,?,?
     DXGI_MODE_DESC1 ENDS
 
     DXGI_SCALING_STRETCH                            EQU 0
@@ -363,31 +398,31 @@
     DXGI_SCALING_ASPECT_RATIO_STRETCH               EQU 2
 
     DXGI_SWAP_CHAIN_DESC1 STRUCT
-        rWidth                                      DD ?
-        rHeight                                     DD ?
-        rFormat                                     DD ?
-        rStereo                                     DB ?,?,?,?
-        rSampleDesc                                 DD ?
-        rBufferUsage                                DD ?
-        rBufferCount                                DD ?
-        rScaling                                    DD ?
-        rSwapEffect                                 DD ?
-        rAlphaMode                                  DD ?
-        rFlags                                      DD ?,?
+        _Width                                      DD ?
+        _Height                                     DD ?
+        _Format                                     DD ?
+        _Stereo                                     DB ?,?,?,?
+        _SampleDesc                                 DD ?
+        _BufferUsage                                DD ?
+        _BufferCount                                DD ?
+        _Scaling                                    DD ?
+        _SwapEffect                                 DD ?
+        _AlphaMode                                  DD ?
+        _Flags                                      DD ?,?
     DXGI_SWAP_CHAIN_DESC1 ENDS
 
     DXGI_SWAP_CHAIN_FULLSCREEN_DESC STRUCT
-        rRefreshRate                                DXGI_RATIONAL {}
-        rScanlineOrdering                           DD ?
-        rScaling                                    DD ?
-        rWindowed                                   DB ?,?,?,?,?,?,?,?
+        _RefreshRate                                DXGI_RATIONAL {}
+        _ScanlineOrdering                           DD ?
+        _Scaling                                    DD ?
+        _Windowed                                   DB ?,?,?,?,?,?,?,?
     DXGI_SWAP_CHAIN_FULLSCREEN_DESC ENDS
 
     DXGI_PRESENT_PARAMETERS STRUCT
-        rDirtyRectsCount                            DD ?,?
-        pDirtyRects                                 DQ ?
-        pScrollRect                                 DQ ?
-        pScrollOffset                               DQ ?
+        _DirtyRectsCount                            DD ?,?
+        _pDirtyRects                                DQ ?
+        _pScrollRect                                DQ ?
+        _pScrollOffset                              DQ ?
     DXGI_PRESENT_PARAMETERS ENDS
 
     DXGI_GRAPHICS_PREEMPTION_DMA_BUFFER_BOUNDARY    EQU 0
@@ -403,33 +438,33 @@
     DXGI_COMPUTE_PREEMPTION_INSTRUCTION_BOUNDARY    EQU 4
 
     DXGI_ADAPTER_DESC2 STRUCT
-        rDescription                                DW 128 DUP (?)
-        rVendorId                                   DD ?
-        rDeviceId                                   DD ?
-        rSubSysId                                   DD ?
-        rRevision                                   DD ?
-        rDedicatedVideoMemory                       DD ?
-        rDedicatedSystemMemory                      DD ?
-        rSharedSystemMemory                         DD ?,?
-        rAdapterLuid                                DQ ?
-        rFlags                                      DD ?
-        rGraphicsPreemptionGranularity              DD ?
-        rComputePreemptionGranularity               DD ?
+        _Description                                DW 128 DUP (?)
+        _VendorId                                   DD ?
+        _DeviceId                                   DD ?
+        _SubSysId                                   DD ?
+        _Revision                                   DD ?
+        _DedicatedVideoMemory                       DQ ?
+        _DedicatedSystemMemory                      DQ ?
+        _SharedSystemMemory                         DQ ?
+        _AdapterLuid                                DQ ?
+        _Flags                                      DD ?
+        _GraphicsPreemptionGranularity              DD ?
+        _ComputePreemptionGranularity               DD ?
     DXGI_ADAPTER_DESC2 ENDS
 
 ; --- DXGI 3 structs and values ---
 
     DXGI_MATRIX_3X2_F STRUCT
-        r_11                                        REAL4 ?
-        r_12                                        REAL4 ?
-        r_21                                        REAL4 ?
-        r_22                                        REAL4 ?
-        r_31                                        REAL4 ?
-        r_32                                        REAL4 ?
+        __11                                        REAL4 ?
+        __12                                        REAL4 ?
+        __21                                        REAL4 ?
+        __22                                        REAL4 ?
+        __31                                        REAL4 ?
+        __32                                        REAL4 ?
     DXGI_MATRIX_3X2_F ENDS
 
     DXGI_DECODE_SWAP_CHAIN_DESC STRUCT
-        rFlags                                      DD ?,?
+        _Flags                                      DD ?,?
     DXGI_DECODE_SWAP_CHAIN_DESC ENDS
 
     DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_NOMINAL_RANGE            EQU 1
@@ -442,13 +477,13 @@
     DXGI_FRAME_PRESENTATION_MODE_COMPOSITION_FAILURE            EQU 3
 
     DXGI_FRAME_STATISTICS_MEDIA STRUCT
-        rPresentCount                               DD ?
-        rPresentRefreshCount                        DD ?
-        rSyncRefreshCount                           DD ?,?
-        rSyncQPCTime                                DQ ?
-        rSyncGPUTime                                DQ ?
-        rCompositionMode                            DD ?
-        rApprovedPresentDuration                    DD ?
+        _PresentCount                               DD ?
+        _PresentRefreshCount                        DD ?
+        _SyncRefreshCount                           DD ?,?
+        _SyncQPCTime                                DQ ?
+        _SyncGPUTime                                DQ ?
+        _CompositionMode                            DD ?
+        _ApprovedPresentDuration                    DD ?
     DXGI_FRAME_STATISTICS_MEDIA ENDS
 
     DXGI_OVERLAY_SUPPORT_FLAG_DIRECT                EQU 1
@@ -465,10 +500,10 @@
     DXGI_MEMORY_SEGMENT_GROUP_NON_LOCAL                         EQU 1
 
     DXGI_QUERY_VIDEO_MEMORY_INFO STRUCT
-        rBudget                                     DQ ?
-        rCurrentUsage                               DQ ?
-        rAvailableForReservation                    DQ ?
-        rCurrentReservation                         DQ ?
+        _Budget                                     DQ ?
+        _CurrentUsage                               DQ ?
+        _AvailableForReservation                    DQ ?
+        _CurrentReservation                         DQ ?
     DXGI_QUERY_VIDEO_MEMORY_INFO ENDS
 
 ; --- DXGI 5 structs and values ---
@@ -480,19 +515,19 @@
     DXGI_HDR_METADATA_TYPE_HDR10PLUS                EQU 2
 
     DXGI_HDR_METADATA_HDR10 STRUCT
-        rRedPrimary                                 DW 2 DP (?)
-        rGreenPrimary                               DW 2 DP (?)
-        rBluePrimary                                DW 2 DP (?)
-        rWhitePoint                                 DW 2 DP (?)
-        rMaxMasteringLuminance                      DD ?
-        rMinMasteringLuminance                      DD ?
-        rMaxContentLightLevel                       DW ?
-        rMaxFrameAverageLightLevel                  DW ?
+        _RedPrimary                                 DW 2 DP (?)
+        _GreenPrimary                               DW 2 DP (?)
+        _BluePrimary                                DW 2 DP (?)
+        _WhitePoint                                 DW 2 DP (?)
+        _MaxMasteringLuminance                      DD ?
+        _MinMasteringLuminance                      DD ?
+        _MaxContentLightLevel                       DW ?
+        _MaxFrameAverageLightLevel                  DW ?
                                                     DD ?
     DXGI_HDR_METADATA_HDR10 ENDS
 
     DXGI_HDR_METADATA_HDR10PLUS STRUCT
-        rData                                       DB 72 DUP (?)
+        _Data                                       DB 72 DUP (?)
     DXGI_HDR_METADATA_HDR10PLUS ENDS
 
     DXGI_OFFER_RESOURCE_FLAG_ALLOW_DECOMMIT         EQU 1
@@ -515,35 +550,35 @@
     DXGI_ADAPTER_FLAG3_FORCE_DWORD                              EQU 0ffffffffh
 
     DXGI_ADAPTER_DESC3 STRUCT
-        rDescription                                DW 128 DUP (?)
-        rVendorId                                   DD ?
-        rDeviceId                                   DD ?
-        rSubSysId                                   DD ?
-        rRevision                                   DD ?
-        rDedicatedVideoMemory                       DD ?
-        rDedicatedSystemMemory                      DD ?
-        rSharedSystemMemory                         DD ?,?
-        rAdapterLuid                                DQ ?
-        rFlags                                      DD ?
-        rGraphicsPreemptionGranularity              DD ?
-        rComputePreemptionGranularity               DD ?
+        _Description                                DW 128 DUP (?)
+        _VendorId                                   DD ?
+        _DeviceId                                   DD ?
+        _SubSysId                                   DD ?
+        _Revision                                   DD ?
+        _DedicatedVideoMemory                       DQ ?
+        _DedicatedSystemMemory                      DQ ?
+        _SharedSystemMemory                         DQ ?
+        _AdapterLuid                                DQ ?
+        _Flags                                      DD ?
+        _GraphicsPreemptionGranularity              DD ?
+        _ComputePreemptionGranularity               DD ?
     DXGI_ADAPTER_DESC3 ENDS
 
     DXGI_OUTPUT_DESC1 STRUCT
-        rDeviceName                                 DW 32 DUP (?)
-        rDesktopCoordinates                         RECT {}
-        rAttachedToDesktop                          DB ?,?,?,?
-        rRotation                                   DD ?
-        rdMonitor                                   DQ ?
-        rBitsPerColor                               DD ?
-        rColorSpace                                 DD ?
-        rRedPrimary                                 REAL4 2 DUP (?)
-        rGreenPrimary                               REAL4 2 DUP (?)
-        rBluePrimary                                REAL4 2 DUP (?)
-        rWhitePoint                                 REAL4 2 DUP (?)
-        rMinLuminance                               REAL4 ?
-        rMaxLuminance                               REAL4 ?
-        rMaxFullFrameLuminance                      REAL4 ?,?
+        _DeviceName                                 DW 32 DUP (?)
+        _DesktopCoordinates                         RECT {}
+        _AttachedToDesktop                          DB ?,?,?,?
+        _Rotation                                   DD ?
+        _dMonitor                                   DQ ?
+        _BitsPerColor                               DD ?
+        _ColorSpace                                 DD ?
+        _RedPrimary                                 REAL4 2 DUP (?)
+        _GreenPrimary                               REAL4 2 DUP (?)
+        _BluePrimary                                REAL4 2 DUP (?)
+        _WhitePoint                                 REAL4 2 DUP (?)
+        _MinLuminance                               REAL4 ?
+        _MaxLuminance                               REAL4 ?
+        _MaxFullFrameLuminance                      REAL4 ?,?
     DXGI_OUTPUT_DESC1 ENDS
 
     DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAG_FULLSCREEN           EQU 1
@@ -558,10 +593,10 @@
 
     _IDXGIObject MACRO
         _IUnknown
-        rSetPrivateData                             DQ ?
-        rSetPrivateDataInterface                    DQ ?
-        rGetPrivateData                             DQ ?
-        rGetParent                                  DQ ?
+        _SetPrivateData                             DQ ?
+        _SetPrivateDataInterface                    DQ ?
+        _GetPrivateData                             DQ ?
+        _GetParent                                  DQ ?
     ENDM
 
     _ComTable IDXGIObject, _IDXGIObject
@@ -570,9 +605,9 @@
 
     _IDXGIAdapter MACRO
         _IDXGIObject
-        rGetDesc                                    DQ ?
-        rEnumOutputs                                DQ ?
-        rCheckInterfaceSupport                      DQ ?
+        _GetDesc                                    DQ ?
+        _EnumOutputs                                DQ ?
+        _CheckInterfaceSupport                      DQ ?
     ENDM
 
     _ComTable IDXGIAdapter, _IDXGIAdapter
@@ -581,7 +616,7 @@
 
     _IDXGIAdapter1 MACRO
         _IDXGIAdapter
-        rGetDesc1                                   DQ ?
+        _GetDesc1                                   DQ ?
     ENDM
 
     _ComTable IDXGIAdapter1, _IDXGIAdapter1
@@ -590,7 +625,7 @@
 
     _IDXGIAdapter2 MACRO
         _IDXGIAdapter1
-        rGetDesc2                                   DQ ?
+        _GetDesc2                                   DQ ?
     ENDM
 
     _ComTable IDXGIAdapter2, _IDXGIAdapter2
@@ -599,12 +634,12 @@
 
     _IDXGIAdapter3 MACRO
         _IDXGIAdapter2
-        rRegisterHardwareContentProtectionTeardownStatusEvent       DQ ?
-        rUnregisterHardwareContentProtectionTeardownStatus          DQ ?
-        rQueryVideoMemoryInfo                                       DQ ?
-        rSetVideoMemoryReservation                                  DQ ?
-        rRegisterVideoMemoryBudgetChangeNotificationEvent           DQ ?
-        rUnregisterVideoMemoryBudgetChangeNotification              DQ ?
+        _RegisterHardwareContentProtectionTeardownStatusEvent       DQ ?
+        _UnregisterHardwareContentProtectionTeardownStatus          DQ ?
+        _QueryVideoMemoryInfo                                       DQ ?
+        _SetVideoMemoryReservation                                  DQ ?
+        _RegisterVideoMemoryBudgetChangeNotificationEvent           DQ ?
+        _UnregisterVideoMemoryBudgetChangeNotification              DQ ?
     ENDM
 
     _ComTable IDXGIAdapter3, _IDXGIAdapter3
@@ -613,7 +648,7 @@
 
     _IDXGIAdapter4 MACRO
         _IDXGIAdapter3
-        rGetDesc3                                   DQ ?
+        _GetDesc3                                   DQ ?
     ENDM
 
     _ComTable IDXGIAdapter4, _IDXGIAdapter4
@@ -622,11 +657,11 @@
 
     _IDXGIDevice MACRO
         _IDXGIObject
-        rGetAdapter                                 DQ ?
-        rCreateSurface                              DQ ?
-        rQueryResourceResidency                     DQ ?
-        rSetGPUThreadPriority                       DQ ?
-        rGetGPUThreadPriority                       DQ ?
+        _GetAdapter                                 DQ ?
+        _CreateSurface                              DQ ?
+        _QueryResourceResidency                     DQ ?
+        _SetGPUThreadPriority                       DQ ?
+        _GetGPUThreadPriority                       DQ ?
     ENDM
 
     _ComTable IDXGIDevice, _IDXGIDevice
@@ -635,8 +670,8 @@
 
     _IDXGIDevice1 MACRO
         _IDXGIDevice
-        rSetMaximumFrameLatency                     DQ ?
-        rGetMaximumFrameLatency                     DQ ?
+        _SetMaximumFrameLatency                     DQ ?
+        _GetMaximumFrameLatency                     DQ ?
     ENDM
 
     _ComTable IDXGIDevice1, _IDXGIDevice1
@@ -645,9 +680,9 @@
 
     _IDXGIDevice2 MACRO
         _IDXGIDevice1
-        rOfferResources                             DQ ?
-        rReclaimResources                           DQ ?
-        rEnqueueSetEvent                            DQ ?
+        _OfferResources                             DQ ?
+        _ReclaimResources                           DQ ?
+        _EnqueueSetEvent                            DQ ?
     ENDM
 
     _ComTable IDXGIDevice2, _IDXGIDevice2
@@ -656,7 +691,7 @@
 
     _IDXGIDevice3 MACRO
         _IDXGIDevice2
-        rTrim                                       DQ ?
+        _Trim                                       DQ ?
     ENDM
 
     _ComTable IDXGIDevice3, _IDXGIDevice3
@@ -665,8 +700,8 @@
 
     _IDXGIDevice4 MACRO
         _IDXGIDevice3
-        rOfferResources1                            DQ ?
-        rReclaimResources1                          DQ ?
+        _OfferResources1                            DQ ?
+        _ReclaimResources1                          DQ ?
     ENDM
 
     _ComTable IDXGIDevice4, _IDXGIDevice4
@@ -675,11 +710,11 @@
 
     _IDXGIFactory MACRO
         _IDXGIObject
-        rEnumAdapters                               DQ ?
-        rMakeWindowAssociation                      DQ ?
-        rGetWindowAssociation                       DQ ?
-        rCreateSwapChain                            DQ ?
-        rCreateSoftwareAdapter                      DQ ?
+        _EnumAdapters                               DQ ?
+        _MakeWindowAssociation                      DQ ?
+        _GetWindowAssociation                       DQ ?
+        _CreateSwapChain                            DQ ?
+        _CreateSoftwareAdapter                      DQ ?
     ENDM
 
     _ComTable IDXGIFactory, _IDXGIFactory
@@ -688,8 +723,8 @@
 
     _IDXGIFactory1 MACRO
         _IDXGIFactory
-        rEnumAdapters1                              DQ ?
-        rIsCurrent                                  DQ ?
+        _EnumAdapters1                              DQ ?
+        _IsCurrent                                  DQ ?
     ENDM
 
     _ComTable IDXGIFactory1, _IDXGIFactory1
@@ -698,17 +733,17 @@
 
     _IDXGIFactory2 MACRO
         _IDXGIFactory1
-        rIsWindowStereoEnabled                      DQ ?
-        rCreateSwapChainForHwnd                     DQ ?
-        rCreateSwapChainForCoreWindow               DQ ?
-        rGetSharedResourceAdapterLuid               DQ ?
-        rRegisterStereoStatusWindow                 DQ ?
-        rRegisterStereoStatusEvent                  DQ ?
-        rUnregisterStereoStatus                     DQ ?
-        rRegisterOcclusionStatusWindow              DQ ?
-        rRegisterOcclusionStatusEvent               DQ ?
-        rUnregisterOcclusionStatus                  DQ ?
-        rCreateSwapChainForComposition              DQ ?
+        _IsWindowStereoEnabled                      DQ ?
+        _CreateSwapChainForHwnd                     DQ ?
+        _CreateSwapChainForCoreWindow               DQ ?
+        _GetSharedResourceAdapterLuid               DQ ?
+        _RegisterStereoStatusWindow                 DQ ?
+        _RegisterStereoStatusEvent                  DQ ?
+        _UnregisterStereoStatus                     DQ ?
+        _RegisterOcclusionStatusWindow              DQ ?
+        _RegisterOcclusionStatusEvent               DQ ?
+        _UnregisterOcclusionStatus                  DQ ?
+        _CreateSwapChainForComposition              DQ ?
     ENDM
 
     _ComTable IDXGIFactory2, _IDXGIFactory2
@@ -717,7 +752,7 @@
 
     _IDXGIFactory3 MACRO
         _IDXGIFactory2
-        rGetCreationFlags                           DQ ?
+        _GetCreationFlags                           DQ ?
     ENDM
 
     _ComTable IDXGIFactory3, _IDXGIFactory3
@@ -726,8 +761,8 @@
 
     _IDXGIFactory4 MACRO
         _IDXGIFactory3
-        rEnumWarpAdapter                            DQ ?
-        rEnumAdapterByLuid                          DQ ?
+        _EnumWarpAdapter                            DQ ?
+        _EnumAdapterByLuid                          DQ ?
     ENDM
 
     _ComTable IDXGIFactory4, _IDXGIFactory4
@@ -736,7 +771,7 @@
 
     _IDXGIFactory5 MACRO
         _IDXGIFactory4
-        rCheckFeatureSupport                        DQ ?
+        _CheckFeatureSupport                        DQ ?
     ENDM
 
     _ComTable IDXGIFactory5, _IDXGIFactory5
@@ -745,7 +780,7 @@
 
     _IDXGIFactory6 MACRO
         _IDXGIFactory5
-        rEnumAdapterByGpuPreference                 DQ ?
+        _EnumAdapterByGpuPreference                 DQ ?
     ENDM
 
     _ComTable IDXGIFactory6, _IDXGIFactory6
@@ -754,8 +789,8 @@
 
     _IDXGIFactory7 MACRO
         _IDXGIFactory6
-        rRegisterAdaptersChangedEvent               DQ ?
-        rUnregisterAdaptersChangedEvent             DQ ?
+        _RegisterAdaptersChangedEvent               DQ ?
+        _UnregisterAdaptersChangedEvent             DQ ?
     ENDM
 
     _ComTable IDXGIFactory7, _IDXGIFactory7
@@ -764,8 +799,8 @@
 
     _IDXGIKeyedMutex MACRO
         _IDXGIObject
-        rAcquireSync                                DQ ?
-        rReleaseSync                                DQ ?
+        _AcquireSync                                DQ ?
+        _ReleaseSync                                DQ ?
     ENDM
 
     _ComTable IDXGIKeyedMutex, _IDXGIKeyedMutex
@@ -774,18 +809,18 @@
 
     _IDXGIOutput MACRO
         _IDXGIObject
-        rGetDesc                                    DQ ?
-        rGetDisplayModeList                         DQ ?
-        rFindClosestMatchingMode                    DQ ?
-        rWaitForVBlank                              DQ ?
-        rTakeOwnership                              DQ ?
-        rReleaseOwnership                           DQ ?
-        rGetGammaControlCapabilities                DQ ?
-        rSetGammaControl                            DQ ?
-        rGetGammaControl                            DQ ?
-        rSetDisplaySurface                          DQ ?
-        rGetDisplaySurfaceData                      DQ ?
-        rGetFrameStatistics                         DQ ?
+        _GetDesc                                    DQ ?
+        _GetDisplayModeList                         DQ ?
+        _FindClosestMatchingMode                    DQ ?
+        _WaitForVBlank                              DQ ?
+        _TakeOwnership                              DQ ?
+        _ReleaseOwnership                           DQ ?
+        _GetGammaControlCapabilities                DQ ?
+        _SetGammaControl                            DQ ?
+        _GetGammaControl                            DQ ?
+        _SetDisplaySurface                          DQ ?
+        _GetDisplaySurfaceData                      DQ ?
+        _GetFrameStatistics                         DQ ?
     ENDM
 
     _ComTable IDXGIOutput, _IDXGIOutput
@@ -794,10 +829,10 @@
 
     _IDXGIOutput1 MACRO
         _IDXGIOutput
-        rGetDisplayModeList1                        DQ ?
-        rFindClosestMatchingMode1                   DQ ?
-        rGetDisplaySurfaceData1                     DQ ?
-        rDuplicateOutput                            DQ ?
+        _GetDisplayModeList1                        DQ ?
+        _FindClosestMatchingMode1                   DQ ?
+        _GetDisplaySurfaceData1                     DQ ?
+        _DuplicateOutput                            DQ ?
     ENDM
 
     _ComTable IDXGIOutput1, _IDXGIOutput1
@@ -806,7 +841,7 @@
 
     _IDXGIOutput2 MACRO
         _IDXGIOutput1
-        rSupportsOverlays                           DQ ?
+        _SupportsOverlays                           DQ ?
     ENDM
 
     _ComTable IDXGIOutput2, _IDXGIOutput2
@@ -815,7 +850,7 @@
 
     _IDXGIOutput3 MACRO
         _IDXGIOutput2
-        rCheckOverlaySupport                        DQ ?
+        _CheckOverlaySupport                        DQ ?
     ENDM
 
     _ComTable IDXGIOutput3, _IDXGIOutput3
@@ -824,7 +859,7 @@
 
     _IDXGIOutput4 MACRO
         _IDXGIOutput3
-        rCheckOverlayColorSpaceSupport              DQ ?
+        _CheckOverlayColorSpaceSupport              DQ ?
     ENDM
 
     _ComTable IDXGIOutput4, _IDXGIOutput4
@@ -833,7 +868,7 @@
 
     _IDXGIOutput5 MACRO
         _IDXGIOutput4
-        rDuplicateOutput1                           DQ ?
+        _DuplicateOutput1                           DQ ?
     ENDM
 
     _ComTable IDXGIOutput5, _IDXGIOutput5
@@ -842,8 +877,8 @@
 
     _IDXGIOutput6 MACRO
         _IDXGIOutput5
-        rGetDesc1                                   DQ ?
-        rCheckHardwareCompositionSupport            DQ ?
+        _GetDesc1                                   DQ ?
+        _CheckHardwareCompositionSupport            DQ ?
     ENDM
 
     _ComTable IDXGIOutput6, _IDXGIOutput6
@@ -852,10 +887,10 @@
 
     _IDXGIResource MACRO
         _IDXGIObject
-        rGetSharedHandle                            DQ ?
-        rGetUsage                                   DQ ?
-        rSetEvictionPriority                        DQ ?
-        rGetEvictionPriority                        DQ ?
+        _GetSharedHandle                            DQ ?
+        _GetUsage                                   DQ ?
+        _SetEvictionPriority                        DQ ?
+        _GetEvictionPriority                        DQ ?
     ENDM
 
     _ComTable IDXGIResource, _IDXGIResource
@@ -864,8 +899,8 @@
 
     _IDXGIResource1 MACRO
         _IDXGIResource
-        rCreateSubresourceSurface                   DQ ?
-        rCreateSharedHandle                         DQ ?
+        _CreateSubresourceSurface                   DQ ?
+        _CreateSharedHandle                         DQ ?
     ENDM
 
     _ComTable IDXGIResource1, _IDXGIResource1
@@ -874,9 +909,9 @@
 
     _IDXGISurface MACRO
         _IDXGIObject
-        rGetDesc                                    DQ ?
-        rMap                                        DQ ?
-        rUnmap                                      DQ ?
+        _GetDesc                                    DQ ?
+        _Map                                        DQ ?
+        _Unmap                                      DQ ?
     ENDM
 
     _ComTable IDXGISurface, _IDXGISurface
@@ -885,8 +920,8 @@
 
     _IDXGISurface1 MACRO
         _IDXGISurface
-        rGetDC                                      DQ ?
-        rReleaseDC                                  DQ ?
+        _GetDC                                      DQ ?
+        _ReleaseDC                                  DQ ?
     ENDM
 
     _ComTable IDXGISurface1, _IDXGISurface1
@@ -895,7 +930,7 @@
 
     _IDXGISurface2 MACRO
         _IDXGISurface1
-        rGetResource                                DQ ?
+        _GetResource                                DQ ?
     ENDM
 
     _ComTable IDXGISurface2, _IDXGISurface2
@@ -904,16 +939,16 @@
 
     _IDXGISwapChain MACRO
         _IDXGIObject
-        rPresent                                    DQ ?
-        rGetBuffer                                  DQ ?
-        rSetFullscreenState                         DQ ?
-        rGetFullscreenState                         DQ ?
-        rGetDesc                                    DQ ?
-        rResizeBuffers                              DQ ?
-        rResizeTarget                               DQ ?
-        rGetContainingOutput                        DQ ?
-        rGetFrameStatistics                         DQ ?
-        rGetLastPresentCount                        DQ ?
+        _Present                                    DQ ?
+        _GetBuffer                                  DQ ?
+        _SetFullscreenState                         DQ ?
+        _GetFullscreenState                         DQ ?
+        _GetDesc                                    DQ ?
+        _ResizeBuffers                              DQ ?
+        _ResizeTarget                               DQ ?
+        _GetContainingOutput                        DQ ?
+        _GetFrameStatistics                         DQ ?
+        _GetLastPresentCount                        DQ ?
     ENDM
 
     _ComTable IDXGISwapChain, _IDXGISwapChain
@@ -922,17 +957,17 @@
 
     _IDXGISwapChain1 MACRO
         _IDXGISwapChain
-        rGetDesc1                                   DQ ?
-        rGetFullscreenDesc                          DQ ?
-        rGetHwnd                                    DQ ?
-        rGetCoreWindow                              DQ ?
-        rPresent1                                   DQ ?
-        rIsTemporaryMonoSupported                   DQ ?
-        rGetRestrictToOutput                        DQ ?
-        rSetBackgroundColor                         DQ ?
-        rGetBackgroundColor                         DQ ?
-        rSetRotation                                DQ ?
-        rGetRotation                                DQ ?
+        _GetDesc1                                   DQ ?
+        _GetFullscreenDesc                          DQ ?
+        _GetHwnd                                    DQ ?
+        _GetCoreWindow                              DQ ?
+        _Present1                                   DQ ?
+        _IsTemporaryMonoSupported                   DQ ?
+        _GetRestrictToOutput                        DQ ?
+        _SetBackgroundColor                         DQ ?
+        _GetBackgroundColor                         DQ ?
+        _SetRotation                                DQ ?
+        _GetRotation                                DQ ?
     ENDM
 
     _ComTable IDXGISwapChain1, _IDXGISwapChain1
@@ -941,13 +976,13 @@
 
     _IDXGISwapChain2 MACRO
         _IDXGISwapChain1
-        rSetSourceSize                              DQ ?
-        rGetSourceSize                              DQ ?
-        rSetMaximumFrameLatency                     DQ ?
-        rGetMaximumFrameLatency                     DQ ?
-        rGetFrameLatencyWaitableObject              DQ ?
-        rSetMatrixTransform                         DQ ?
-        rGetMatrixTransform                         DQ ?
+        _SetSourceSize                              DQ ?
+        _GetSourceSize                              DQ ?
+        _SetMaximumFrameLatency                     DQ ?
+        _GetMaximumFrameLatency                     DQ ?
+        _GetFrameLatencyWaitableObject              DQ ?
+        _SetMatrixTransform                         DQ ?
+        _GetMatrixTransform                         DQ ?
     ENDM
 
     _ComTable IDXGISwapChain2, _IDXGISwapChain2
@@ -956,10 +991,10 @@
 
     _IDXGISwapChain3 MACRO
         _IDXGISwapChain2
-        rGetCurrentBackBufferIndex                  DQ ?
-        rCheckColorSpaceSupport                     DQ ?
-        rSetColorSpace1                             DQ ?
-        rResizeBuffers1                             DQ ?
+        _GetCurrentBackBufferIndex                  DQ ?
+        _CheckColorSpaceSupport                     DQ ?
+        _SetColorSpace1                             DQ ?
+        _ResizeBuffers1                             DQ ?
     ENDM
 
     _ComTable IDXGISwapChain3, _IDXGISwapChain3
@@ -968,7 +1003,7 @@
 
     _IDXGISwapChain4 MACRO
         _IDXGISwapChain3
-        rSetHDRMetaData                             DQ ?
+        _SetHDRMetaData                             DQ ?
     ENDM
 
     _ComTable IDXGISwapChain4, _IDXGISwapChain4
