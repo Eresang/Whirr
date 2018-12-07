@@ -5,15 +5,15 @@
     D3D_DRIVER_TYPE_SOFTWARE                            EQU D3D_DRIVER_TYPE_NULL + 1
     D3D_DRIVER_TYPE_WARP                                EQU D3D_DRIVER_TYPE_SOFTWARE + 1 
 
-    D3D_FEATURE_LEVEL_9_1                               EQU 0x9100h
-    D3D_FEATURE_LEVEL_9_2                               EQU 0x9200h
-    D3D_FEATURE_LEVEL_9_3                               EQU 0x9300h
-    D3D_FEATURE_LEVEL_10_0                              EQU 0xa000h
-    D3D_FEATURE_LEVEL_10_1                              EQU 0xa100h
-    D3D_FEATURE_LEVEL_11_0                              EQU 0xb000h
-    D3D_FEATURE_LEVEL_11_1                              EQU 0xb100h
-    D3D_FEATURE_LEVEL_12_0                              EQU 0xc000h
-    D3D_FEATURE_LEVEL_12_1                              EQU 0xc100h
+    D3D_FEATURE_LEVEL_9_1                               EQU 09100h
+    D3D_FEATURE_LEVEL_9_2                               EQU 09200h
+    D3D_FEATURE_LEVEL_9_3                               EQU 09300h
+    D3D_FEATURE_LEVEL_10_0                              EQU 0a000h
+    D3D_FEATURE_LEVEL_10_1                              EQU 0a100h
+    D3D_FEATURE_LEVEL_11_0                              EQU 0b000h
+    D3D_FEATURE_LEVEL_11_1                              EQU 0b100h
+    D3D_FEATURE_LEVEL_12_0                              EQU 0c000h
+    D3D_FEATURE_LEVEL_12_1                              EQU 0c100h
 
     D3D_FL9_1_REQ_TEXTURE1D_U_DIMENSION                 EQU 2048
     D3D_FL9_3_REQ_TEXTURE1D_U_DIMENSION                 EQU 4096

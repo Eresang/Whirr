@@ -51,15 +51,15 @@ include IID.inc
     _CallCom MACRO ifp:REQ, interface:REQ, method:REQ
         _ArgMove rcx, ifp
         mov rax, [rcx]
-        call QWORD PTR [rax]._&interface&_.method
+        call QWORD PTR [rax]._&interface&_._&method&
     ENDM
 
 ; --- IUnknown ---
 
     _IUnknown MACRO
-        rQueryInterface         DQ ?
-        rAddRef                 DQ ?
-        rRelease                DQ ?
+        _QueryInterface         DQ ?
+        _AddRef                 DQ ?
+        _Release                DQ ?
     ENDM
 
     _ComTable IUnkown, _IUnknown
