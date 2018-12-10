@@ -161,7 +161,7 @@
             xor r9, r9
             call D3D12CreateDevice
             or eax, eax                     ; eax < 0 == unable to create device
-            jns WhirrLoadPipeline_Break2    ; No error? Break
+            jns WhirrLoadPipeline_Break2    ; No error? Break because device supports D3D12
 
             _CallCom [rsp + 28h], IDXGIAdapter1, Release
             inc QWORD PTR [rsp + 20h]

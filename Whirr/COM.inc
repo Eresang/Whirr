@@ -16,6 +16,7 @@
 ; --- GUID helper macros ---
 
     _DefineGuid MACRO name:REQ, l:REQ, w1:REQ, w2:REQ, b1:REQ, b2:REQ, b3:REQ, b4:REQ, b5:REQ, b6:REQ, b7:REQ, b8:REQ
+        ALIGN 8
         name GUID {l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8}
     ENDM
 
