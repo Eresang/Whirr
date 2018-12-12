@@ -64,9 +64,3 @@ include IID.inc
     ENDM
 
     _ComTable IUnkown, _IUnknown
-
-; --- Interface Specifications ---
-
-include DXGI.inc
-include D3D.inc
-include D3D12.inc

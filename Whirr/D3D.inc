@@ -1,3 +1,23 @@
+; Bulk unit containing D3D structs, enums, interfaces and externals
+
+    D3DCompile                      PROTO STDCALL
+
+; --- Structs and values ---
+
+    D3DCOMPILE_DEBUG                                    EQU 1
+    D3DCOMPILE_SKIP_VALIDATION                          EQU 2
+    D3DCOMPILE_SKIP_OPTIMIZATION                        EQU 4
+    D3DCOMPILE_PACK_MATRIX_ROW_MAJOR                    EQU 8
+    D3DCOMPILE_PACK_MATRIX_COLUMN_MAJOR                 EQU 16
+    D3DCOMPILE_PARTIAL_PRECISION                        EQU 32
+    D3DCOMPILE_ENABLE_BACKWARDS_COMPATIBILITY           EQU 1 SHL 12
+    D3DCOMPILE_IEEE_STRICTNESS                          EQU 1 SHL 13
+    D3DCOMPILE_OPTIMIZATION_LEVEL0                      EQU 1 SHL 14
+    D3DCOMPILE_OPTIMIZATION_LEVEL1                      EQU 0
+    D3DCOMPILE_OPTIMIZATION_LEVEL2                      EQU D3DCOMPILE_OPTIMIZATION_LEVEL1 OR D3DCOMPILE_OPTIMIZATION_LEVEL3
+    D3DCOMPILE_OPTIMIZATION_LEVEL3                      EQU 1 SHL 15
+    D3DCOMPILE_WARNINGS_ARE_ERRORS                      EQU 1 SHL 18
+
     D3D_DRIVER_TYPE_UNKNOWN                             EQU 0
     D3D_DRIVER_TYPE_HARDWARE                            EQU D3D_DRIVER_TYPE_UNKNOWN + 1
     D3D_DRIVER_TYPE_REFERENCE                           EQU D3D_DRIVER_TYPE_HARDWARE + 1
@@ -578,3 +598,13 @@
     D3D_COMPONENT_MASK_Y                                EQU 2
     D3D_COMPONENT_MASK_Z                                EQU 4
     D3D_COMPONENT_MASK_W                                EQU 8
+
+; --- D3D Blob ---
+
+    _ID3DBlob MACRO
+        _IUnknown
+        _GetBufferPointer                           DQ ?
+        _GetBufferSize                              DQ ?
+    ENDM
+
+    _ComTable ID3DBlob, _ID3DBlob

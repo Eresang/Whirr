@@ -8,11 +8,12 @@
     ; HeapReAlloc wrapper
     _HeapReAlloc MACRO destination:REQ, heaphandle:REQ, data:REQ, bytes:REQ
         _ArgMove rcx, heaphandle,\ 
-                 rdx, HEAP_GENERATE_EXCEPTIONS OR HEAP_ZERO_MEMORY,\
+                 rdx, HEAP_ZERO_MEMORY,\
                  r8, data,\
                  r9, bytes
 
         call HeapReAlloc
+        ; TODO -> ERRORCHECK (rax == null -> error)
 
         _ArgMove destination, rax
     ENDM
@@ -25,26 +26,29 @@
         xor rdx, rdx
 
         call HeapFree
+        ; TODO -> ERRORCHECK (rax == null -> error)
     ENDM
 
     ; HeapAlloc wrapper
     _HeapAlloc MACRO destination:REQ, heaphandle:REQ, bytes:REQ
         _ArgMove rcx, heaphandle,\
-                 rdx, HEAP_GENERATE_EXCEPTIONS OR HEAP_ZERO_MEMORY,\
+                 rdx, HEAP_ZERO_MEMORY,\
                  r8, bytes
 
         call HeapAlloc
+        ; TODO -> ERRORCHECK (rax == null -> error)
 
         _ArgMove destination, rax
     ENDM
 
     ; HeapCreate wrapper
     _HeapCreate MACRO destination:REQ
-        mov rcx, HEAP_GENERATE_EXCEPTIONS
+        xor rcx, rcx
         xor rdx, rdx
         xor r8, r8
 
         call HeapCreate
+        ; TODO -> ERRORCHECK (rax == null -> error)
 
         _ArgMove destination, rax
     ENDM
@@ -54,6 +58,7 @@
         _ArgMove rcx, heaphandle
 
         call HeapDestroy
+        ; TODO -> ERRORCHECK (rax == null -> error)
     ENDM
 
 .DATA

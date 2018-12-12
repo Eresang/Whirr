@@ -1,19 +1,24 @@
+include Defines.inc
 include Macros.inc
 
-include Defines.inc
 include Externals.inc
 
 include COM.inc
 
+include DXGI.inc
+include D3D.inc
+include D3D12.inc
+
 include Heaps.inc
 include Strings.inc
+
 include Random.inc
 include Window.inc
 
 .DATA
     ALIGN 8
     WHIRR_MODULE                                DQ ?
-    WHIRR_HEAPHANDLE                            DQ ?
+    WHIRR_HEAP                                  DQ ?
 
     _String\
         WHIRR_TITLE,\
@@ -24,16 +29,16 @@ include Window.inc
 ; --- Main() ---
 
     WhirrProc PROC
-    ; Initialize()
-    ; {
         _Enter _ToBytes(8, 8)
 
+    ; Initialize()
+    ; {
         xor rcx, rcx
         call GetModuleHandle
         mov WHIRR_MODULE, rax
 
         call GetProcessHeap
-        mov WHIRR_HEAPHANDLE, rax
+        mov WHIRR_HEAP, rax
     ; }
 
     ; ---
@@ -57,8 +62,9 @@ include Window.inc
     ; {
         xor rcx, rcx
         call ExitProcess
-        _Leave
     ; }
+
+        _Leave
     WhirrProc ENDP
 
 END

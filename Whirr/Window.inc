@@ -1,7 +1,7 @@
 .DATA\
 
     ALIGN 8
-    WHIRR_HWND                                  DQ ?
+    WHIRR_HWND                                  DQ 0
 
     _String\
         WHIRR_WNDCLASSNAME,\
@@ -154,14 +154,14 @@
             and eax, [rsp + 30h].DXGI_ADAPTER_DESC1._Flags
             jnz WhirrLoadPipeline_Loop
 
-            ; Check D3D12 support (feature level 11)
+            ; Check feature level 11 support
             mov rcx, [rsp + 28h]
             mov rdx, D3D_FEATURE_LEVEL_11_0
             lea r8, ID3D12Device
             xor r9, r9
             call D3D12CreateDevice
             or eax, eax                     ; eax < 0 == unable to create device
-            jns WhirrLoadPipeline_Break2    ; No error? Break because device supports D3D12
+            jns WhirrLoadPipeline_Break2    ; No error? Break because device does not support feature level 11
 
             _CallCom [rsp + 28h], IDXGIAdapter1, Release
             inc QWORD PTR [rsp + 20h]

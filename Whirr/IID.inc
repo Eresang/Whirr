@@ -55,6 +55,9 @@
     _DefineGuid IDXGIFactory6,              0c1b6694fh, 0ff09h, 044a9h, 0b0h, 03ch, 077h, 090h, 00ah, 00ah, 01dh, 017h
     _DefineGuid IDXGIFactory7,              0a4966eedh, 076dbh, 044dah, 084h, 0c1h, 0eeh, 09ah, 07ah, 0fbh, 020h, 0a8h
 
+    ; D3D
+    _DefineGuid ID3DBlob,                   08ba5fb08h, 05195h, 040e2h, 0ach, 058h, 00dh, 098h, 09ch, 03ah, 001h, 002h
+
     ; D3D12
     _DefineGuid ID3D12Object,               0c4fec28fh, 07966h, 04e95h, 09fh, 094h, 0f4h, 031h, 0cbh, 056h, 0c3h, 0b8h
     _DefineGuid ID3D12DeviceChild,          0905db94bh, 0a00ch, 04140h, 09dh, 0f5h, 02bh, 064h, 0cah, 09eh, 0a3h, 057h
