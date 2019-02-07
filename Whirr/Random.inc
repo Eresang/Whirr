@@ -1,7 +1,7 @@
     ; Wrappers only check if arguments match their target registers
     ; Invokers should ensure:
     ;  - Register values don't get overwritten
-    ;  - Stack is 16-bit aligned
+    ;  - Stack is 16-byte aligned
 
 ; --- Random helper macros ---
 

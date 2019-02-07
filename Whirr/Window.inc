@@ -1,4 +1,4 @@
-.DATA\
+.DATA
 
     ALIGN 8
     WHIRR_HWND                                  DQ 0
