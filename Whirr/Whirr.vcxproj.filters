@@ -62,6 +62,9 @@
     <None Include="Window.inc">
       <Filter>Source Files\Units</Filter>
     </None>
+    <None Include="FXP.inc">
+      <Filter>Source Files\Units</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Whir.rc">

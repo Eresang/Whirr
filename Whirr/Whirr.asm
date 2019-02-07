@@ -9,6 +9,7 @@ include DXGI.inc
 include D3D.inc
 include D3D12.inc
 
+include FXP.inc
 include Heaps.inc
 include Strings.inc
 
@@ -42,6 +43,11 @@ include Window.inc
     ; }
 
     ; ---
+
+        mov rdx, 1 SHL 49
+        mov rcx, 1 SHL 50
+        _FXPDiv rax, rcx, rdx
+        or rax, rax
 
         call WhirrWindowCreate
 
