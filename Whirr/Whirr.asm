@@ -44,9 +44,12 @@ include Window.inc
 
     ; ---
 
-        mov rdx, 1 SHL 49
-        mov rcx, 1 SHL 50
-        _FXPDiv rax, rcx, rdx
+        mov rax, _FXP(1, 46)
+        _FXPCos rax, rax, 48
+
+        mov rdx, 1 SHL 49 ; 2
+        mov rcx, 1 SHL 50 ; 4
+        _FXPDiv rax, rcx, rdx ; 4 / 2
         or rax, rax
 
         call WhirrWindowCreate

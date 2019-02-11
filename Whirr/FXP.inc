@@ -3,7 +3,27 @@
     ;  - Register values don't get overwritten
     ;  - Stack is 16-byte aligned
 
+    FXP_FRACTIONBITS_DEFAULT = 48
+
 ; --- FXP macros ---
+
+    ; FXP
+    ; Return input with added fraction bits
+    _FXP MACRO input:REQ, fractBits
+    LOCAL frt
+        frt = FXP_FRACTIONBITS_DEFAULT
+        IFNB <fractBits>
+            IF fractBits GT 60
+                ECHO Error: _FXP fractBits: too high (max: 60)
+            ENDIF
+            IF fractBits LT 0
+                ECHO Error: _FXP fractBits: too low (min: 0)
+            ENDIF
+            frt = fractBits
+        ENDIF
+
+        EXITM <input SHL frt>
+    ENDM
 
     ; FXPAdd
     ; Calculate destination = augend + addend
@@ -27,8 +47,7 @@
     LOCAL frt, whl
 
         ; Get shift values
-        frt = 48
-        whl = 16
+        frt = FXP_FRACTIONBITS_DEFAULT
         IFNB <fractBits>
             IF fractBits GT 60
                 ECHO Error: _FXPMul fractBits: too high (max: 60)
@@ -37,8 +56,8 @@
                 ECHO Error: _FXPMul fractBits: too low (min: 0)
             ENDIF
             frt = fractBits
-            whl = 64 - frt
         ENDIF
+        whl = 64 - frt
 
         IFDIFI <multiplier>, <rax>
             _ArgMove rax, multiplicand
@@ -50,9 +69,7 @@
         ; Make result match fractBits format
         IFIDNI <destination>, <rdx>
             shld rdx, rax, whl
-            IFIDNI <destination>, <rdx>
-                ECHO Warning: _FXPMul: overflow lost due to destination register of rdx
-            ENDIF
+            ECHO Warning: _FXPMul: overflow lost due to destination register of rdx
         ELSE
             shrd rax, rdx, frt
             sar rdx, frt
@@ -65,11 +82,10 @@
     ; Optional fractBits argument to specify fixed point position in input and output
     ; Beware of overflow - WILL cause error
     _FXPDiv MACRO destination:REQ, dividend:REQ, divisor:REQ, fractBits
-    LOCAL frt, whl
+    LOCAL frt, whl, ind
 
         ; Get shift values
-        frt = 48
-        whl = 16
+        frt = FXP_FRACTIONBITS_DEFAULT
         IFNB <fractBits>
             IF fractBits GT 60
                 ECHO Error: _FXPDiv fractBits: too high (max: 60)
@@ -78,17 +94,33 @@
                 ECHO Error: _FXPDiv fractBits: too low (min: 0)
             ENDIF
             frt = fractBits
-            whl = 64 - frt
         ENDIF
+        whl = 64 - frt
 
-        ; TODO: ensure registers are not overwritten
-        ; mov rax, dividend
-        ; mov rdx, dividend
+        ; Ensure registers are not overwritten before division
+        ind = _ArgIndexOf(divisor, rax, rdx)
+        IF ind EQ -1            ; No overlapping register
+            _ArgMove rax, dividend,\
+                     rdx, dividend
 
-        ; Perform shift to make result match fractBits format
-        shl rax, frt
-        sar rdx, whl
-        idiv divisor
+            shl rax, frt
+            sar rdx, whl
+            idiv divisor
+        ELSE                    ; Overlapping register
+            IFIDNI <dividend>, <rcx>
+                mov _ArgAtIndex(1 - ind, rax, rdx), rcx
+                mov rcx, divisor
+                mov _ArgAtIndex(ind, rax, rdx), _ArgAtIndex(1 - ind, rax, rdx)
+            ELSE
+                _ArgMove rax, dividend,\
+                         rdx, dividend,\
+                         rcx, divisor
+            ENDIF
+
+            shl rax, frt
+            sar rdx, whl
+            idiv rcx
+        ENDIF
 
         _ArgMove destination, rax
     ENDM
@@ -96,12 +128,12 @@
     ; FXPSqrt
     ; Calculate destination = sqrt(input)
     ; Optional fractBits argument to specify fixed point position in input and output
+    ; Does NOT check for negative input
     _FXPSqrt MACRO destination:REQ, input:REQ, fractBits
     LOCAL frt, whl, bps
 
         ; Get shift values
-        frt = 48
-        whl = 16
+        frt = FXP_FRACTIONBITS_DEFAULT
         IFNB <fractBits>
             IF fractBits GT 60
                 ECHO Error: _FXPSqrt fractBits: too high (max: 60)
@@ -110,9 +142,9 @@
                 ECHO Error: _FXPSqrt fractBits: too low (min: 0)
             ENDIF
             frt = fractBits
-            whl = 64 - frt
         ENDIF
-        bps = whl / 2 + frt - 1     ; First relevant bit for specific fraction bits
+        whl = 64 - frt
+        bps = whl / 2 + frt - 1     ; First relevant bit for specified fraction bits
 
         _ArgMove r12, input,\
                  r13, input
@@ -155,7 +187,153 @@
         _ArgMove destination, rax
     ENDM
 
+
+        ; CORDIC can be used to determine consecutive bits
+        ; Generate CORDIC thresholds (WolframAlpha): Table[IntegerPart(atan(2^-n)*2^60/pi),{n,0,59}]
+        ; Table holds 60 values including terminating 0
+        ; Table memory footprint optimization possibility:
+        ; - after the 21th entry all consecutive entries conform to entry = previous entry SHR 1
+        ; CORDIC depends on adds and shifts
+
+        ; Alternatively, the Taylor series could be used
+        ; Generate Taylor multipliers (WolframAlpha): Table[IntegerPart(pi^(2n+1)*2^60/(2n+1)!),{n,0,15}]
+        ; Table holds 16 values including terminating 0
+        ; Taylor depends on adds and multiplies
+
+        ; Taylor requires a smaller data footprint (16 vs 60 quadword table)
+        ; CORDIC requires fewer slower instructions (it has no multiplications)
+
+
+    ; FXPSin - Taylor
+    ; Calculate destination = sin(input)
+    ; Optional fractBits argument to specify fixed point position in input and output
+    ; Expects input to be in binary radians (i.e. pi = 1)
+    ; Always calculates 4.60 fxp and shifts to desired fraction bits afterwards
+    _FXPSin MACRO destination:REQ, input:REQ, fractBits
+    LOCAL frt, whl, bps
+
+        ; Get shift values
+        frt = FXP_FRACTIONBITS_DEFAULT
+        IFNB <fractBits>
+            IF fractBits GT 60
+                ECHO Error: _FXPSin fractBits: too high (max: 60)
+            ENDIF
+            IF fractBits LT 0
+                ECHO Error: _FXPSin fractBits: too low (min: 0)
+            ENDIF
+            frt = fractBits
+        ENDIF
+        whl = 63 - frt              ; Shift required to match 60 bit fraction
+        bps = 60 - frt
+
+        _ArgMove rax, input
+
+        lea r12, FXP_SINTABLE
+        shl rax, whl                ; Move oddness bit to sign position, whl can never be zero
+        cqo
+        prefetchnta [r12]           ; Prefetch multiplier table
+        mov r13, rdx                ; Input oddness becomes sign in r13
+
+        shl rax, 1
+        cqo
+        xor rax, rdx
+        sub rax, rdx                ; Mirror input around (-)0.5
+
+        mov r9, rax
+        mul r9
+        xor r8, r8
+        mov rcx, rdx                ; Input squared in rcx
+
+        ALIGN 8
+        @FXPSin_Loop:
+            mov rax, [r12]
+            mul r9
+            jno @FXPSin_Break       ; Term has become too small to matter
+            add r12, 8
+
+            xor rdx, r13
+            mov rax, r9
+            shl r13, 1
+            adc r8, rdx
+            sar r13, 1
+
+            mul rcx
+            not r13
+            mov r9, rdx
+        jmp @FXPSin_Loop
+
+        @FXPSin_Break:
+
+        IF bps NE 0
+            mov rax, r8
+            cqo
+            sar r8, bps
+            adc r8, rdx             ; Rounding
+
+            _ArgMove destination, rax
+        ELSE
+            _ArgMove destination, r8
+        ENDIF
+    ENDM
+
+    ; FXPCos - Taylor
+    ; Calculate destination = cos(input)
+    ; Optional fractBits argument to specify fixed point position in input and output
+    ; Expects input to be in binary radians (i.e. pi = 1)
+    _FXPCos MACRO destination:REQ, input:REQ, fractBits
+    LOCAL frt
+
+        ; Get shift value
+        frt = FXP_FRACTIONBITS_DEFAULT
+        IFNB <fractBits>
+            IF fractBits GT 60
+                ECHO Error: _FXPCos fractBits: too high (max: 60)
+            ENDIF
+            IF fractBits LT 0
+                ECHO Error: _FXPCos fractBits: too low (min: 0)
+            ENDIF
+            frt = fractBits
+        ENDIF
+
+        ; Prevent overwriting of input
+        IFIDNI <input>, <rcx>
+            mov rax, _FXP(1, frt - 1)
+        ELSE
+            mov rcx, _FXP(1, frt - 1)
+        ENDIF
+
+        add rax, rcx
+
+        ; cos(input) = sin(input + 0.5)
+        _FXPSin destination, rax, frt
+    ENDM
+
+    ; FXPTan
+    ; Calculate destination = tan(input)
+    ; tan(input) = sin(input) / cos(input)
+    ; - 1 Sin 1 Cos 1 Div
+    ; tan(input) = (+/-) sin(input) / sqrt(1 - sin(input) * sin(input))
+    ; - 1 Sin 1 Sqrt 1 Mul 1 Div
+    ; - Requires sign determination (along the lines of result *= Odd(input + 0.5) ? -1 : 1)
+
 .DATA
+    ALIGN 8
+    FXP_SINTABLE                                DQ 3622009729038561421
+                                                DQ 5957967193751243514
+                                                DQ 2940138961849664420
+                                                DQ 690904962802041567
+                                                DQ 94707759188965403
+                                                DQ 8497528335533855
+                                                DQ 537610532427990
+                                                DQ 25266682271063
+                                                DQ 916809406409
+                                                DQ 26457737287
+                                                DQ 621731905
+                                                DQ 12126972
+                                                DQ 199480
+                                                DQ 2804
+                                                DQ 34
+                                                DQ 0
 
 .CODE
 
@@ -166,3 +344,19 @@
         _FXPSqrt rax, rcx
         ret
     FXPSqrt ENDP
+
+    ; _FXPSin as procedure
+    ; RCX: input
+    ; Optional fractBits parameter not available
+    FXPSin PROC
+        _FXPSin rax, rcx
+        ret
+    FXPSin ENDP
+
+    ; _FXPCos as procedure
+    ; RCX: input
+    ; Optional fractBits parameter not available
+    FXPCos PROC
+        _FXPCos rax, rcx
+        ret
+    FXPCos ENDP
