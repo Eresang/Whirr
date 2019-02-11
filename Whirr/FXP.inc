@@ -50,9 +50,7 @@
         ; Make result match fractBits format
         IFIDNI <destination>, <rdx>
             shld rdx, rax, whl
-            IFIDNI <destination>, <rdx>
-                ECHO Warning: _FXPMul: overflow lost due to destination register of rdx
-            ENDIF
+            ECHO Warning: _FXPMul: overflow lost due to destination register of rdx
         ELSE
             shrd rax, rdx, frt
             sar rdx, frt
@@ -65,7 +63,7 @@
     ; Optional fractBits argument to specify fixed point position in input and output
     ; Beware of overflow - WILL cause error
     _FXPDiv MACRO destination:REQ, dividend:REQ, divisor:REQ, fractBits
-    LOCAL frt, whl
+    LOCAL frt, whl, ind
 
         ; Get shift values
         frt = 48
@@ -81,14 +79,30 @@
             whl = 64 - frt
         ENDIF
 
-        ; TODO: ensure registers are not overwritten
-        ; mov rax, dividend
-        ; mov rdx, dividend
+        ; Ensure registers are not overwritten before division
+        ind = _ArgIndexOf(divisor, rax, rdx)
+        IF ind EQ -1
+            _ArgMove rax, dividend,\
+                     rdx, dividend
 
-        ; Perform shift to make result match fractBits format
-        shl rax, frt
-        sar rdx, whl
-        idiv divisor
+            shl rax, frt
+            sar rdx, whl
+            idiv divisor
+        ELSE
+            IFIDNI <dividend>, <rcx>
+                mov _ArgAtIndex(1 - ind, rax, rdx), rcx
+                mov rcx, divisor
+                mov _ArgAtIndex(ind, rax, rdx), _ArgAtIndex(1 - ind, rax, rdx)
+            ELSE
+                _ArgMove rax, dividend,\
+                         rdx, dividend,\
+                         rcx, divisor
+            ENDIF
+
+            shl rax, frt
+            sar rdx, whl
+            idiv rcx
+        ENDIF
 
         _ArgMove destination, rax
     ENDM
@@ -96,6 +110,7 @@
     ; FXPSqrt
     ; Calculate destination = sqrt(input)
     ; Optional fractBits argument to specify fixed point position in input and output
+    ; Does NOT check for negative input
     _FXPSqrt MACRO destination:REQ, input:REQ, fractBits
     LOCAL frt, whl, bps
 
@@ -153,6 +168,25 @@
         jnz @FXPSqrt_Loop
 
         _ArgMove destination, rax
+    ENDM
+
+    ; _FXPSin
+    ; Calculate destination = sin(input)
+    ; Optional fractBits argument to specify fixed point position in input and output
+    ; Expects input to be in binary radians (i.e. pi = 1)
+    _FXPSin MACRO destination:REQ, input:REQ, fractBits
+        ; CORDIC can be used to determine consecutive bits
+        ; Generate CORDIC thresholds (WolframAlpha): Table[IntegerPart(atan(2^-n)*2^60/pi),{n,0,59}]
+        ; Table holds 60 values including terminating 0
+        ; CORDIC depends on adds and shifts
+
+        ; Alternatively, the Taylor series could be used
+        ; Generate Taylor multipliers (WolframAlpha): Table[IntegerPart(pi^(2n+1)*2^60/(2n+1)!),{n,0,15}]
+        ; Table holds 16 values including terminating 0
+        ; Taylor depends on adds and multiplies
+
+        ; Taylor requires a smaller data footprint (16 vs 60 quadword tables)
+        ; CORDIC requires fewer slower instructions (it has no multiplications)
     ENDM
 
 .DATA
