@@ -44,6 +44,9 @@ include Window.inc
 
     ; ---
 
+        mov rax, _FXP(1, 58)
+        _FXPTan rax, rax, 60
+
         mov rdx, 1 SHL 49 ; 2
         mov rcx, 1 SHL 50 ; 4
         _FXPDiv rax, rcx, rdx ; 4 / 2
