@@ -4,6 +4,8 @@
     ;  - Stack is 16-byte aligned
 
     FXP_FRACTIONBITS_DEFAULT = 48
+    FXP_ONEOVERPI = 0517CC1B727220A94h
+    FXP_MAX = 7FFFFFFFFFFFFFFFh
 
 ; --- FXP macros ---
 
@@ -231,9 +233,8 @@
 
             xor rdx, r13
             mov rax, r9
-            shl r13, 1
-            adc r8, rdx
             sar r13, 1
+            adc r8, rdx
 
             mul rcx
             not r13
@@ -290,11 +291,6 @@
     ; Calculate destination = tan(input)
     ; Optional fractBits argument to specify fixed point position in input and output
     ; Expects input to be in binary radians (i.e. pi = 1)
-    ; tan(input) = sin(input) / cos(input)
-    ; - 1 Sin 1 Cos 1 Div
-    ; tan(input) = (+/-) sin(input) / sqrt(1 - sin(input) * sin(input))
-    ; - 1 Sin 1 Sqrt 1 Mul 1 Div
-    ; - Requires fixing sign (along the lines of result *= Odd(input + 0.5) ? -1 : 1)
     _FXPTan MACRO destination:REQ, input:REQ, fractBits
     LOCAL frt, whl, bps
 
@@ -316,6 +312,7 @@
 
         _ArgMove rax, input
 
+        ; Calculate cos(input)
         mov rcx, _FXP(1, 62)
         shl rax, whl                ; Move oddness bit to sign position, whl can never be zero
         mov r14, rax
@@ -344,9 +341,8 @@
 
             xor rdx, r13
             mov rax, r9
-            shl r13, 1
-            adc r8, rdx
             sar r13, 1
+            adc r8, rdx
 
             mul rcx
             not r13
@@ -380,9 +376,8 @@
 
             xor rdx, r13
             mov rax, r9
-            shl r13, 1
-            adc r14, rdx
             sar r13, 1
+            adc r14, rdx
 
             mul rcx
             not r13
@@ -392,16 +387,49 @@
         @FXPTan_Sin_Break:
 
         ; Compare difference in magnitude between cos(input) and sin(input) to detect overflow
-        ; 4.60 fxp to target fxp
         ; r8 = cos(input)
         ; r14 = sin(input)
 
-        mov rax, 0517CC1B727220A94h     ; 1 / PI in 0.64 fxp
+        mov rax, r8
+        cqo
+        xor r8, rdx
+        sar rdx, 1
+        adc r8, 0
+        mov r12, rdx
+        mov rax, r14
+        cqo
+        xor r14, rdx
+        sar rdx, 1
+        adc r14, 0                      ; r12 = sign(r8), r13 = sign(r14)
+        mov r13, rdx                    ; r8 = abs(r8), r14 = abs(r14)
+
+        mov rax, FXP_ONEOVERPI
         mul r14
 
         shrd rax, rdx, bps
         sar rdx, bps
-        idiv r8                         ; Potential for divide by zero, integer overflow
+
+        mov rcx, rax
+        mov r9, rdx
+        sar rcx, 1
+        adc r9, 0
+
+        cmp r9, r8
+        jae @FXPTan_Overflow            ; If r9 >= r8, overflow!
+
+            div r8
+            jmp @FXPTan_Return
+
+        @FXPTan_Overflow:
+
+            mov rax, FXP_MAX
+
+        @FXPTan_Return:
+
+        xor r12, r13
+        xor rax, r12
+        sar r12, 1
+        adc rax, 0                      ; Apply proper sign
 
         _ArgMove destination, rax
     ENDM
