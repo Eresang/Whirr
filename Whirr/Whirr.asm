@@ -14,6 +14,7 @@ include Heaps.inc
 include Strings.inc
 
 include Random.inc
+include Time.inc
 include Window.inc
 
 .DATA
@@ -40,12 +41,20 @@ include Window.inc
 
         call GetProcessHeap
         mov WHIRR_HEAP, rax
+
+        _TimeInitiate
     ; }
 
     ; ---
+        mov r15, 100000000
+        @Loop:
+        ;mov rax, _FXP(1, 58)
+        _Random rax
+        _FXPSin rax, rax, 60
+        sub r15, 1
+        jnz @Loop
 
-        mov rax, _FXP(1, 58)
-        _FXPTan rax, rax, 60
+        _TimeCalculateInterval
 
         mov rdx, 1 SHL 49 ; 2
         mov rcx, 1 SHL 50 ; 4

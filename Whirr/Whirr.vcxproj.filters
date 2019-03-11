@@ -65,6 +65,9 @@
     <None Include="FXP.inc">
       <Filter>Source Files\Units</Filter>
     </None>
+    <None Include="Time.inc">
+      <Filter>Source Files\Units</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Whir.rc">

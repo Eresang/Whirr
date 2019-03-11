@@ -36,6 +36,7 @@
     <None Include="Heaps.inc" />
     <None Include="Random.inc" />
     <None Include="Strings.inc" />
+    <None Include="Time.inc" />
     <None Include="Window.inc" />
   </ItemGroup>
   <ItemGroup>

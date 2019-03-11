@@ -225,7 +225,7 @@
         mov rcx, rdx                ; Input squared in rcx
 
         ALIGN 8
-        @FXPSin_Loop:
+        @FXPSin_Loop:               ; Will only reach ~12 iterations in small numerical range
             mov rax, [r12]
             mul r9
             jno @FXPSin_Break       ; Term has become too small to matter
@@ -291,6 +291,8 @@
     ; Calculate destination = tan(input)
     ; Optional fractBits argument to specify fixed point position in input and output
     ; Expects input to be in binary radians (i.e. pi = 1)
+    ; Calculates tan(x) = sin(x) / cos(x)
+    ; Could use a _FXPSinCos
     _FXPTan MACRO destination:REQ, input:REQ, fractBits
     LOCAL frt, whl, bps
 
@@ -389,7 +391,6 @@
         ; Compare difference in magnitude between cos(input) and sin(input) to detect overflow
         ; r8 = cos(input)
         ; r14 = sin(input)
-
         mov rax, r8
         cqo
         xor r8, rdx
@@ -411,7 +412,7 @@
 
         mov rcx, rax
         mov r9, rdx
-        sar rcx, 1
+        shl rcx, 1
         adc r9, 0
 
         cmp r9, r8
@@ -479,3 +480,11 @@
         _FXPCos rax, rcx
         ret
     FXPCos ENDP
+
+    ; _FXPTan as procedure
+    ; RCX: input
+    ; Optional fractBits parameter not available
+    FXPTan PROC
+        _FXPTan rax, rcx
+        ret
+    FXPTan ENDP
