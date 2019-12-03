@@ -84,7 +84,7 @@
     ; RCX: seed pointer
     ;      if NULL use RANDOM_SEED
     Random PROC
-        ; Determine if custom seed is used
+        ; Determine if custom seed is to be used
         or rcx, rcx
         jnz @Random_SeedSelected
             lea rcx, RANDOM_SEED

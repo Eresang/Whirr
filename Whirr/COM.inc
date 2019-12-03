@@ -1,28 +1,39 @@
-; --- GUID value storage ---
-    GUID STRUCT
-        Data1       DD  ?
-        Data2       DW  ?
-        Data3       DW  ?
-        Data4a      DB  ?
-        Data4b      DB  ?
-        Data4c      DB  ?
-        Data4d      DB  ?
-        Data4e      DB  ?
-        Data4f      DB  ?
-        Data4g      DB  ?
-        Data4h      DB  ?
-    GUID ENDS
-
 ; --- GUID helper macros ---
 
-    _DefineGuid MACRO name:REQ, l:REQ, w1:REQ, w2:REQ, b1:REQ, b2:REQ, b3:REQ, b4:REQ, b5:REQ, b6:REQ, b7:REQ, b8:REQ
-        ALIGN 8
-        name GUID {l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8}
+    _GetGuid MACRO destination:REQ, name:REQ
+        IFNDEF <name>
+            GUIDDATA SEGMENT
+                ALIGN 8
+                name DD name&_DATA0
+                     DW name&_DATA1
+                     DW name&_DATA2
+                     DB name&_DATA3
+                     DB name&_DATA4
+                     DB name&_DATA5
+                     DB name&_DATA6
+                     DB name&_DATA7
+                     DB name&_DATA8
+                     DB name&_DATA9
+                     DB name&_DATAA
+            GUIDDATA ENDS
+            .CODE
+        ENDIF
+        lea destination, name
     ENDM
 
-; --- IID ---
-
-include IID.inc
+    _DefineGuid MACRO name:REQ, l:REQ, w1:REQ, w2:REQ, b1:REQ, b2:REQ, b3:REQ, b4:REQ, b5:REQ, b6:REQ, b7:REQ, b8:REQ
+        name&_DATA0 = l
+        name&_DATA1 = w1
+        name&_DATA2 = w2
+        name&_DATA3 = b1
+        name&_DATA4 = b2
+        name&_DATA5 = b3
+        name&_DATA6 = b4
+        name&_DATA7 = b5
+        name&_DATA8 = b6
+        name&_DATA9 = b7
+        name&_DATAA = b8
+    ENDM
 
 ; --- COM return values ---
 
@@ -47,9 +58,9 @@ include IID.inc
 ; --- Com call ---
 
     ; Ex. Usage:
-    ; _CallCom "instance", IUnknown, QueryInterface
+    ; _ComCall "instance", IUnknown, QueryInterface
     ; In which instance is a previously obtained [[vTable]]
-    _CallCom MACRO ifp:REQ, interface:REQ, method:REQ
+    _ComCall MACRO ifp:REQ, interface:REQ, method:REQ
         _ArgMove rcx, ifp
         mov rax, [rcx]
         call QWORD PTR [rax]._&interface&_._&method&

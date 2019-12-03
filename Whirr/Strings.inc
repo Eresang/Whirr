@@ -29,17 +29,48 @@
             cnt = cnt + __StringRealLength(item)
         ENDM
 
-        ; Place length field and reference label
-        ALIGN 8
-        DQ cnt
-        name label DW
+        TEXTDATA SEGMENT
+            ; Place length field and reference label
+            ALIGN 8
+            DQ cnt
+            name label DW
 
-        ; Write actual text
+            ; Write actual text
+            FOR item, <text>
+                __StringToWords item
+            ENDM
+
+            DW 0
+        TEXTDATA ENDS
+    ENDM
+
+    ; Identical to _String but places the text data in a different segment
+    _ErrorString MACRO name:REQ, text:VARARG
+    LOCAL cnt
+        cnt = 0
+
+        ; Count actual characters
         FOR item, <text>
-            __StringToWords item
+            IF __StringValidate(item) EQ 0
+                ECHO Error:_String &label&: invalid string format
+            ENDIF
+
+            cnt = cnt + __StringRealLength(item)
         ENDM
 
-        DW 0
+        ERRORTEXTDATA SEGMENT
+            ; Place length field and reference label
+            ALIGN 8
+            DQ cnt
+            name label DW
+
+            ; Write actual text
+            FOR item, <text>
+                __StringToWords item
+            ENDM
+
+            DW 0
+        ERRORTEXTDATA ENDS
     ENDM
 
     ; _String helper
@@ -133,14 +164,17 @@
         GOTO nxt
     ENDM
 
-.DATA
-    ALIGN 8
-                                                DQ 2
-    STRINGS_NEWLINE                             DQ 0A000Dh
+    TEXTDATA SEGMENT
+        ALIGN 8
+                                                    DQ 2
+        STRING_NEWLINE                              DQ 0A000Dh
 
-                                                DQ 1
-    STRINGS_SPACE                               DQ 20h
+                                                    DQ 1
+        STRING_SPACE                                DQ 20h
 
-    _String STRINGS_NUMBERS, "0123456789ABCDEF"
+        _String\
+            STRING_NUMBERS,\
+            "0123456789ABCDEF"
+    TEXTDATA ENDS
 
 .CODE

@@ -5,6 +5,7 @@
 
     FXP_FRACTIONBITS_DEFAULT = 48
     FXP_ONEOVERPI = 0517CC1B727220A94h
+    FXP_MIN = 8000000000000001h
     FXP_MAX = 7FFFFFFFFFFFFFFFh
 
 ; --- FXP macros ---
@@ -19,7 +20,7 @@
             frt = fractBits
         ENDIF
 
-        EXITM <input SHL frt>
+        EXITM <input * (1 SHL frt)>
     ENDM
 
     ; FXPAdd
@@ -437,7 +438,7 @@
 
 .DATA
     ALIGN 8
-    ; Taylor series multipliers (WolframAlpha): Table[IntegerPart(pi^(2n+1)*2^60/(2n+1)!),{n,0,15}]
+    ; Taylor series multipliers (WolframAlpha): Table[IntegerPart(pi^(2n + 1) * 2^60 / (2n + 1)!), {n, 0, 15}]
     FXP_SINTABLE                                DQ 3622009729038561421
                                                 DQ 5957967193751243514
                                                 DQ 2940138961849664420

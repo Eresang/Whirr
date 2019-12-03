@@ -13,7 +13,7 @@
                  r9, bytes
 
         call HeapReAlloc
-        ; TODO -> ERRORCHECK (rax == null -> error)
+        _ErrorIfZero rax, ERROR_HEAPREALLOC
 
         _ArgMove destination, rax
     ENDM
@@ -26,7 +26,7 @@
         xor rdx, rdx
 
         call HeapFree
-        ; TODO -> ERRORCHECK (rax == null -> error)
+        _ErrorIfZero rax, ERROR_HEAPFREE
     ENDM
 
     ; HeapAlloc wrapper
@@ -36,7 +36,7 @@
                  r8, bytes
 
         call HeapAlloc
-        ; TODO -> ERRORCHECK (rax == null -> error)
+        _ErrorIfZero rax, ERROR_HEAPALLOC
 
         _ArgMove destination, rax
     ENDM
@@ -48,7 +48,7 @@
         xor r8, r8
 
         call HeapCreate
-        ; TODO -> ERRORCHECK (rax == null -> error)
+        _ErrorIfZero rax, ERROR_HEAPCREATE
 
         _ArgMove destination, rax
     ENDM
@@ -58,9 +58,24 @@
         _ArgMove rcx, heaphandle
 
         call HeapDestroy
-        ; TODO -> ERRORCHECK (rax == null -> error)
+        _ErrorIfZero rax, ERROR_HEAPDESTROY
     ENDM
 
-.DATA
+; Error strings
+    _ErrorString\
+        ERROR_HEAPREALLOC,\
+        "HeapReAlloc failed"
+    _ErrorString\
+        ERROR_HEAPFREE,\
+        "HeapFree failed"
+    _ErrorString\
+        ERROR_HEAPALLOC,\
+        "HeapAlloc failed"
+    _ErrorString\
+        ERROR_HEAPCREATE,\
+        "HeapCreate failed"
+    _ErrorString\
+        ERROR_HEAPDESTROY,\
+        "HeapDestroy failed"
 
 .CODE

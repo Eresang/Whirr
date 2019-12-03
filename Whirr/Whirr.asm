@@ -1,18 +1,19 @@
 include Defines.inc
 include Macros.inc
-
 include Externals.inc
+include Strings.inc
 
 include COM.inc
 
+include RIID.inc
 include DXGI.inc
 include D3D.inc
 include D3D12.inc
 
-include FXP.inc
+include Error.inc
 include Heaps.inc
-include Strings.inc
 
+include FXP.inc
 include Random.inc
 include Time.inc
 include Window.inc
@@ -28,49 +29,38 @@ include Window.inc
 
 .CODE
 
-; --- Main() ---
-
-    WhirrProc PROC
-        _Enter _ToBytes(8, 8)
+; --- START Main()
+_EnterProc WhirrProc, 0
 
     ; Initialize()
     ; {
         xor rcx, rcx
         call GetModuleHandle
+        ; _ErrorIfZero rax, ERROR_GETMODULEHANDLE
         mov WHIRR_MODULE, rax
 
         call GetProcessHeap
+        ; _ErrorIfZero rax, ERROR_GETPROCESSHEAP
         mov WHIRR_HEAP, rax
-
-        _TimeInitiate
-    ; }
-
-    ; ---
-        mov r15, 100000000
-        @Loop:
-        ;mov rax, _FXP(1, 58)
-        _Random rax
-        _FXPSin rax, rax, 60
-        sub r15, 1
-        jnz @Loop
-
-        _TimeCalculateInterval
-
-        mov rdx, 1 SHL 49 ; 2
-        mov rcx, 1 SHL 50 ; 4
-        _FXPDiv rax, rcx, rdx ; 4 / 2
-        or rax, rax
 
         call WhirrWindowCreate
 
-        call WhirrLoadPipeline
+        _TimeInitiate
+
+        IF RANDOMIZEATSTART EQ TRUE
+            _Randomize
+        ENDIF
+    ; }
+
+    ; ---
 
         mov rcx, WHIRR_HWND
         mov rdx, SW_SHOWNORMAL
         call ShowWindow
-
         mov rcx, WHIRR_HWND
         call UpdateWindow
+
+        call WhirrLoadPipeline
 
         call WhirrMessageLoop
 
@@ -82,7 +72,7 @@ include Window.inc
         call ExitProcess
     ; }
 
-        _Leave
-    WhirrProc ENDP
+_LeaveProc WhirrProc
+; --- END Main()
 
 END
