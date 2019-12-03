@@ -12,11 +12,10 @@
     ; Ex. Usage:
     ; _Enter sizeof(SYSTEM_INFO), rcx, rdx, r8, r9
     _Enter MACRO extra:REQ, arguments:VARARG
-    LOCAL cnt, mxc, itr, ind
+    LOCAL cnt, itr, ind
         cnt = _ArgCount(arguments)
-        mxc = cnt
 
-        ; Push a number even and greater than 3 of DQ
+        ; Push an even number greater than 3 of DQ
         IF cnt LT 4
             cnt = 4
         ENDIF
@@ -47,6 +46,16 @@
     _Leave MACRO
         leave
         ret
+    ENDM
+
+    _EnterProc MACRO procName:REQ, extra:REQ, arguments:VARARG
+        procName PROC
+        _Enter extra, arguments
+    ENDM
+
+    _LeaveProc MACRO procName:REQ
+        _Leave
+        procName ENDP
     ENDM
 
 ; --- VARARG helper macros ---
@@ -109,7 +118,7 @@
         ENDIF
     ENDM
 
-    ; Move odd index arguments to [their index-1] if they don't match
+    ; Move odd index arguments to [their index-1] if those arguments don't match
     _ArgMove MACRO arguments:VARARG
     LOCAL itr, previous
         itr = 0
@@ -127,7 +136,3 @@
             itr = (itr + 1) MOD 2
         ENDM
     ENDM
-
-.DATA
-
-.CODE

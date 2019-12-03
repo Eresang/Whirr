@@ -16,7 +16,25 @@
     <Filter Include="Source Files\COM">
       <UniqueIdentifier>{f571c225-fcfa-470e-9ee1-0a6b5b4c3bf6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Units">
+    <Filter Include="Source Files\Error">
+      <UniqueIdentifier>{8c6e33de-21ae-4e5d-a669-a974585aafd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Window">
+      <UniqueIdentifier>{f50138fc-66d7-416f-9c8c-4d779c29d9a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Heap">
+      <UniqueIdentifier>{b768fe4f-675d-4f00-9966-36860610b2bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Random">
+      <UniqueIdentifier>{7ee29663-5f58-44d3-af68-e321e10c90e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FXPMath">
+      <UniqueIdentifier>{dfd662f1-d0aa-42cc-b782-01df39c55d93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Time">
+      <UniqueIdentifier>{2449e72d-eec9-4f58-958f-b4b461b1cd34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\String">
       <UniqueIdentifier>{971eb1f6-2b11-4de3-a316-db0288805400}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -26,19 +44,10 @@
     </MASM>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Heaps.inc">
-      <Filter>Source Files\Units</Filter>
-    </None>
-    <None Include="Random.inc">
-      <Filter>Source Files\Units</Filter>
-    </None>
     <None Include="Strings.inc">
-      <Filter>Source Files\Units</Filter>
+      <Filter>Source Files\String</Filter>
     </None>
     <None Include="COM.inc">
-      <Filter>Source Files\COM</Filter>
-    </None>
-    <None Include="IID.inc">
       <Filter>Source Files\COM</Filter>
     </None>
     <None Include="DXGI.inc">
@@ -59,14 +68,26 @@
     <None Include="Macros.inc">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="RIID.inc">
+      <Filter>Source Files\COM</Filter>
+    </None>
     <None Include="Window.inc">
-      <Filter>Source Files\Units</Filter>
+      <Filter>Source Files\Window</Filter>
+    </None>
+    <None Include="Heaps.inc">
+      <Filter>Source Files\Heap</Filter>
+    </None>
+    <None Include="Random.inc">
+      <Filter>Source Files\Random</Filter>
     </None>
     <None Include="FXP.inc">
-      <Filter>Source Files\Units</Filter>
+      <Filter>Source Files\FXPMath</Filter>
     </None>
     <None Include="Time.inc">
-      <Filter>Source Files\Units</Filter>
+      <Filter>Source Files\Time</Filter>
+    </None>
+    <None Include="Error.inc">
+      <Filter>Source Files\Error</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

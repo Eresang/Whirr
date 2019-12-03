@@ -1,4 +1,8 @@
+; ---
+    FALSE                               = 0
+    TRUE                                = 1
+
 ; --- Optional defines ---
-    DEFINES_RANDOMIZEATSTART                    = 0
+    RANDOMIZEATSTART                    = FALSE
 
 ; --- Required defines ---
